@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useApp } from '../context/AppContext';
-import { Clock, Users, ChefHat, Zap, ArrowRight, CheckCircle2, Check, Cpu } from 'lucide-react';
+import { Clock, Users, ArrowRight, CheckCircle2, Check, AlertTriangle, Sparkles, Activity } from 'lucide-react';
 
 interface DemandTimelineProps {
   onReviewSchedule?: () => void;
@@ -8,108 +8,122 @@ interface DemandTimelineProps {
 
 export const DemandTimeline: React.FC<DemandTimelineProps> = ({ onReviewSchedule }) => {
   const { hourlyData, scheduleApproved, approveSchedule } = useApp();
-  const [selectedHour, setSelectedHour] = useState<number>(15); // default 3 PM
+  const [selectedHour, setSelectedHour] = useState<number>(15); // default 3 PM to show lull
 
   const currentPoint = hourlyData.find((h) => h.hour === selectedHour) || hourlyData[3];
-  const isDip = currentPoint.hour >= 15 && currentPoint.hour <= 16;
-  const isPeak = currentPoint.hour >= 18 && currentPoint.hour <= 20;
+  const isLull = currentPoint.isLull;
+  const isPeak = currentPoint.isPeak;
 
   return (
-    <div className="bg-white rounded-[4px] border border-[rgba(55,53,47,0.09)] p-4 sm:p-5 font-sans select-none">
-      {/* Database View Bar */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-[rgba(55,53,47,0.06)]">
-        <div className="flex items-center gap-1 text-xs">
-          <button className="flex items-center gap-1.5 px-2 py-1 rounded-[3px] font-medium text-[#37352F] bg-[rgba(55,53,47,0.06)] cursor-pointer">
-            <span>⏱</span>
-            <span>Timeline</span>
-          </button>
-          <span className="text-[#37352F]/30 mx-1">/</span>
-          <span className="text-[11px] text-[#37352F]/50">12:00 PM – 8:00 PM Synchronization</span>
+    <div className="bg-white rounded-2xl border border-stone-200/80 shadow-[0_1px_3px_rgba(0,0,0,0.04)] p-6 overflow-hidden font-ui">
+      {/* Header */}
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-5 border-b border-stone-100">
+        <div>
+          <div className="flex items-center gap-2">
+            <span className="px-2.5 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wider bg-[#5C3320] text-white">
+              Demand-Responsive Timeline
+            </span>
+            <span className="text-xs text-[#6E6E6E] font-medium">12 PM – 8 PM Hourly Synchronization</span>
+          </div>
+          <h3 className="text-xl font-black font-display text-[#1A1A1A] mt-1">
+            Traffic Velocity, Speed of Service & Roster Demand.
+          </h3>
+          <p className="text-xs text-[#6E6E6E] mt-0.5">
+            Compare static 9-hour straight shifts against dynamic 4-hour micro-shifts across every operating hour.
+          </p>
         </div>
 
         {/* Action Buttons */}
-        <div className="flex items-center gap-2 text-xs">
+        <div className="flex items-center gap-2.5">
           {onReviewSchedule && (
             <button
               onClick={onReviewSchedule}
-              className="px-2.5 py-1 rounded-[3px] text-[#37352F]/80 hover:bg-[rgba(55,53,47,0.06)] hover:text-[#37352F] transition-colors cursor-pointer border border-[rgba(55,53,47,0.12)]"
+              className="px-3.5 py-1.5 rounded-xl text-xs font-bold font-ui text-[#5C3320] bg-stone-100 hover:bg-stone-200 transition-all cursor-pointer"
             >
-              Review Roster
+              Review Station Roster
             </button>
           )}
 
           <button
             onClick={approveSchedule}
             disabled={scheduleApproved}
-            className={`px-3 py-1 rounded-[3px] font-medium flex items-center gap-1.5 transition-colors cursor-pointer ${
+            className={`px-4 py-1.5 rounded-xl text-xs font-bold font-ui uppercase tracking-wider flex items-center gap-1.5 transition-all cursor-pointer ${
               scheduleApproved
-                ? 'bg-[#DDEDEA] text-[#0F7B6C] cursor-default'
-                : 'bg-[#2383E2] hover:bg-[#1B6FBF] text-white shadow-xs'
+                ? 'bg-emerald-50 text-[#0E8A3E] border border-emerald-200 cursor-default'
+                : 'bg-[#5C3320] hover:bg-[#4A2616] text-white shadow-xs'
             }`}
           >
             {scheduleApproved ? (
               <>
-                <CheckCircle2 className="w-3.5 h-3.5" />
-                <span>Roster Approved</span>
+                <CheckCircle2 className="w-3.5 h-3.5" /> 5-Day Schedule Approved
               </>
             ) : (
               <>
-                <Check className="w-3.5 h-3.5" />
-                <span>Apply Sync</span>
+                <Check className="w-3.5 h-3.5 text-[#E85C1A]" /> Approve Dynamic Roster
               </>
             )}
           </button>
         </div>
       </div>
 
-      {/* Timeline Scrubber Bar */}
-      <div className="py-4 overflow-x-auto">
-        <div className="min-w-[580px] flex items-stretch gap-1.5">
+      {/* Timeline Bar (Horizontal hours) */}
+      <div className="py-5 overflow-x-auto">
+        <div className="min-w-[640px] flex items-stretch gap-2">
           {hourlyData.map((hour) => {
             const isSelected = hour.hour === selectedHour;
-            const is3to5Dip = hour.hour >= 15 && hour.hour <= 16;
-            const isEveningPeak = hour.hour >= 18 && hour.hour <= 20;
+            const isOverstaffedLull = hour.isLull && !scheduleApproved;
+            const isUnderstaffedPeak = hour.isPeak && !scheduleApproved;
 
             return (
               <button
                 key={hour.hour}
                 onClick={() => setSelectedHour(hour.hour)}
-                className={`flex-1 min-w-[65px] p-2.5 rounded-[3px] transition-colors text-center flex flex-col justify-between cursor-pointer border ${
+                className={`flex-1 min-w-[72px] p-3 rounded-xl transition-all text-center flex flex-col justify-between cursor-pointer border ${
                   isSelected
-                    ? 'bg-[rgba(55,53,47,0.08)] border-[rgba(55,53,47,0.25)] text-[#37352F]'
-                    : 'bg-white border-[rgba(55,53,47,0.09)] text-[#37352F]/80 hover:bg-[rgba(55,53,47,0.04)]'
+                    ? 'bg-[#5C3320] text-white border-[#5C3320] shadow-sm ring-2 ring-[#E85C1A]'
+                    : isOverstaffedLull
+                    ? 'bg-amber-50/70 border-amber-300 text-[#1A1A1A] hover:bg-amber-100/60'
+                    : isUnderstaffedPeak
+                    ? 'bg-rose-50/70 border-rose-200 text-[#1A1A1A] hover:bg-rose-100/60'
+                    : 'bg-stone-50/70 border-stone-200 text-[#1A1A1A] hover:bg-stone-100/80'
                 }`}
               >
                 {/* Time header */}
-                <div className="text-[11px] font-medium text-[#37352F]/70 flex items-center justify-center gap-1">
+                <div className="flex items-center justify-center gap-1 text-[11px] font-bold font-ui">
                   <span>{hour.timeLabel}</span>
-                  {is3to5Dip && <span className="w-1.5 h-1.5 rounded-full bg-[#DFAB01]" title="Afternoon Lull" />}
-                  {isEveningPeak && <span className="w-1.5 h-1.5 rounded-full bg-[#D9730D]" title="Evening Rush" />}
+                  {hour.isLull && <span className="w-1.5 h-1.5 rounded-full bg-amber-500" title="Afternoon Lull" />}
+                  {hour.isPeak && <span className="w-1.5 h-1.5 rounded-full bg-rose-500" title="Dinner Rush Peak" />}
                 </div>
 
-                {/* Demand Value */}
-                <div className="my-1.5">
-                  <div className={`text-lg font-semibold tracking-tight ${isSelected ? 'text-[#37352F]' : 'text-[#37352F]/90'}`}>
-                    {hour.aiForecast}
+                {/* Transactions Value */}
+                <div className="my-2">
+                  <div
+                    className={`text-xl font-black font-display leading-tight ${
+                      isSelected ? 'text-[#F5A827]' : 'text-[#1A1A1A]'
+                    }`}
+                  >
+                    {hour.transactionsPerHour}
                   </div>
-                  <div className="text-[10px] text-[#37352F]/40 font-normal">orders</div>
+                  <div className={`text-[9px] font-medium font-ui ${isSelected ? 'text-stone-300' : 'text-stone-400'}`}>
+                    tx / hr
+                  </div>
                 </div>
 
-                {/* Crew comparison pill */}
+                {/* Productivity / Crew Pill */}
                 <div
-                  className={`text-[10px] font-medium py-0.5 px-1 rounded-[3px] ${
+                  className={`text-[9px] font-bold py-1 px-1 rounded-md ${
                     isSelected
-                      ? 'bg-white text-[#37352F] border border-[rgba(55,53,47,0.12)]'
-                      : hour.scheduledCrew !== hour.recommendedCrew
-                      ? 'bg-[#FBF3DB] text-[#DFAB01]'
-                      : 'bg-[#EBECED] text-[#9B9A97]'
+                      ? 'bg-white/15 text-white'
+                      : isOverstaffedLull
+                      ? 'bg-amber-200/70 text-amber-950 font-black'
+                      : isUnderstaffedPeak
+                      ? 'bg-rose-200/70 text-rose-950 font-black'
+                      : 'bg-stone-200/60 text-stone-600'
                   }`}
                 >
                   {scheduleApproved
                     ? `${hour.recommendedCrew} crew`
-                    : hour.scheduledCrew !== hour.recommendedCrew
-                    ? `${hour.scheduledCrew}→${hour.recommendedCrew}`
-                    : `${hour.scheduledCrew} crew`}
+                    : `${hour.traditionalCrew9h} crew`}
                 </div>
               </button>
             );
@@ -117,63 +131,114 @@ export const DemandTimeline: React.FC<DemandTimelineProps> = ({ onReviewSchedule
         </div>
       </div>
 
-      {/* Notion Callout Block for Selected Hour Detail */}
-      <div className="notion-callout mt-1">
-        <div className="text-xl shrink-0">💡</div>
-        <div className="flex-1 min-w-0">
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
-            <div className="flex items-center gap-2">
-              <span className="font-semibold text-sm text-[#37352F]">
-                {currentPoint.timeLabel} Simulation
+      {/* Detailed Callout for Selected Hour */}
+      <div className="p-5 rounded-xl bg-stone-50/90 border border-stone-200/80">
+        <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-5">
+          <div className="flex items-start sm:items-center gap-3.5">
+            <div className="w-13 h-13 rounded-xl bg-[#5C3320] text-[#F5A827] flex flex-col items-center justify-center font-black font-display text-base shadow-xs shrink-0">
+              <span>{currentPoint.timeLabel}</span>
+              <span className="text-[9px] text-stone-300 font-normal font-ui">Window</span>
+            </div>
+            <div>
+              <div className="flex flex-wrap items-center gap-2">
+                <span className="text-base font-black font-display text-[#1A1A1A]">
+                  {currentPoint.transactionsPerHour} Transactions Projected
+                </span>
+                {isLull && (
+                  <span className="px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-amber-200 text-amber-950 border border-amber-300">
+                    Off-Peak Lull ({currentPoint.txPerEmployeeUnoptimized} tx/emp in static roster)
+                  </span>
+                )}
+                {isPeak && (
+                  <span className="px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-rose-200 text-rose-950 border border-rose-300">
+                    Peak Surge Window (SoS Risk)
+                  </span>
+                )}
+              </div>
+              <p className="text-xs text-[#6E6E6E] mt-1">
+                Static 9h Roster: <strong>{currentPoint.traditionalCrew9h} Staff</strong> · Dynamic AI Roster:{' '}
+                <strong className="text-[#E85C1A]">{currentPoint.recommendedCrew} Staff</strong>{' '}
+                {currentPoint.microShiftCrewCount > 0 && (
+                  <span className="text-[#0E8A3E] font-bold">
+                    (+{currentPoint.microShiftCrewCount} Peak Micro-Shifts)
+                  </span>
+                )}
+              </p>
+            </div>
+          </div>
+
+          {/* 3 Metric Diagnosis Badges */}
+          <div className="grid grid-cols-3 gap-2.5 text-xs">
+            {/* Speed of Service */}
+            <div className="p-2.5 rounded-xl bg-white border border-stone-200 shadow-xs">
+              <span className="text-[10px] text-[#6E6E6E] font-bold uppercase tracking-wider block flex items-center gap-1">
+                <Clock className="w-3 h-3 text-[#E85C1A]" /> Speed of Service
               </span>
-              {isDip && (
-                <span className="notion-tag bg-[#FBF3DB] text-[#DFAB01] text-[10px]">
-                  -31% Afternoon Lull
+              <div className="mt-0.5">
+                <span className="font-black font-display text-sm text-[#1A1A1A]">
+                  {scheduleApproved
+                    ? `${Math.floor(currentPoint.speedOfServiceSecOptimized / 60)}m ${currentPoint.speedOfServiceSecOptimized % 60}s`
+                    : `${Math.floor(currentPoint.speedOfServiceSecUnoptimized / 60)}m ${currentPoint.speedOfServiceSecUnoptimized % 60}s`}
                 </span>
-              )}
-              {isPeak && (
-                <span className="notion-tag bg-[#FAEBDD] text-[#D9730D] text-[10px]">
-                  Peak Dinner Rush
+                <span className={`text-[9px] ml-1 font-semibold ${
+                  scheduleApproved ? 'text-[#0E8A3E]' : currentPoint.speedOfServiceSecUnoptimized > 240 ? 'text-rose-600' : 'text-stone-500'
+                }`}>
+                  {scheduleApproved ? '✓ < 3m Target' : currentPoint.speedOfServiceSecUnoptimized > 240 ? '⚠ Blowout' : 'Normal'}
                 </span>
-              )}
+              </div>
             </div>
 
-            <span className="text-xs text-[#37352F]/50">
-              Roster: {currentPoint.scheduledCrew} scheduled → <strong className="text-[#0F7B6C]">{currentPoint.recommendedCrew} recommended</strong>
-            </span>
+            {/* Transactions per Employee */}
+            <div className="p-2.5 rounded-xl bg-white border border-stone-200 shadow-xs">
+              <span className="text-[10px] text-[#6E6E6E] font-bold uppercase tracking-wider block flex items-center gap-1">
+                <Activity className="w-3 h-3 text-[#5C3320]" /> Tx / Employee
+              </span>
+              <div className="mt-0.5">
+                <span className="font-black font-display text-sm text-[#1A1A1A]">
+                  {scheduleApproved ? currentPoint.txPerEmployeeOptimized : currentPoint.txPerEmployeeUnoptimized}
+                </span>
+                <span className={`text-[9px] ml-1 font-semibold ${
+                  currentPoint.txPerEmployeeUnoptimized < 2.0 && !scheduleApproved
+                    ? 'text-amber-700'
+                    : 'text-[#0E8A3E]'
+                }`}>
+                  {currentPoint.txPerEmployeeUnoptimized < 2.0 && !scheduleApproved ? 'Idle Overstaffed' : 'Optimal Band'}
+                </span>
+              </div>
+            </div>
+
+            {/* Station Rebalancing */}
+            <div className="p-2.5 rounded-xl bg-white border border-stone-200 shadow-xs">
+              <span className="text-[10px] text-[#6E6E6E] font-bold uppercase tracking-wider block flex items-center gap-1">
+                <Users className="w-3 h-3 text-[#0E8A3E]" /> Station Rebalance
+              </span>
+              <div className="mt-0.5 font-bold text-[#1A1A1A] truncate text-[11px]">
+                {isPeak
+                  ? 'BOH → Assembly & Dispatch'
+                  : isLull
+                  ? 'Sanitize & Stagger Breaks'
+                  : 'Balanced Standard'}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* AI Action Strip */}
+        <div className="mt-4 pt-3.5 border-t border-stone-200 flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs">
+          <div className="flex items-start gap-2">
+            <Sparkles className="w-4 h-4 text-[#E85C1A] shrink-0 mt-0.5" />
+            <p className="text-[#1A1A1A]">
+              <strong>AI Decision Loop: </strong>
+              {isLull
+                ? 'Standing down 5 unneeded staff prevents 10 unproductive labor hours. 1 crew member rebalanced to deep back-of-house sanitization.'
+                : isPeak
+                ? 'Deploying 3 to 4 flexible micro-shift crew to the Assembly Board and Aggregator Dispatch keeps ticket times under 3 minutes and prevents customer walkouts.'
+                : 'All station queues balanced within optimal throughput capacity.'}
+            </p>
           </div>
 
-          {/* Inline Properties Grid */}
-          <div className="mt-3 grid grid-cols-1 sm:grid-cols-3 gap-2 text-xs">
-            <div className="p-2 rounded-[3px] bg-white border border-[rgba(55,53,47,0.09)]">
-              <div className="text-[11px] text-[#37352F]/50 font-normal">Stations</div>
-              <div className="font-medium text-[#37352F] mt-0.5">
-                {currentPoint.recFrontCrew} FOH · {currentPoint.recKitchenCrew} KDS
-              </div>
-            </div>
-
-            <div className="p-2 rounded-[3px] bg-white border border-[rgba(55,53,47,0.09)]">
-              <div className="text-[11px] text-[#37352F]/50 font-normal">Kitchen Batch Prep</div>
-              <div className="font-medium text-[#37352F] mt-0.5">
-                {isDip ? 'Hold batch drops' : 'Staggered batches'}
-              </div>
-            </div>
-
-            <div className="p-2 rounded-[3px] bg-white border border-[rgba(55,53,47,0.09)]">
-              <div className="text-[11px] text-[#37352F]/50 font-normal">Dining Setback</div>
-              <div className="font-medium text-[#0F7B6C] mt-0.5">
-                {currentPoint.diningHvacMode}
-              </div>
-            </div>
-          </div>
-
-          <div className="mt-2.5 text-xs text-[#37352F]/70 leading-relaxed">
-            <strong>Recommendation: </strong>
-            {isDip
-              ? 'Reduce active front-of-house staffing by 2 and reallocate cross-trained crew to the 5–7 PM rush window.'
-              : isPeak
-              ? 'Reinforce Fry Station and Packer role. Ensure 1 cross-trained runner covers aggregator handoffs.'
-              : 'Maintain standard cadence; all stations operating within calibrated throughput capacity.'}
+          <div className="text-[11px] text-[#6E6E6E] font-semibold shrink-0 italic">
+            {scheduleApproved ? '✓ 5-Day Schedule Locked' : 'Pending Manager Review & Approval'}
           </div>
         </div>
       </div>

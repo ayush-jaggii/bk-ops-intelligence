@@ -51,7 +51,7 @@ export const DietFilterToggles: React.FC<DietFilterProps> = ({
         onClick={() => setDietFilter(dietFilter === 'veg' ? 'all' : 'veg')}
         className={`inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-bold font-ui transition-all border cursor-pointer ${
           dietFilter === 'veg'
-            ? 'bg-emerald-50 border-[#0E8A3E] text-[#0E8A3E] shadow-xs ring-1 ring-[#0E8A3E]'
+            ? 'bg-emerald-50 border-[#0E8A3E] text-[#0E8A3E] ring-1 ring-[#0E8A3E]'
             : 'bg-white border-stone-300 text-[#5C3320] hover:border-stone-400'
         }`}
       >
@@ -64,7 +64,7 @@ export const DietFilterToggles: React.FC<DietFilterProps> = ({
         onClick={() => setDietFilter(dietFilter === 'nonveg' ? 'all' : 'nonveg')}
         className={`inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-bold font-ui transition-all border cursor-pointer ${
           dietFilter === 'nonveg'
-            ? 'bg-red-50 border-[#7A1F1F] text-[#7A1F1F] shadow-xs ring-1 ring-[#7A1F1F]'
+            ? 'bg-red-50 border-[#7A1F1F] text-[#7A1F1F] ring-1 ring-[#7A1F1F]'
             : 'bg-white border-stone-300 text-[#5C3320] hover:border-stone-400'
         }`}
       >

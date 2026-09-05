@@ -62,7 +62,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
 
   return (
     <aside
-      className={`bg-white border-r border-[#E5E4E0] transition-all duration-300 flex flex-col justify-between shrink-0 shadow-xs z-30 font-ui ${
+      className={`bg-white border-r border-[#E5E4E0] transition-all duration-300 flex flex-col justify-between shrink-0 z-30 font-ui ${
         collapsed ? 'w-20' : 'w-64'
       }`}
     >
@@ -95,7 +95,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
                 onClick={() => setCurrentTab(item.id as NavTab)}
                 className={`w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-xs font-bold transition-all group cursor-pointer relative ${
                   isActive
-                    ? 'bg-[#F5F4F1] text-[#1A1A1A] font-extrabold border-l-4 border-[#E85C1A] shadow-xs'
+                    ? 'bg-[#F5F4F1] text-[#1A1A1A] font-extrabold border-l-4 border-[#E85C1A] '
                     : 'text-[#6E6E6E] hover:bg-[#F5F4F1]/60 hover:text-[#1A1A1A]'
                 }`}
               >

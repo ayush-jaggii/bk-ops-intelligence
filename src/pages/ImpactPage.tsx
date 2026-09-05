@@ -67,7 +67,7 @@ export const ImpactPage: React.FC = () => {
       </div>
 
       {/* Hero Monthly Opportunity Card */}
-      <div className="p-8 rounded-2xl bg-gradient-to-br from-[#5C3320] to-[#422012] text-white shadow-md relative overflow-hidden">
+      <div className="p-8 rounded-2xl bg-gradient-to-br from-[#5C3320] to-[#422012] text-white relative overflow-hidden">
         <div className="relative z-10">
           <span className="text-xs font-black font-ui uppercase tracking-wider text-[#F5A827] block">
             ESTIMATED MONTHLY STORE BENEFIT
@@ -115,7 +115,7 @@ export const ImpactPage: React.FC = () => {
       </div>
 
       {/* Labor Cost Waterfall Bridge */}
-      <div className="p-6 bg-white rounded-2xl border border-stone-200/80 shadow-xs">
+      <div className="p-6 bg-white rounded-2xl border border-stone-200/80 ">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 mb-4 border-b border-stone-100">
           <div>
             <h3 className="text-lg font-black font-display text-[#1A1A1A]">
@@ -141,7 +141,6 @@ export const ImpactPage: React.FC = () => {
                   backgroundColor: '#FFFFFF',
                   borderRadius: '12px',
                   border: '1px solid #e5dfd5',
-                  boxShadow: '0 8px 20px -4px rgba(0, 0, 0, 0.08)',
                   padding: '12px 16px'
                 }}
                 formatter={(val: any, _name: any, item: any) => [item.payload.label, 'Monthly Value']}

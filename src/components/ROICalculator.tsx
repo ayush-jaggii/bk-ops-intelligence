@@ -52,7 +52,7 @@ export const ROICalculator: React.FC = () => {
   }, [params]);
 
   return (
-    <div className="p-6 sm:p-8 bg-white rounded-2xl border border-stone-200/80 shadow-xs space-y-6 font-ui">
+    <div className="p-6 sm:p-8 bg-white rounded-2xl border border-stone-200/80 space-y-6 font-ui">
       {/* Title */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 border-b border-stone-100">
         <div className="flex items-center gap-3">

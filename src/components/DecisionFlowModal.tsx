@@ -69,11 +69,11 @@ export const DecisionFlowModal: React.FC = () => {
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-xs animate-fade-in font-ui">
-      <div className="bg-white rounded-2xl shadow-2xl max-w-4xl w-full max-h-[92vh] overflow-y-auto border border-stone-200">
+      <div className="bg-white rounded-2xl max-w-4xl w-full max-h-[92vh] overflow-y-auto border border-stone-200">
         {/* Header */}
         <div className="p-6 border-b border-stone-200 bg-[#5C3320] text-white flex items-center justify-between sticky top-0 z-10">
           <div className="flex items-center gap-3.5">
-            <div className="p-1.5 bg-white rounded-2xl shadow-xs shrink-0 flex items-center justify-center">
+            <div className="p-1.5 bg-white rounded-2xl shrink-0 flex items-center justify-center">
               <BurgerKingLogo size={42} />
             </div>
             <div>

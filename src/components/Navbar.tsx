@@ -46,7 +46,7 @@ export const Navbar: React.FC = () => {
   }, []);
 
   return (
-    <header className="sticky top-0 z-40 bg-white border-b border-stone-200/80 shadow-xs font-ui">
+    <header className="sticky top-0 z-40 bg-white border-b border-stone-200/80 font-ui">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between gap-4">
         {/* Left: Brand Mark + Name */}
         <div className="flex items-center gap-3 shrink-0">
@@ -81,7 +81,7 @@ export const Navbar: React.FC = () => {
             </button>
 
             {storeMenuOpen && (
-              <div className="absolute left-0 mt-2 w-80 bg-white rounded-2xl shadow-xl border border-stone-200 py-2 text-stone-800 z-50 animate-fade-in">
+              <div className="absolute left-0 mt-2 w-80 bg-white rounded-2xl border border-stone-200 py-2 text-stone-800 z-50 animate-fade-in">
                 <div className="px-4 py-2 text-[10px] font-black uppercase tracking-wider text-[#6E6E6E] border-b border-stone-100">
                   Select Store
                 </div>
@@ -127,7 +127,7 @@ export const Navbar: React.FC = () => {
               onClick={() => setScenario('normal')}
               className={`px-3 py-1 rounded-full transition-all cursor-pointer ${
                 scenario === 'normal'
-                  ? 'bg-white text-[#5C3320] shadow-xs'
+                  ? 'bg-white text-[#5C3320] '
                   : 'text-[#6E6E6E] hover:text-[#1A1A1A]'
               }`}
             >
@@ -137,7 +137,7 @@ export const Navbar: React.FC = () => {
               onClick={() => setScenario('spike')}
               className={`px-3 py-1 rounded-full transition-all cursor-pointer flex items-center gap-1 ${
                 scenario === 'spike'
-                  ? 'bg-[#E85C1A] text-white shadow-xs'
+                  ? 'bg-[#E85C1A] text-white '
                   : 'text-[#6E6E6E] hover:text-[#E85C1A]'
               }`}
             >
@@ -148,7 +148,7 @@ export const Navbar: React.FC = () => {
               onClick={() => setScenario('low')}
               className={`px-3 py-1 rounded-full transition-all cursor-pointer ${
                 scenario === 'low'
-                  ? 'bg-amber-600 text-white shadow-xs'
+                  ? 'bg-amber-600 text-white '
                   : 'text-[#6E6E6E] hover:text-amber-800'
               }`}
             >
@@ -191,7 +191,7 @@ export const Navbar: React.FC = () => {
             </button>
 
             {notificationsOpen && (
-              <div className="absolute right-0 mt-2 w-80 sm:w-96 bg-white rounded-2xl shadow-xl border border-stone-200 p-4 text-stone-800 z-50 animate-fade-in">
+              <div className="absolute right-0 mt-2 w-80 sm:w-96 bg-white rounded-2xl border border-stone-200 p-4 text-stone-800 z-50 animate-fade-in">
                 <div className="flex items-center justify-between pb-2 border-b border-stone-100">
                   <span className="text-xs font-black uppercase tracking-wider text-[#1A1A1A]">
                     Operational Alerts
@@ -223,7 +223,7 @@ export const Navbar: React.FC = () => {
 
           {/* Duty Manager Avatar */}
           <div className="flex items-center gap-2 pl-2 border-l border-stone-200/80">
-            <div className="w-8 h-8 rounded-full bg-[#5C3320] text-white font-black text-xs flex items-center justify-center font-display shadow-xs">
+            <div className="w-8 h-8 rounded-full bg-[#5C3320] text-white font-black text-xs flex items-center justify-center font-display ">
               SM
             </div>
             <div className="hidden xl:block text-left leading-tight">

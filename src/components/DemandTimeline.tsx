@@ -15,7 +15,7 @@ export const DemandTimeline: React.FC<DemandTimelineProps> = ({ onReviewSchedule
   const isPeak = currentPoint.isPeak;
 
   return (
-    <div className="bg-white rounded-2xl border border-stone-200/80 shadow-[0_1px_3px_rgba(0,0,0,0.04)] p-6 overflow-hidden font-ui">
+    <div className="bg-white rounded-2xl border border-stone-200/80 p-6 overflow-hidden font-ui">
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-5 border-b border-stone-100">
         <div>
@@ -50,7 +50,7 @@ export const DemandTimeline: React.FC<DemandTimelineProps> = ({ onReviewSchedule
             className={`px-4 py-1.5 rounded-xl text-xs font-bold font-ui uppercase tracking-wider flex items-center gap-1.5 transition-all cursor-pointer ${
               scheduleApproved
                 ? 'bg-emerald-50 text-[#0E8A3E] border border-emerald-200 cursor-default'
-                : 'bg-[#5C3320] hover:bg-[#4A2616] text-white shadow-xs'
+                : 'bg-[#5C3320] hover:bg-[#4A2616] text-white '
             }`}
           >
             {scheduleApproved ? (
@@ -80,7 +80,7 @@ export const DemandTimeline: React.FC<DemandTimelineProps> = ({ onReviewSchedule
                 onClick={() => setSelectedHour(hour.hour)}
                 className={`flex-1 min-w-[72px] p-3 rounded-xl transition-all text-center flex flex-col justify-between cursor-pointer border ${
                   isSelected
-                    ? 'bg-[#5C3320] text-white border-[#5C3320] shadow-sm ring-2 ring-[#E85C1A]'
+                    ? 'bg-[#5C3320] text-white border-[#5C3320] ring-2 ring-[#E85C1A]'
                     : isOverstaffedLull
                     ? 'bg-amber-50/70 border-amber-300 text-[#1A1A1A] hover:bg-amber-100/60'
                     : isUnderstaffedPeak
@@ -135,7 +135,7 @@ export const DemandTimeline: React.FC<DemandTimelineProps> = ({ onReviewSchedule
       <div className="p-5 rounded-xl bg-stone-50/90 border border-stone-200/80">
         <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-5">
           <div className="flex items-start sm:items-center gap-3.5">
-            <div className="w-13 h-13 rounded-xl bg-[#5C3320] text-[#F5A827] flex flex-col items-center justify-center font-black font-display text-base shadow-xs shrink-0">
+            <div className="w-13 h-13 rounded-xl bg-[#5C3320] text-[#F5A827] flex flex-col items-center justify-center font-black font-display text-base shrink-0">
               <span>{currentPoint.timeLabel}</span>
               <span className="text-[9px] text-stone-300 font-normal font-ui">Window</span>
             </div>
@@ -170,7 +170,7 @@ export const DemandTimeline: React.FC<DemandTimelineProps> = ({ onReviewSchedule
           {/* 3 Metric Diagnosis Badges */}
           <div className="grid grid-cols-3 gap-2.5 text-xs">
             {/* Speed of Service */}
-            <div className="p-2.5 rounded-xl bg-white border border-stone-200 shadow-xs">
+            <div className="p-2.5 rounded-xl bg-white border border-stone-200 ">
               <span className="text-[10px] text-[#6E6E6E] font-bold uppercase tracking-wider block flex items-center gap-1">
                 <Clock className="w-3 h-3 text-[#E85C1A]" /> Speed of Service
               </span>
@@ -189,7 +189,7 @@ export const DemandTimeline: React.FC<DemandTimelineProps> = ({ onReviewSchedule
             </div>
 
             {/* Transactions per Employee */}
-            <div className="p-2.5 rounded-xl bg-white border border-stone-200 shadow-xs">
+            <div className="p-2.5 rounded-xl bg-white border border-stone-200 ">
               <span className="text-[10px] text-[#6E6E6E] font-bold uppercase tracking-wider block flex items-center gap-1">
                 <Activity className="w-3 h-3 text-[#5C3320]" /> Tx / Employee
               </span>
@@ -208,7 +208,7 @@ export const DemandTimeline: React.FC<DemandTimelineProps> = ({ onReviewSchedule
             </div>
 
             {/* Station Rebalancing */}
-            <div className="p-2.5 rounded-xl bg-white border border-stone-200 shadow-xs">
+            <div className="p-2.5 rounded-xl bg-white border border-stone-200 ">
               <span className="text-[10px] text-[#6E6E6E] font-bold uppercase tracking-wider block flex items-center gap-1">
                 <Users className="w-3 h-3 text-[#0E8A3E]" /> Station Rebalance
               </span>

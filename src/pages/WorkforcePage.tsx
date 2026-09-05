@@ -76,7 +76,7 @@ export const WorkforcePage: React.FC = () => {
 
           <button
             onClick={() => setShiftBuilderOpen(true)}
-            className="flex items-center gap-1.5 px-4 py-2 rounded-xl border border-[#5C3320] bg-white hover:bg-[#5C3320] text-[#5C3320] hover:text-white text-xs font-black uppercase tracking-wider shadow-xs transition-all cursor-pointer"
+            className="flex items-center gap-1.5 px-4 py-2 rounded-xl border border-[#5C3320] bg-white hover:bg-[#5C3320] text-[#5C3320] hover:text-white text-xs font-black uppercase tracking-wider transition-all cursor-pointer"
           >
             <Edit3 className="w-3.5 h-3.5 text-[#E85C1A]" /> Open Shift Builder
           </button>
@@ -85,7 +85,7 @@ export const WorkforcePage: React.FC = () => {
 
       {/* Top 3 Metric Diagnosis Cards */}
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-        <div className="p-5 bg-white rounded-2xl border border-stone-200/80 shadow-xs">
+        <div className="p-5 bg-white rounded-2xl border border-stone-200/80 ">
           <span className="text-[10px] font-black uppercase tracking-wider text-[#6E6E6E] block font-ui">
             Off-Peak Lull Productivity (3–5 PM)
           </span>
@@ -99,7 +99,7 @@ export const WorkforcePage: React.FC = () => {
           </span>
         </div>
 
-        <div className="p-5 bg-white rounded-2xl border border-stone-200/80 shadow-xs">
+        <div className="p-5 bg-white rounded-2xl border border-stone-200/80 ">
           <span className="text-[10px] font-black uppercase tracking-wider text-[#6E6E6E] block font-ui">
             Peak Speed of Service (SoS at 7 PM)
           </span>
@@ -113,7 +113,7 @@ export const WorkforcePage: React.FC = () => {
           </span>
         </div>
 
-        <div className="p-5 bg-white rounded-2xl border border-stone-200/80 shadow-xs">
+        <div className="p-5 bg-white rounded-2xl border border-stone-200/80 ">
           <span className="text-[10px] font-black uppercase tracking-wider text-[#6E6E6E] block font-ui">
             Weekly Store Labor Savings
           </span>
@@ -127,7 +127,7 @@ export const WorkforcePage: React.FC = () => {
       </div>
 
       {/* Main Hourly Station Deployment Matrix */}
-      <div className="p-6 bg-white rounded-2xl border border-stone-200/80 shadow-xs">
+      <div className="p-6 bg-white rounded-2xl border border-stone-200/80 ">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 mb-4 border-b border-stone-100">
           <div>
             <h3 className="text-lg font-black font-display text-[#1A1A1A]">
@@ -206,7 +206,7 @@ export const WorkforcePage: React.FC = () => {
       {/* Crew Roster Breakdown: Full-Time 9h vs Flexible 4h Micro-Shifts */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {/* Full-Time Straight Shift Crew */}
-        <div className="p-6 bg-white rounded-2xl border border-stone-200/80 shadow-xs">
+        <div className="p-6 bg-white rounded-2xl border border-stone-200/80 ">
           <div className="flex items-center justify-between pb-3 border-b border-stone-100">
             <div>
               <h4 className="text-base font-black font-display text-[#1A1A1A]">
@@ -252,7 +252,7 @@ export const WorkforcePage: React.FC = () => {
         </div>
 
         {/* Flexible 4-Hour Micro-Shift Crew */}
-        <div className="p-6 bg-white rounded-2xl border border-stone-200/80 shadow-xs">
+        <div className="p-6 bg-white rounded-2xl border border-stone-200/80 ">
           <div className="flex items-center justify-between pb-3 border-b border-stone-100">
             <div>
               <h4 className="text-base font-black font-display text-[#1A1A1A]">
@@ -297,7 +297,7 @@ export const WorkforcePage: React.FC = () => {
       </div>
 
       {/* Human-in-the-Loop Action Card */}
-      <div className="p-6 rounded-2xl bg-[#5C3320] text-white shadow-md flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+      <div className="p-6 rounded-2xl bg-[#5C3320] text-white flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
           <div className="flex items-center gap-2">
             <span className="text-[10px] font-black uppercase tracking-wider px-2 py-0.5 rounded-full bg-amber-400 text-[#5C3320]">
@@ -326,7 +326,7 @@ export const WorkforcePage: React.FC = () => {
             className={`px-5 py-2.5 rounded-xl text-xs font-black uppercase tracking-wider transition-all cursor-pointer ${
               scheduleApproved
                 ? 'bg-emerald-600 text-white cursor-default'
-                : 'bg-[#E85C1A] hover:bg-[#D44D0F] text-white shadow-xs'
+                : 'bg-[#E85C1A] hover:bg-[#D44D0F] text-white '
             }`}
           >
             {scheduleApproved ? '✓ Master Schedule Locked' : 'Approve Master Roster'}

@@ -68,7 +68,7 @@ export const SettingsPage: React.FC = () => {
 
       <form onSubmit={handleSubmit} className="space-y-6">
         {/* Section 1: Speed of Service & Customer Experience */}
-        <div className="p-6 bg-white rounded-2xl border border-stone-200/80 shadow-xs space-y-4">
+        <div className="p-6 bg-white rounded-2xl border border-stone-200/80 space-y-4">
           <div className="flex items-center gap-2.5 pb-3 border-b border-stone-100">
             <div className="w-9 h-9 rounded-xl bg-[#E85C1A]/10 flex items-center justify-center text-[#E85C1A]">
               <Clock className="w-5 h-5" />
@@ -131,7 +131,7 @@ export const SettingsPage: React.FC = () => {
         </div>
 
         {/* Section 2: Employee Productivity Targets */}
-        <div className="p-6 bg-white rounded-2xl border border-stone-200/80 shadow-xs space-y-4">
+        <div className="p-6 bg-white rounded-2xl border border-stone-200/80 space-y-4">
           <div className="flex items-center gap-2.5 pb-3 border-b border-stone-100">
             <div className="w-9 h-9 rounded-xl bg-[#5C3320]/10 flex items-center justify-center text-[#5C3320]">
               <Activity className="w-5 h-5" />
@@ -196,7 +196,7 @@ export const SettingsPage: React.FC = () => {
         </div>
 
         {/* Section 3: Station Minimum Staffing & Advance Notice */}
-        <div className="p-6 bg-white rounded-2xl border border-stone-200/80 shadow-xs space-y-4">
+        <div className="p-6 bg-white rounded-2xl border border-stone-200/80 space-y-4">
           <div className="flex items-center gap-2.5 pb-3 border-b border-stone-100">
             <div className="w-9 h-9 rounded-xl bg-emerald-500/10 flex items-center justify-center text-[#0E8A3E]">
               <ShieldCheck className="w-5 h-5" />
@@ -269,7 +269,7 @@ export const SettingsPage: React.FC = () => {
         <div className="flex justify-end">
           <button
             type="submit"
-            className="px-6 py-2.5 bg-[#E85C1A] hover:bg-[#D44D0F] text-white text-xs font-black uppercase tracking-wider rounded-xl shadow-xs transition-all flex items-center gap-2 cursor-pointer"
+            className="px-6 py-2.5 bg-[#E85C1A] hover:bg-[#D44D0F] text-white text-xs font-black uppercase tracking-wider rounded-xl transition-all flex items-center gap-2 cursor-pointer"
           >
             <Save className="w-4 h-4" /> Save Scheduling Rules
           </button>

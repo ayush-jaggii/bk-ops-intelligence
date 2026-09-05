@@ -73,7 +73,7 @@ export const ForecastPage: React.FC = () => {
 
         {/* 7-Day Advance Horizon Pill */}
         <div className="flex items-center gap-3">
-          <div className="px-4 py-2 bg-white border border-stone-200/80 rounded-2xl shadow-xs flex items-center gap-3">
+          <div className="px-4 py-2 bg-white border border-stone-200/80 rounded-2xl flex items-center gap-3">
             <div className="text-right">
               <span className="text-[10px] font-black uppercase tracking-wider text-[#6E6E6E] block font-ui">
                 Forecast Horizon
@@ -88,7 +88,7 @@ export const ForecastPage: React.FC = () => {
       </div>
 
       {/* Main Interactive Forecast Chart Card */}
-      <div className="p-6 bg-white rounded-2xl border border-stone-200/80 shadow-xs">
+      <div className="p-6 bg-white rounded-2xl border border-stone-200/80 ">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 mb-4 border-b border-stone-100">
           <div>
             <h3 className="text-lg font-black font-display text-[#1A1A1A]">
@@ -147,7 +147,6 @@ export const ForecastPage: React.FC = () => {
                   backgroundColor: '#FFFFFF',
                   borderRadius: '12px',
                   border: '1px solid #e5dfd5',
-                  boxShadow: '0 8px 20px -4px rgba(0, 0, 0, 0.08)',
                   padding: '12px 16px'
                 }}
                 labelStyle={{ fontWeight: 800, color: '#1A1A1A', marginBottom: '4px' }}
@@ -225,7 +224,7 @@ export const ForecastPage: React.FC = () => {
             return (
               <div
                 key={signal.id}
-                className="p-5 bg-white rounded-2xl border border-stone-200/80 shadow-xs hover:border-[#5C3320]/30 transition-all flex flex-col justify-between"
+                className="p-5 bg-white rounded-2xl border border-stone-200/80 hover:border-[#5C3320]/30 transition-all flex flex-col justify-between"
               >
                 <div>
                   <div className="flex items-center justify-between">

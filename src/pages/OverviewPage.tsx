@@ -89,7 +89,7 @@ export const OverviewPage: React.FC<OverviewPageProps> = ({ setCurrentTab }) => 
           {!scheduleApproved ? (
             <button
               onClick={approveSchedule}
-              className="px-4 py-2 bg-[#5C3320] hover:bg-[#4A2616] text-white text-xs font-bold font-ui uppercase tracking-wider rounded-xl transition-all shadow-xs cursor-pointer flex items-center gap-1.5"
+              className="px-4 py-2 bg-[#5C3320] hover:bg-[#4A2616] text-white text-xs font-bold font-ui uppercase tracking-wider rounded-xl transition-all cursor-pointer flex items-center gap-1.5"
             >
               <span>Approve Roster</span>
               <ArrowRight className="w-3.5 h-3.5 text-[#E85C1A]" />
@@ -150,7 +150,7 @@ export const OverviewPage: React.FC<OverviewPageProps> = ({ setCurrentTab }) => 
       {/* The Two Core Operational Pillars: Off-Peak Overstaffing vs Peak Understaffing */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {/* Card 1: Off-Peak Overstaffing */}
-        <div className="p-6 bg-white rounded-2xl border border-stone-200 shadow-xs flex flex-col justify-between">
+        <div className="p-6 bg-white rounded-2xl border border-stone-200 flex flex-col justify-between">
           <div>
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-2">
@@ -193,7 +193,7 @@ export const OverviewPage: React.FC<OverviewPageProps> = ({ setCurrentTab }) => 
             <span className="text-xs font-black text-[#0E8A3E]">Daily Saving: ₹ 3,840/- (16 Idle Hours)</span>
             <button
               onClick={() => setCurrentTab('workforce')}
-              className="px-4 py-2 rounded-full border border-[#5C3320] bg-white hover:bg-[#5C3320] text-[#5C3320] hover:text-white text-xs font-black uppercase tracking-wider transition-all shadow-xs flex items-center gap-1.5 cursor-pointer"
+              className="px-4 py-2 rounded-full border border-[#5C3320] bg-white hover:bg-[#5C3320] text-[#5C3320] hover:text-white text-xs font-black uppercase tracking-wider transition-all flex items-center gap-1.5 cursor-pointer"
             >
               Inspect Roster <ArrowRight className="w-3.5 h-3.5" />
             </button>
@@ -201,7 +201,7 @@ export const OverviewPage: React.FC<OverviewPageProps> = ({ setCurrentTab }) => 
         </div>
 
         {/* Card 2: Peak Understaffing & Micro-Shifts */}
-        <div className="p-6 bg-white rounded-2xl border border-stone-200 shadow-xs flex flex-col justify-between">
+        <div className="p-6 bg-white rounded-2xl border border-stone-200 flex flex-col justify-between">
           <div>
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-2">
@@ -244,7 +244,7 @@ export const OverviewPage: React.FC<OverviewPageProps> = ({ setCurrentTab }) => 
             <span className="text-xs font-bold text-emerald-800">Protected Peak Revenue: ~₹14,500/day</span>
             <button
               onClick={() => setCurrentTab('workforce')}
-              className="px-4 py-2 rounded-full border border-[#E85C1A] bg-[#E85C1A] hover:bg-[#D44D0F] text-white text-xs font-black uppercase tracking-wider transition-all shadow-xs flex items-center gap-1.5 cursor-pointer"
+              className="px-4 py-2 rounded-full border border-[#E85C1A] bg-[#E85C1A] hover:bg-[#D44D0F] text-white text-xs font-black uppercase tracking-wider transition-all flex items-center gap-1.5 cursor-pointer"
             >
               Open Shift Builder <ArrowRight className="w-3.5 h-3.5" />
             </button>

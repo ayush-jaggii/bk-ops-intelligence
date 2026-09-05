@@ -79,7 +79,7 @@ export const StoresPage: React.FC<StoresPageProps> = ({ setCurrentTab }) => {
       </div>
 
       {/* Filter and Search Bar */}
-      <div className="p-4 bg-white rounded-2xl border border-stone-200/80 shadow-xs flex flex-col md:flex-row items-center justify-between gap-4">
+      <div className="p-4 bg-white rounded-2xl border border-stone-200/80 flex flex-col md:flex-row items-center justify-between gap-4">
         {/* Search */}
         <div className="relative w-full md:w-80">
           <Search className="w-4 h-4 text-stone-400 absolute left-3.5 top-3" />
@@ -130,7 +130,7 @@ export const StoresPage: React.FC<StoresPageProps> = ({ setCurrentTab }) => {
       </div>
 
       {/* Stores Fleet Table */}
-      <div className="bg-white rounded-2xl border border-stone-200/80 shadow-xs overflow-hidden">
+      <div className="bg-white rounded-2xl border border-stone-200/80 overflow-hidden">
         <div className="overflow-x-auto">
           <table className="w-full text-left border-collapse min-w-[760px]">
             <thead>
@@ -214,7 +214,7 @@ export const StoresPage: React.FC<StoresPageProps> = ({ setCurrentTab }) => {
                         className={`px-3.5 py-1.5 rounded-xl text-xs font-bold uppercase tracking-wider transition-all cursor-pointer flex items-center gap-1 mx-auto ${
                           isSelected
                             ? 'bg-[#5C3320] text-white cursor-default'
-                            : 'bg-white border border-stone-300 text-[#5C3320] hover:bg-[#5C3320] hover:text-white shadow-xs'
+                            : 'bg-white border border-stone-300 text-[#5C3320] hover:bg-[#5C3320] hover:text-white '
                         }`}
                       >
                         <span>{isSelected ? 'Managing' : 'Select'}</span>

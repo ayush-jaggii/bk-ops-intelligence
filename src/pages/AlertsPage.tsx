@@ -42,7 +42,7 @@ export const AlertsPage: React.FC = () => {
             onClick={() => setFilter('all')}
             className={`px-3.5 py-1.5 rounded-full uppercase tracking-wider text-[11px] transition-all cursor-pointer ${
               filter === 'all'
-                ? 'bg-[#5C3320] text-white shadow-xs'
+                ? 'bg-[#5C3320] text-white '
                 : 'text-[#6E6E6E] hover:text-[#1A1A1A]'
             }`}
           >
@@ -52,7 +52,7 @@ export const AlertsPage: React.FC = () => {
             onClick={() => setFilter('HIGH')}
             className={`px-3.5 py-1.5 rounded-full uppercase tracking-wider text-[11px] transition-all cursor-pointer ${
               filter === 'HIGH'
-                ? 'bg-[#7A1F1F] text-white shadow-xs'
+                ? 'bg-[#7A1F1F] text-white '
                 : 'text-[#6E6E6E] hover:text-[#1A1A1A]'
             }`}
           >
@@ -62,7 +62,7 @@ export const AlertsPage: React.FC = () => {
             onClick={() => setFilter('MEDIUM')}
             className={`px-3.5 py-1.5 rounded-full uppercase tracking-wider text-[11px] transition-all cursor-pointer ${
               filter === 'MEDIUM'
-                ? 'bg-amber-600 text-white shadow-xs'
+                ? 'bg-amber-600 text-white '
                 : 'text-[#6E6E6E] hover:text-[#1A1A1A]'
             }`}
           >
@@ -72,7 +72,7 @@ export const AlertsPage: React.FC = () => {
             onClick={() => setFilter('LOW')}
             className={`px-3.5 py-1.5 rounded-full uppercase tracking-wider text-[11px] transition-all cursor-pointer ${
               filter === 'LOW'
-                ? 'bg-blue-600 text-white shadow-xs'
+                ? 'bg-blue-600 text-white '
                 : 'text-[#6E6E6E] hover:text-[#1A1A1A]'
             }`}
           >
@@ -105,10 +105,10 @@ export const AlertsPage: React.FC = () => {
                     : isDismissed
                     ? 'bg-stone-100 border-stone-200 opacity-60'
                     : isHigh
-                    ? 'bg-white border-red-300 shadow-sm ring-1 ring-red-200'
+                    ? 'bg-white border-red-300 ring-1 ring-red-200'
                     : isMedium
-                    ? 'bg-white border-amber-300 shadow-xs'
-                    : 'bg-white border-stone-200 shadow-xs'
+                    ? 'bg-white border-amber-300 '
+                    : 'bg-white border-stone-200 '
                 }`}
               >
                 <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
@@ -171,7 +171,7 @@ export const AlertsPage: React.FC = () => {
                     <div className="flex sm:flex-col gap-2 shrink-0 justify-center">
                       <button
                         onClick={() => approveAlert(alert.id)}
-                        className="px-5 py-2.5 bg-[#E85C1A] hover:bg-[#D44D0F] text-white text-xs font-black uppercase tracking-wider rounded-full shadow-xs transition-all flex items-center justify-center gap-1.5 cursor-pointer"
+                        className="px-5 py-2.5 bg-[#E85C1A] hover:bg-[#D44D0F] text-white text-xs font-black uppercase tracking-wider rounded-full transition-all flex items-center justify-center gap-1.5 cursor-pointer"
                       >
                         <CheckCircle2 className="w-3.5 h-3.5" /> Approve Action
                       </button>

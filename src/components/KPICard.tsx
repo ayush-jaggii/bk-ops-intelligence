@@ -23,7 +23,7 @@ export const KPICard: React.FC<KPICardProps> = ({
   const isGood = reverseColor ? !isPositiveChange : isPositiveChange;
 
   return (
-    <div className="p-5 sm:p-6 bg-white rounded-2xl border border-stone-200/80 shadow-[0_1px_3px_rgba(0,0,0,0.04)] hover:shadow-[0_4px_12px_rgba(0,0,0,0.06)] transition-all duration-200 relative overflow-hidden group font-ui">
+    <div className="p-5 sm:p-6 bg-white rounded-2xl border border-stone-200/80 transition-all duration-200 relative overflow-hidden group font-ui">
       <div className="flex items-start justify-between">
         <div>
           <span className="text-[11px] font-black uppercase tracking-wider text-[#6E6E6E] block font-ui">
@@ -33,7 +33,7 @@ export const KPICard: React.FC<KPICardProps> = ({
             {value}
           </div>
         </div>
-        <div className="w-10 h-10 rounded-full bg-[#F5F4F1] border border-stone-200 flex items-center justify-center text-[#E85C1A] group-hover:scale-105 transition-transform shadow-xs">
+        <div className="w-10 h-10 rounded-full bg-[#F5F4F1] border border-stone-200 flex items-center justify-center text-[#E85C1A] group-hover:scale-105 transition-transform ">
           <Icon className="w-5 h-5" />
         </div>
       </div>

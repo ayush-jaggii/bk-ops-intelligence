@@ -16,7 +16,7 @@ export const ToastContainer: React.FC = () => {
         return (
           <div
             key={toast.id}
-            className={`pointer-events-auto flex items-start gap-3 p-4 rounded-xl shadow-xl border transition-all duration-300 transform translate-y-0 ${
+            className={`pointer-events-auto flex items-start gap-3 p-4 rounded-xl border transition-all duration-300 transform translate-y-0 ${
               isSuccess
                 ? 'bg-white border-green-200 text-stone-800'
                 : isWarning

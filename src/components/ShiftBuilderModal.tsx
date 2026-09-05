@@ -79,7 +79,7 @@ export const ShiftBuilderModal: React.FC<ShiftBuilderModalProps> = ({ isOpen, on
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-xs animate-fade-in font-ui">
-      <div className="bg-white rounded-2xl shadow-2xl max-w-4xl w-full max-h-[92vh] overflow-y-auto border border-stone-200">
+      <div className="bg-white rounded-2xl max-w-4xl w-full max-h-[92vh] overflow-y-auto border border-stone-200">
         {/* Header */}
         <div className="p-6 border-b border-stone-200 bg-[#F5F4F1] flex items-center justify-between sticky top-0 z-10">
           <div>
@@ -188,7 +188,7 @@ export const ShiftBuilderModal: React.FC<ShiftBuilderModalProps> = ({ isOpen, on
                 {/* Shift Hours Adjuster */}
                 <div className="flex-1 flex flex-col sm:flex-row sm:items-center gap-4">
                   {/* Current Active Hours */}
-                  <div className="p-3 rounded-xl bg-white border border-stone-200 flex-1 shadow-2xs">
+                  <div className="p-3 rounded-xl bg-white border border-stone-200 flex-1 ">
                     <span className="text-[10px] font-black uppercase tracking-wider text-[#6E6E6E] block mb-1">
                       Assigned Shift Window
                     </span>
@@ -277,7 +277,7 @@ export const ShiftBuilderModal: React.FC<ShiftBuilderModalProps> = ({ isOpen, on
             </button>
             <button
               onClick={handleSave}
-              className="px-6 py-2.5 bg-[#E85C1A] hover:bg-[#D44D0F] text-white text-xs font-black uppercase tracking-wider rounded-full shadow-xs transition-all flex items-center gap-2 cursor-pointer"
+              className="px-6 py-2.5 bg-[#E85C1A] hover:bg-[#D44D0F] text-white text-xs font-black uppercase tracking-wider rounded-full transition-all flex items-center gap-2 cursor-pointer"
             >
               <Save className="w-4 h-4" /> Save Schedule Override
             </button>

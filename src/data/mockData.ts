@@ -332,6 +332,8 @@ export const FORECAST_SIGNALS: ForecastSignal[] = [
   }
 ];
 
+export const INITIAL_SIGNALS = FORECAST_SIGNALS;
+
 export const INITIAL_EMPLOYEES: Employee[] = [
   {
     id: 'crew-a',

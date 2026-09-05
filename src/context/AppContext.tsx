@@ -13,6 +13,7 @@ import {
 } from '../types';
 import {
   INITIAL_STORES,
+  FORECAST_SIGNALS,
   INITIAL_SIGNALS,
   INITIAL_EMPLOYEES,
   INITIAL_SKUS,

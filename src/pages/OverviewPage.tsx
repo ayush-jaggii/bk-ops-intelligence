@@ -2,15 +2,12 @@ import React from 'react';
 import { useApp } from '../context/AppContext';
 import { KPICard } from '../components/KPICard';
 import { DemandTimeline } from '../components/DemandTimeline';
-import { VegIndicator, NonVegIndicator } from '../components/FoodIndicators';
 import {
   IndianRupee,
   ShoppingBag,
   Users,
   Trash2,
   ArrowRight,
-  Workflow,
-  Zap,
   ChefHat
 } from 'lucide-react';
 import { NavTab } from '../components/Sidebar';
@@ -23,112 +20,68 @@ export const OverviewPage: React.FC<OverviewPageProps> = ({ setCurrentTab }) => 
   const {
     selectedStore,
     metrics,
-    scheduleApproved,
-    setDecisionFlowOpen
+    scheduleApproved
   } = useApp();
 
   return (
     <div className="space-y-6 pb-12 font-ui">
       {/* Page Header */}
-      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <div className="flex items-center gap-2.5">
-            <h1 className="text-3xl sm:text-4xl font-black font-display text-[#1A1A1A] tracking-tight">
-              Good afternoon, Manager.
-            </h1>
-            <span className="px-3 py-1 rounded-full text-xs font-black font-ui uppercase tracking-wider bg-stone-100 text-[#5C3320] border border-stone-300">
-              {selectedStore.name}
-            </span>
-          </div>
-          <p className="text-sm text-[#6E6E6E] mt-1 font-medium">
-            AI-powered operations recommendations for your restaurant today · Telemetry synced with POS & KDS.
+          <h1 className="text-2xl sm:text-3xl font-black font-display text-[#1A1A1A] tracking-tight">
+            Store Overview
+          </h1>
+          <p className="text-xs sm:text-sm text-[#6E6E6E] mt-0.5 font-medium">
+            Live operations telemetry for {selectedStore.name} · Synchronized with POS, KDS & IoT
           </p>
         </div>
 
-        {/* Action quick links */}
         <div className="flex items-center gap-2.5">
           <button
-            onClick={() => setDecisionFlowOpen(true)}
-            className="flex items-center gap-1.5 px-4 py-2 bg-white border border-[#5C3320] hover:bg-[#F5F4F1] text-[#5C3320] text-xs font-bold font-ui uppercase tracking-wider rounded-full transition-all shadow-xs cursor-pointer"
-          >
-            <Workflow className="w-3.5 h-3.5 text-[#E85C1A]" />
-            <span>Decision Loop</span>
-          </button>
-          <button
             onClick={() => setCurrentTab('impact')}
-            className="flex items-center gap-1.5 px-5 py-2 bg-[#5C3320] hover:bg-[#4A2616] text-white text-xs font-bold font-ui uppercase tracking-wider rounded-full transition-all shadow-sm cursor-pointer"
+            className="flex items-center gap-1.5 px-4 py-2 bg-stone-100 hover:bg-stone-200 text-[#5C3320] text-xs font-bold font-ui uppercase tracking-wider rounded-xl transition-all cursor-pointer"
           >
-            <span>Opportunity (₹ {metrics.monthlyOpportunityLakhs}L/-)</span>
+            <span>Monthly Impact: ₹{metrics.monthlyOpportunityLakhs}L</span>
             <ArrowRight className="w-3.5 h-3.5 text-[#E85C1A]" />
           </button>
         </div>
       </div>
 
-      {/* Prominent Current Operating Status Card */}
-      <div className="p-7 rounded-2xl bg-gradient-to-br from-[#5C3320] to-[#422012] text-white shadow-md relative overflow-hidden">
-        {/* Background ambient flame accent */}
-        <div className="absolute -right-10 -bottom-10 w-64 h-64 rounded-full bg-[#E85C1A]/20 blur-3xl pointer-events-none"></div>
-
-        <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6 relative z-10">
-          <div>
-            <div className="flex items-center gap-2">
-              <span className="text-[10px] font-black uppercase tracking-wider px-2.5 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 flex items-center gap-1">
-                <span className="w-2 h-2 rounded-full bg-[#0E8A3E] animate-pulse"></span>
-                STORE STATUS
-              </span>
-              <span className="text-xs text-stone-300 font-medium font-ui">
-                Active Resource Telemetry
-              </span>
-            </div>
-            <h2 className="text-3xl sm:text-4xl font-black font-display text-white mt-2 tracking-tight">
-              {scheduleApproved ? 'Store Fully Optimized.' : 'Optimization Available.'}
-            </h2>
-            <p className="text-xs sm:text-sm text-stone-300 mt-1 max-w-xl leading-relaxed font-ui">
+      {/* Clean Status Alert Strip */}
+      <div
+        className={`px-4 sm:px-5 py-3.5 rounded-2xl border transition-all flex flex-col sm:flex-row sm:items-center justify-between gap-3 ${
+          scheduleApproved
+            ? 'bg-emerald-50/70 border-emerald-200 text-emerald-950'
+            : 'bg-[#F5F4F1] border-stone-200 text-[#1A1A1A]'
+        }`}
+      >
+        <div className="flex items-center gap-3">
+          <div
+            className={`w-2.5 h-2.5 rounded-full shrink-0 ${
+              scheduleApproved ? 'bg-[#0E8A3E]' : 'bg-[#E85C1A] animate-pulse'
+            }`}
+          />
+          <div className="text-xs font-ui">
+            <span className="font-bold">
+              {scheduleApproved ? 'Store Fully Optimized' : 'Optimization Recommendation Available'}
+            </span>
+            <span className="text-[#6E6E6E] ml-2 hidden md:inline">
               {scheduleApproved
-                ? 'Store resources are currently matched to forecasted demand velocity. Peak-hour throughput protected.'
-                : 'Afternoon demand lull (3:00–5:00 PM) detected. Reassigning 2 cross-trained crew to the 5–7 PM rush will boost labor utilization by +9 pts.'}
-            </p>
-          </div>
-
-          {/* 4 Status Pillars */}
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-            <div className="p-3.5 rounded-xl bg-white/10 backdrop-blur-xs border border-white/15">
-              <span className="text-[10px] font-bold font-ui text-stone-300 block uppercase tracking-wider">
-                Current Demand
-              </span>
-              <div className="text-xl font-black font-display text-[#F5A827] mt-0.5">78 ord/hr</div>
-              <span className="text-[10px] text-stone-300">Pacing on target</span>
-            </div>
-
-            <div className="p-3.5 rounded-xl bg-white/10 backdrop-blur-xs border border-white/15">
-              <span className="text-[10px] font-bold font-ui text-stone-300 block uppercase tracking-wider">
-                Current Staffing
-              </span>
-              <div className="text-xl font-black font-display text-white mt-0.5">
-                {scheduleApproved ? '6 Active' : '8 Active'}
-              </div>
-              <span className="text-[10px] text-stone-300">
-                {scheduleApproved ? 'Reassigned to peak' : '2 crew idle in lull'}
-              </span>
-            </div>
-
-            <div className="p-3.5 rounded-xl bg-white/10 backdrop-blur-xs border border-white/15">
-              <span className="text-[10px] font-bold font-ui text-stone-300 block uppercase tracking-wider">
-                Kitchen Queue
-              </span>
-              <div className="text-xl font-black font-display text-white mt-0.5">14 In KDS</div>
-              <span className="text-[10px] text-stone-300">Avg prep: 7m 24s</span>
-            </div>
-
-            <div className="p-3.5 rounded-xl bg-white/10 backdrop-blur-xs border border-white/15">
-              <span className="text-[10px] font-bold font-ui text-stone-300 block uppercase tracking-wider">
-                Energy Mode
-              </span>
-              <div className="text-xl font-black font-display text-emerald-300 mt-0.5">Eco 72%</div>
-              <span className="text-[10px] text-stone-300">Safe Dining Setback</span>
-            </div>
+                ? 'Labor and kitchen batch schedules are synced to predicted order pacing.'
+                : 'Afternoon demand lull (3–5 PM) detected. Shift 2 crew to 5–7 PM dinner rush to protect throughput.'}
+            </span>
           </div>
         </div>
+
+        {!scheduleApproved && (
+          <button
+            onClick={() => setCurrentTab('workforce')}
+            className="self-start sm:self-auto shrink-0 px-3.5 py-1.5 bg-[#5C3320] hover:bg-[#4A2616] text-white text-[11px] font-bold uppercase tracking-wider rounded-lg transition-all cursor-pointer flex items-center gap-1.5"
+          >
+            <span>Review Roster</span>
+            <ArrowRight className="w-3 h-3 text-[#E85C1A]" />
+          </button>
+        )}
       </div>
 
       {/* 4 KPI Cards */}

@@ -45,23 +45,23 @@ export const Sidebar: React.FC<SidebarProps> = ({
 
   const navItems = [
     { id: 'overview', label: 'Overview', icon: LayoutDashboard, badge: null },
-    { id: 'forecast', label: 'AI Forecast', icon: TrendingUp, badge: 'Live' },
+    { id: 'forecast', label: 'AI Forecast', icon: TrendingUp, badge: null },
     {
       id: 'workforce',
       label: 'Workforce',
       icon: Users,
-      badge: scheduleApproved ? 'Approved' : 'Rec'
+      badge: scheduleApproved ? null : '1 Rec'
     },
-    { id: 'kitchen', label: 'Kitchen', icon: ChefHat, badge: '6 SKUs' },
-    { id: 'energy', label: 'Energy', icon: Zap, badge: 'Smart' },
-    { id: 'impact', label: 'Impact & ROI', icon: PieChart, badge: '₹1.42L' },
-    { id: 'stores', label: 'Stores Fleet', icon: Building2, badge: '5 Hubs' },
+    { id: 'kitchen', label: 'Kitchen Prep', icon: ChefHat, badge: null },
+    { id: 'energy', label: 'Smart Energy', icon: Zap, badge: null },
+    { id: 'impact', label: 'Impact & ROI', icon: PieChart, badge: null },
+    { id: 'stores', label: 'Stores Fleet', icon: Building2, badge: null },
     {
       id: 'alerts',
       label: 'Alerts',
       icon: BellRing,
       badge: pendingAlertsCount > 0 ? `${pendingAlertsCount}` : null,
-      badgeColor: 'bg-[#D62300] text-white'
+      badgeColor: 'bg-[#E85C1A] text-white'
     },
     { id: 'settings', label: 'Settings', icon: Sliders, badge: null }
   ];
@@ -89,29 +89,8 @@ export const Sidebar: React.FC<SidebarProps> = ({
           </button>
         </div>
 
-        {/* Store mini pulse status */}
-        {!collapsed && (
-          <div className="mx-3 my-3 p-3.5 rounded-xl bg-[#F5F4F1] border border-stone-200">
-            <div className="flex items-center justify-between">
-              <span className="text-[10px] font-black uppercase tracking-wider text-[#6E6E6E]">
-                Store Telemetry
-              </span>
-              <span className="flex items-center gap-1.5 text-[11px] font-bold text-[#0E8A3E]">
-                <span className="w-2 h-2 rounded-full bg-[#0E8A3E] animate-pulse"></span>
-                {selectedStore.status}
-              </span>
-            </div>
-            <div className="mt-1 text-xs font-black text-[#1A1A1A] font-display truncate">
-              {selectedStore.name}
-            </div>
-            <div className="text-[10px] text-[#6E6E6E] mt-0.5">
-              Efficiency: {selectedStore.laborUtil}% labor · {selectedStore.energyEfficiency}% energy
-            </div>
-          </div>
-        )}
-
         {/* Nav Links */}
-        <nav className="p-2 space-y-1">
+        <nav className="p-2 space-y-1 mt-1">
           {navItems.map((item) => {
             const Icon = item.icon;
             const isActive = currentTab === item.id;
@@ -154,16 +133,16 @@ export const Sidebar: React.FC<SidebarProps> = ({
         </nav>
       </div>
 
-      {/* Bottom Guard Pill */}
+      {/* Bottom Store Status */}
       {!collapsed && (
-        <div className="p-4 border-t border-stone-200 bg-[#F5F4F1] m-2 rounded-xl text-[11px] text-[#6E6E6E]">
-          <div className="flex items-center gap-1.5 font-bold text-[#1A1A1A] mb-1">
-            <ShieldCheck className="w-3.5 h-3.5 text-[#E85C1A]" />
-            <span className="uppercase text-[10px] tracking-wider">HACCP & Labor Guard</span>
+        <div className="p-3 m-2 rounded-xl bg-[#F5F4F1] border border-stone-200/80 text-[11px]">
+          <div className="flex items-center justify-between font-semibold">
+            <span className="text-[#1A1A1A] truncate max-w-[130px]">{selectedStore.name}</span>
+            <span className="inline-flex items-center gap-1 text-[10px] text-[#0E8A3E] font-bold">
+              <span className="w-1.5 h-1.5 rounded-full bg-[#0E8A3E] animate-pulse"></span>
+              Live
+            </span>
           </div>
-          <p className="text-[10px] leading-tight text-[#6E6E6E]">
-            Food safety constraints, statutory breaks, and safety floors enforced.
-          </p>
         </div>
       )}
     </aside>

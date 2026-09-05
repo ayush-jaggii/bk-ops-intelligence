@@ -15,19 +15,15 @@ export const DemandTimeline: React.FC<DemandTimelineProps> = ({ onReviewSchedule
   const isPeak = currentPoint.hour >= 18 && currentPoint.hour <= 20;
 
   return (
-    <div className="bg-white rounded-2xl border border-stone-200 shadow-xs p-6 overflow-hidden font-ui">
+    <div className="bg-white rounded-2xl border border-stone-200/80 shadow-[0_1px_3px_rgba(0,0,0,0.04)] p-6 overflow-hidden font-ui">
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-5 border-b border-stone-100">
         <div>
-          <div className="flex items-center gap-2">
-            <span className="px-3 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wider bg-[#5C3320] text-white">
-              Operations Timeline
-            </span>
-            <span className="text-xs text-[#6E6E6E] font-medium">12 PM – 8 PM Hourly Synchronization</span>
-          </div>
-          <h3 className="text-2xl font-black font-display text-[#1A1A1A] mt-1">AI Operations Timeline.</h3>
+          <h3 className="text-xl font-black font-display text-[#1A1A1A]">
+            Hourly Demand & Station Synchronization
+          </h3>
           <p className="text-xs text-[#6E6E6E] mt-0.5">
-            Select any hour to inspect simulated demand velocity, recommended crew, kitchen batch triggers, and HVAC state.
+            Select an hour to inspect demand pacing, station staffing, prep thresholds, and dining setback.
           </p>
         </div>
 
@@ -36,7 +32,7 @@ export const DemandTimeline: React.FC<DemandTimelineProps> = ({ onReviewSchedule
           {onReviewSchedule && (
             <button
               onClick={onReviewSchedule}
-              className="px-4 py-2 rounded-full text-xs font-black uppercase tracking-wider border-2 border-[#5C3320] text-[#5C3320] hover:bg-[#5C3320] hover:text-white transition-all cursor-pointer"
+              className="px-3.5 py-1.5 rounded-xl text-xs font-bold font-ui text-[#5C3320] bg-stone-100 hover:bg-stone-200 transition-all cursor-pointer"
             >
               Review Schedule
             </button>
@@ -45,19 +41,19 @@ export const DemandTimeline: React.FC<DemandTimelineProps> = ({ onReviewSchedule
           <button
             onClick={approveSchedule}
             disabled={scheduleApproved}
-            className={`px-5 py-2 rounded-full text-xs font-black uppercase tracking-wider flex items-center gap-1.5 transition-all cursor-pointer ${
+            className={`px-4 py-1.5 rounded-xl text-xs font-bold font-ui uppercase tracking-wider flex items-center gap-1.5 transition-all cursor-pointer ${
               scheduleApproved
-                ? 'bg-emerald-100 text-[#0E8A3E] cursor-default border border-emerald-300'
-                : 'bg-[#E85C1A] hover:bg-[#D44D0F] text-white shadow-sm ring-2 ring-orange-200'
+                ? 'bg-emerald-50 text-[#0E8A3E] border border-emerald-200 cursor-default'
+                : 'bg-[#5C3320] hover:bg-[#4A2616] text-white shadow-xs'
             }`}
           >
             {scheduleApproved ? (
               <>
-                <CheckCircle2 className="w-3.5 h-3.5" /> Recommendation Approved
+                <CheckCircle2 className="w-3.5 h-3.5" /> Approved
               </>
             ) : (
               <>
-                <Check className="w-3.5 h-3.5" /> Apply Recommendation
+                <Check className="w-3.5 h-3.5 text-[#E85C1A]" /> Apply Sync
               </>
             )}
           </button>
@@ -65,8 +61,8 @@ export const DemandTimeline: React.FC<DemandTimelineProps> = ({ onReviewSchedule
       </div>
 
       {/* Timeline Bar (Horizontal hours) */}
-      <div className="py-6 overflow-x-auto">
-        <div className="min-w-[650px] flex items-stretch gap-2.5">
+      <div className="py-5 overflow-x-auto">
+        <div className="min-w-[620px] flex items-stretch gap-2">
           {hourlyData.map((hour) => {
             const isSelected = hour.hour === selectedHour;
             const is3to5Dip = hour.hour >= 15 && hour.hour <= 16;
@@ -76,61 +72,49 @@ export const DemandTimeline: React.FC<DemandTimelineProps> = ({ onReviewSchedule
               <button
                 key={hour.hour}
                 onClick={() => setSelectedHour(hour.hour)}
-                className={`flex-1 min-w-[72px] p-3.5 rounded-xl transition-all text-center flex flex-col justify-between cursor-pointer border ${
+                className={`flex-1 min-w-[70px] p-3 rounded-xl transition-all text-center flex flex-col justify-between cursor-pointer border ${
                   isSelected
-                    ? 'bg-[#5C3320] text-white border-[#5C3320] shadow-md scale-102 ring-2 ring-[#E85C1A]'
-                    : is3to5Dip
-                    ? 'bg-amber-50/80 border-amber-300 text-[#1A1A1A] hover:bg-amber-100'
-                    : isEveningPeak
-                    ? 'bg-orange-50/70 border-orange-200 text-[#1A1A1A] hover:bg-orange-100'
-                    : 'bg-[#F5F4F1] border-stone-200 text-[#1A1A1A] hover:bg-stone-100'
+                    ? 'bg-[#5C3320] text-white border-[#5C3320] shadow-sm ring-2 ring-[#E85C1A]'
+                    : 'bg-stone-50/70 border-stone-200 text-[#1A1A1A] hover:bg-stone-100/80'
                 }`}
               >
                 {/* Time header */}
-                <div className="text-xs font-black uppercase tracking-wider mb-1 font-ui">
-                  {hour.timeLabel}
+                <div className="flex items-center justify-center gap-1 text-[11px] font-bold font-ui">
+                  <span>{hour.timeLabel}</span>
+                  {is3to5Dip && <span className="w-1.5 h-1.5 rounded-full bg-amber-500" title="Afternoon Lull" />}
+                  {isEveningPeak && <span className="w-1.5 h-1.5 rounded-full bg-[#E85C1A]" title="Evening Rush" />}
                 </div>
 
                 {/* Demand Value */}
-                <div
-                  className={`text-xl font-black font-display my-1 ${
-                    isSelected
-                      ? 'text-[#F5A827]'
-                      : is3to5Dip
-                      ? 'text-amber-800'
-                      : isEveningPeak
-                      ? 'text-[#E85C1A]'
-                      : 'text-[#1A1A1A]'
-                  }`}
-                >
-                  {hour.aiForecast}
-                  <span className="text-[9px] font-normal block font-ui text-stone-400">orders/hr</span>
+                <div className="my-2">
+                  <div
+                    className={`text-xl font-black font-display leading-tight ${
+                      isSelected ? 'text-[#F5A827]' : 'text-[#1A1A1A]'
+                    }`}
+                  >
+                    {hour.aiForecast}
+                  </div>
+                  <div className={`text-[10px] font-medium font-ui ${isSelected ? 'text-stone-300' : 'text-stone-400'}`}>
+                    orders
+                  </div>
                 </div>
 
                 {/* Crew comparison badge */}
                 <div
-                  className={`text-[10px] font-bold py-1 px-1.5 rounded-md mt-2 ${
+                  className={`text-[10px] font-bold py-1 px-1 rounded-md ${
                     isSelected
-                      ? 'bg-white/20 text-white'
+                      ? 'bg-white/15 text-white'
                       : hour.scheduledCrew !== hour.recommendedCrew
-                      ? 'bg-amber-200/80 text-amber-900 font-black'
-                      : 'bg-stone-200/70 text-[#6E6E6E]'
+                      ? 'bg-amber-100 text-amber-900'
+                      : 'bg-stone-200/60 text-stone-600'
                   }`}
                 >
-                  {scheduleApproved ? `${hour.recommendedCrew} crew` : `${hour.scheduledCrew} → ${hour.recommendedCrew} crew`}
+                  {scheduleApproved
+                    ? `${hour.recommendedCrew} crew`
+                    : hour.scheduledCrew !== hour.recommendedCrew
+                    ? `${hour.scheduledCrew}→${hour.recommendedCrew}`
+                    : `${hour.scheduledCrew} crew`}
                 </div>
-
-                {/* Period tag */}
-                {is3to5Dip && (
-                  <span className="mt-1 text-[8px] font-black uppercase tracking-wider text-amber-700">
-                    Low Lull
-                  </span>
-                )}
-                {isEveningPeak && (
-                  <span className="mt-1 text-[8px] font-black uppercase tracking-wider text-[#E85C1A]">
-                    Dinner Rush
-                  </span>
-                )}
               </button>
             );
           })}
@@ -138,7 +122,7 @@ export const DemandTimeline: React.FC<DemandTimelineProps> = ({ onReviewSchedule
       </div>
 
       {/* Detailed Callout for Selected Hour */}
-      <div className="p-5 rounded-xl bg-[#F5F4F1] border border-stone-200">
+      <div className="p-4 sm:p-5 rounded-xl bg-stone-50/80 border border-stone-200/80">
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
           <div className="flex items-center gap-3">
             <div className="w-12 h-12 rounded-xl bg-[#5C3320] text-[#F5A827] flex items-center justify-center font-black font-display text-lg shadow-sm">

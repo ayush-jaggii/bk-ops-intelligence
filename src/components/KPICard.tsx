@@ -23,10 +23,7 @@ export const KPICard: React.FC<KPICardProps> = ({
   const isGood = reverseColor ? !isPositiveChange : isPositiveChange;
 
   return (
-    <div className="p-5 bg-white rounded-2xl border border-stone-200 shadow-xs hover:shadow-md transition-all duration-200 relative overflow-hidden group font-ui">
-      {/* Subtle top accent bar */}
-      <div className="absolute top-0 left-0 right-0 h-1 bg-[#E85C1A] opacity-90 group-hover:h-1.5 transition-all"></div>
-
+    <div className="p-5 sm:p-6 bg-white rounded-2xl border border-stone-200/80 shadow-[0_1px_3px_rgba(0,0,0,0.04)] hover:shadow-[0_4px_12px_rgba(0,0,0,0.06)] transition-all duration-200 relative overflow-hidden group font-ui">
       <div className="flex items-start justify-between">
         <div>
           <span className="text-[11px] font-black uppercase tracking-wider text-[#6E6E6E] block font-ui">

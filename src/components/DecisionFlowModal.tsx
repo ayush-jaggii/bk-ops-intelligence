@@ -68,92 +68,92 @@ export const DecisionFlowModal: React.FC = () => {
   ];
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-xs animate-fade-in font-ui">
-      <div className="bg-white rounded-2xl shadow-2xl max-w-4xl w-full max-h-[92vh] overflow-y-auto border border-stone-200">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/40 backdrop-blur-[2px] animate-fade-in">
+      <div className="bg-white rounded-[6px] shadow-[rgba(15,15,15,0.05)_0px_0px_0px_1px,rgba(15,15,15,0.1)_0px_3px_6px,rgba(15,15,15,0.2)_0px_9px_24px] max-w-3xl w-full max-h-[90vh] overflow-y-auto border border-[rgba(55,53,47,0.09)]">
         {/* Header */}
-        <div className="p-6 border-b border-stone-200 bg-[#5C3320] text-white flex items-center justify-between sticky top-0 z-10">
-          <div className="flex items-center gap-3.5">
-            <div className="p-1.5 bg-white rounded-2xl shadow-xs shrink-0 flex items-center justify-center">
-              <BurgerKingLogo size={42} />
-            </div>
+        <div className="p-4 border-b border-[rgba(55,53,47,0.09)] bg-[#F7F6F3] flex items-center justify-between sticky top-0 z-10">
+          <div className="flex items-center gap-2">
+            <span className="text-xl">🔄</span>
             <div>
-              <div className="flex items-center gap-2 mb-0.5">
-                <span className="px-2.5 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wider bg-[#E85C1A] text-white">
-                  Closed-Loop Architecture
+              <div className="flex items-center gap-2">
+                <h3 className="text-sm font-semibold text-[#37352F]">
+                  Closed-Loop Manager Decision Workflow
+                </h3>
+                <span className="text-[10px] px-1.5 py-0.2 rounded-[3px] bg-[#DDEBF1] text-[#0B6E99] font-medium">
+                  Human-In-The-Loop
                 </span>
-                <span className="text-xs font-semibold text-stone-300">Human-In-The-Loop AI</span>
               </div>
-              <h3 className="text-2xl font-black font-display text-white">
-                Manager Decision & Operational Workflow.
-              </h3>
+              <p className="text-[11px] text-[#37352F]/60">
+                How AI recommendations transition to manager authorization and store execution
+              </p>
             </div>
           </div>
           <button
             onClick={() => setDecisionFlowOpen(false)}
-            className="text-stone-300 hover:text-white p-2 rounded-full hover:bg-white/10 transition-colors cursor-pointer"
+            className="text-[#37352F]/50 hover:text-[#37352F] p-1 rounded-[3px] hover:bg-[rgba(55,53,47,0.06)] transition-colors cursor-pointer"
           >
-            <X className="w-5 h-5" />
+            <X className="w-4 h-4" />
           </button>
         </div>
 
         {/* Model Performance Indicators */}
-        <div className="p-6 bg-gradient-to-r from-[#5C3320] to-[#422012] text-white">
-          <h4 className="text-xs font-black uppercase tracking-wider text-[#F5A827] mb-4">
-            System Adherence & Feedback Reliability (Trailing 30 Days)
-          </h4>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            <div className="bg-white/10 backdrop-blur-xs p-4 rounded-xl border border-white/15">
-              <div className="flex items-center justify-between">
-                <span className="text-xs text-stone-200 font-medium">Forecast Accuracy (MAPE)</span>
-                <BarChart2 className="w-4 h-4 text-[#F5A827]" />
+        <div className="p-4 border-b border-[rgba(55,53,47,0.09)] bg-white">
+          <div className="text-[11px] font-medium text-[#37352F]/50 mb-3">
+            System Adherence & Reliability (Trailing 30 Days)
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+            <div className="p-3 rounded-[4px] border border-[rgba(55,53,47,0.09)] bg-[#F7F6F3]/50">
+              <div className="flex items-center justify-between text-xs text-[#37352F]/60">
+                <span>Forecast Accuracy (MAPE)</span>
+                <BarChart2 className="w-3.5 h-3.5 text-[#37352F]/40" />
               </div>
-              <div className="text-3xl font-black font-display text-white mt-1">89%</div>
-              <p className="text-[11px] text-stone-300 mt-1">±4.2 orders average variance</p>
+              <div className="text-xl font-bold text-[#37352F] mt-1">89%</div>
+              <p className="text-[11px] text-[#37352F]/50 mt-0.5">±4.2 orders average variance</p>
             </div>
-            <div className="bg-white/10 backdrop-blur-xs p-4 rounded-xl border border-white/15">
-              <div className="flex items-center justify-between">
-                <span className="text-xs text-stone-200 font-medium">Staffing Adherence</span>
-                <Users className="w-4 h-4 text-emerald-400" />
+            <div className="p-3 rounded-[4px] border border-[rgba(55,53,47,0.09)] bg-[#F7F6F3]/50">
+              <div className="flex items-center justify-between text-xs text-[#37352F]/60">
+                <span>Staffing Adherence</span>
+                <Users className="w-3.5 h-3.5 text-[#0F7B6C]" />
               </div>
-              <div className="text-3xl font-black font-display text-white mt-1">94%</div>
-              <p className="text-[11px] text-stone-300 mt-1">Managers adopt AI shift reallocation</p>
+              <div className="text-xl font-bold text-[#37352F] mt-1">94%</div>
+              <p className="text-[11px] text-[#37352F]/50 mt-0.5">Manager shift adoption rate</p>
             </div>
-            <div className="bg-white/10 backdrop-blur-xs p-4 rounded-xl border border-white/15">
-              <div className="flex items-center justify-between">
-                <span className="text-xs text-stone-200 font-medium">Prep Rec Acceptance</span>
-                <ShieldCheck className="w-4 h-4 text-[#F5A827]" />
+            <div className="p-3 rounded-[4px] border border-[rgba(55,53,47,0.09)] bg-[#F7F6F3]/50">
+              <div className="flex items-center justify-between text-xs text-[#37352F]/60">
+                <span>Prep Rec Acceptance</span>
+                <ShieldCheck className="w-3.5 h-3.5 text-[#D9730D]" />
               </div>
-              <div className="text-3xl font-black font-display text-white mt-1">81%</div>
-              <p className="text-[11px] text-stone-300 mt-1">Kitchen staff follow batch trigger recommendations</p>
+              <div className="text-xl font-bold text-[#37352F] mt-1">81%</div>
+              <p className="text-[11px] text-[#37352F]/50 mt-0.5">Kitchen batch trigger adherence</p>
             </div>
           </div>
         </div>
 
         {/* 8-Step Pipeline */}
-        <div className="p-6 space-y-4 bg-[#F5F4F1]/50">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div className="p-4 space-y-2 bg-white">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-2.5">
             {steps.map((step, idx) => (
               <div
                 key={step.num}
-                className="p-4 rounded-xl bg-white border border-stone-200 hover:border-[#E85C1A]/40 transition-all hover:shadow-xs"
+                className="p-3 rounded-[4px] border border-[rgba(55,53,47,0.09)] bg-white hover:bg-[#F7F6F3]/40 transition-colors"
               >
-                <div className="flex items-center justify-between mb-2">
-                  <div className="flex items-center gap-2">
-                    <span className="w-7 h-7 rounded-full bg-[#5C3320] text-white text-xs font-black font-display flex items-center justify-center">
+                <div className="flex items-center justify-between mb-1">
+                  <div className="flex items-center gap-1.5">
+                    <span className="text-[10px] font-mono px-1.5 py-0.2 rounded-[3px] bg-[rgba(55,53,47,0.08)] text-[#37352F] font-medium">
                       {step.num}
                     </span>
-                    <h5 className="font-black font-display text-[#1A1A1A] text-base">{step.title}.</h5>
+                    <span className="font-medium text-xs text-[#37352F]">{step.title}</span>
                   </div>
-                  <span className="text-[11px] font-bold px-2 py-0.5 rounded-full bg-orange-50 text-[#E85C1A] border border-orange-200 uppercase tracking-wider text-[10px]">
+                  <span className="text-[10px] font-medium px-1.5 py-0.2 rounded-[3px] bg-[#FDECC8] text-[#D9730D]">
                     {step.highlight}
                   </span>
                 </div>
-                <p className="text-xs text-[#6E6E6E] leading-relaxed mb-2">{step.desc}</p>
-                <div className="flex items-center justify-between pt-2 border-t border-stone-100 text-[11px] text-stone-400 font-medium">
-                  <span className="uppercase text-[10px] tracking-wider">Role: {step.badge}</span>
+                <p className="text-[11px] text-[#37352F]/70 leading-relaxed mb-2">{step.desc}</p>
+                <div className="flex items-center justify-between pt-1.5 border-t border-[rgba(55,53,47,0.06)] text-[10px] text-[#37352F]/50">
+                  <span>Role: {step.badge}</span>
                   {idx < steps.length - 1 && (
-                    <span className="flex items-center gap-1 text-[#E85C1A] font-bold text-xs uppercase tracking-wider">
-                      Next <ArrowRight className="w-3 h-3" />
+                    <span className="flex items-center gap-1 text-[#2383E2]">
+                      Next <ArrowRight className="w-2.5 h-2.5" />
                     </span>
                   )}
                 </div>
@@ -163,15 +163,15 @@ export const DecisionFlowModal: React.FC = () => {
         </div>
 
         {/* Footer */}
-        <div className="p-5 bg-white border-t border-stone-200 flex items-center justify-between">
-          <p className="text-xs text-[#6E6E6E] italic">
-            "AI recommends. Manager reviews. Manager approves. System records the action."
-          </p>
+        <div className="p-3 bg-[#F7F6F3] border-t border-[rgba(55,53,47,0.09)] flex items-center justify-between text-xs">
+          <span className="text-[#37352F]/60 text-[11px]">
+            AI recommends. Manager reviews and approves. System executes.
+          </span>
           <button
             onClick={() => setDecisionFlowOpen(false)}
-            className="px-6 py-2.5 bg-[#E85C1A] hover:bg-[#D44D0F] text-white text-xs font-black uppercase tracking-wider rounded-full transition-all shadow-xs cursor-pointer"
+            className="px-3 py-1.5 bg-[#2383E2] hover:bg-[#1B6FC2] text-white text-xs font-medium rounded-[3px] transition-colors cursor-pointer"
           >
-            Got It
+            Close
           </button>
         </div>
       </div>

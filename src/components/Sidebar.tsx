@@ -1,18 +1,12 @@
 import React from 'react';
 import {
-  LayoutDashboard,
-  TrendingUp,
-  Users,
-  ChefHat,
-  Zap,
-  PieChart,
-  Building2,
-  BellRing,
-  Sliders,
-  ChevronLeft,
   ChevronRight,
-  ShieldCheck,
-  AlertTriangle
+  ChevronDown,
+  Search,
+  Settings,
+  Plus,
+  HelpCircle,
+  Trash2
 } from 'lucide-react';
 import { useApp } from '../context/AppContext';
 
@@ -43,108 +37,136 @@ export const Sidebar: React.FC<SidebarProps> = ({
   const { alerts, scheduleApproved, selectedStore } = useApp();
   const pendingAlertsCount = alerts.filter((a) => a.status === 'pending').length;
 
-  const navItems = [
-    { id: 'overview', label: 'Overview', icon: LayoutDashboard, badge: null },
-    { id: 'forecast', label: 'AI Forecast', icon: TrendingUp, badge: null },
+  const navPages = [
+    { id: 'overview', label: 'Overview', icon: '📊', badge: null },
+    { id: 'forecast', label: 'Demand Forecast', icon: '📈', badge: null },
     {
       id: 'workforce',
-      label: 'Workforce',
-      icon: Users,
+      label: 'Workforce & Shifts',
+      icon: '👥',
       badge: scheduleApproved ? null : '1 Rec'
     },
-    { id: 'kitchen', label: 'Kitchen Prep', icon: ChefHat, badge: null },
-    { id: 'energy', label: 'Smart Energy', icon: Zap, badge: null },
-    { id: 'impact', label: 'Impact & ROI', icon: PieChart, badge: null },
-    { id: 'stores', label: 'Stores Fleet', icon: Building2, badge: null },
+    { id: 'kitchen', label: 'Kitchen & Holding', icon: '🍳', badge: null },
+    { id: 'energy', label: 'Energy & HVAC', icon: '⚡', badge: null },
+    { id: 'impact', label: 'Impact & Financials', icon: '💰', badge: null },
+    { id: 'stores', label: 'Multi-Store Hub', icon: '🏬', badge: null },
     {
       id: 'alerts',
-      label: 'Alerts',
-      icon: BellRing,
+      label: 'Live Alerts',
+      icon: '🔔',
       badge: pendingAlertsCount > 0 ? `${pendingAlertsCount}` : null,
-      badgeColor: 'bg-[#E85C1A] text-white'
+      badgeTag: 'bg-[#FBE4E4] text-[#E03E3E]'
     },
-    { id: 'settings', label: 'Settings', icon: Sliders, badge: null }
+    { id: 'settings', label: 'Settings', icon: '⚙️', badge: null }
   ];
 
   return (
     <aside
-      className={`bg-white border-r border-[#E5E4E0] transition-all duration-300 flex flex-col justify-between shrink-0 shadow-xs z-30 font-ui ${
-        collapsed ? 'w-20' : 'w-64'
+      className={`bg-[#F7F6F3] border-r border-[rgba(55,53,47,0.09)] text-[#37352F] select-none transition-all duration-200 flex flex-col justify-between shrink-0 font-sans ${
+        collapsed ? 'w-12' : 'w-60'
       }`}
     >
-      <div>
-        {/* Toggle Collapse */}
-        <div className="p-3 border-b border-stone-100 flex items-center justify-between">
+      <div className="flex flex-col h-full justify-between">
+        <div>
+          {/* Workspace Switcher Header */}
+          <div className="px-3 py-2.5 flex items-center justify-between border-b border-[rgba(55,53,47,0.06)]">
+            {!collapsed && (
+              <div className="flex items-center gap-2 min-w-0">
+                <div className="w-5 h-5 rounded-[3px] bg-[#37352F] text-white flex items-center justify-center font-bold text-[10px]">
+                  BK
+                </div>
+                <div className="truncate text-xs font-semibold text-[#37352F]">
+                  Burger King India
+                </div>
+              </div>
+            )}
+
+            <button
+              onClick={() => setCollapsed(!collapsed)}
+              className="p-1 rounded-[4px] hover:bg-[rgba(55,53,47,0.08)] text-[#37352F]/60 hover:text-[#37352F] transition-colors cursor-pointer ml-auto"
+              title={collapsed ? 'Expand sidebar' : 'Collapse sidebar'}
+            >
+              <ChevronRight
+                className={`w-3.5 h-3.5 transition-transform ${collapsed ? '' : 'rotate-180'}`}
+              />
+            </button>
+          </div>
+
+          {/* Quick Search */}
           {!collapsed && (
-            <span className="text-[11px] font-black uppercase tracking-wider text-[#6E6E6E] pl-2">
-              Operations Console
-            </span>
-          )}
-          <button
-            onClick={() => setCollapsed(!collapsed)}
-            className="p-1.5 rounded-lg text-[#6E6E6E] hover:text-[#1A1A1A] hover:bg-[#F5F4F1] transition-colors ml-auto cursor-pointer"
-            title={collapsed ? 'Expand Sidebar' : 'Collapse Sidebar'}
-          >
-            {collapsed ? <ChevronRight className="w-4 h-4" /> : <ChevronLeft className="w-4 h-4" />}
-          </button>
-        </div>
-
-        {/* Nav Links */}
-        <nav className="p-2 space-y-1 mt-1">
-          {navItems.map((item) => {
-            const Icon = item.icon;
-            const isActive = currentTab === item.id;
-
-            return (
+            <div className="px-2 pt-2">
               <button
-                key={item.id}
-                onClick={() => setCurrentTab(item.id as NavTab)}
-                className={`w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-xs font-bold transition-all group cursor-pointer relative ${
-                  isActive
-                    ? 'bg-[#F5F4F1] text-[#1A1A1A] font-extrabold border-l-4 border-[#E85C1A] shadow-xs'
-                    : 'text-[#6E6E6E] hover:bg-[#F5F4F1]/60 hover:text-[#1A1A1A]'
-                }`}
+                onClick={() => setCurrentTab('overview')}
+                className="w-full flex items-center justify-between px-2 py-1 rounded-[4px] text-xs text-[#37352F]/60 hover:bg-[rgba(55,53,47,0.08)] hover:text-[#37352F] transition-colors cursor-pointer"
               >
-                <Icon
-                  className={`w-4 h-4 shrink-0 transition-transform group-hover:scale-110 ${
-                    isActive ? 'text-[#E85C1A]' : 'text-[#6E6E6E]'
-                  }`}
-                />
-                {!collapsed && (
-                  <div className="flex-1 flex items-center justify-between">
-                    <span className="text-left tracking-wide">{item.label}</span>
-                    {item.badge && (
-                      <span
-                        className={`text-[9px] font-black px-2 py-0.5 rounded-full ${
-                          item.badgeColor ||
-                          (isActive
-                            ? 'bg-[#E85C1A] text-white'
-                            : 'bg-stone-200/80 text-[#6E6E6E] group-hover:bg-amber-100 group-hover:text-amber-900')
-                        }`}
-                      >
-                        {item.badge}
-                      </span>
-                    )}
-                  </div>
-                )}
+                <div className="flex items-center gap-2">
+                  <Search className="w-3.5 h-3.5" />
+                  <span>Quick Find</span>
+                </div>
+                <kbd className="text-[10px] bg-[rgba(55,53,47,0.08)] px-1 rounded text-[#37352F]/60 font-mono">
+                  ⌘K
+                </kbd>
               </button>
-            );
-          })}
-        </nav>
-      </div>
+            </div>
+          )}
 
-      {/* Bottom Store Status */}
-      {!collapsed && (
-        <div className="p-3 m-2 rounded-xl bg-[#F5F4F1] border border-stone-200/80 text-[11px]">
-          <div className="flex items-center justify-between font-semibold">
-            <span className="text-[#1A1A1A] truncate max-w-[130px]">{selectedStore.name}</span>
-            <span className="inline-flex items-center gap-1 text-[10px] text-[#0E8A3E] font-bold">
-              <span className="w-1.5 h-1.5 rounded-full bg-[#0E8A3E] animate-pulse"></span>
-              Live
-            </span>
+          {/* Workspace Pages Navigation */}
+          <div className="p-2 space-y-0.5 mt-1">
+            {!collapsed && (
+              <div className="px-2 py-1 text-[11px] font-medium text-[#37352F]/45 tracking-wider">
+                WORKSPACE
+              </div>
+            )}
+
+            {navPages.map((page) => {
+              const isActive = currentTab === page.id;
+
+              return (
+                <button
+                  key={page.id}
+                  onClick={() => setCurrentTab(page.id as NavTab)}
+                  className={`w-full flex items-center gap-2 px-2 py-1.5 rounded-[4px] text-[13px] transition-colors cursor-pointer group ${
+                    isActive
+                      ? 'bg-[rgba(55,53,47,0.08)] text-[#37352F] font-medium'
+                      : 'text-[#37352F]/80 hover:bg-[rgba(55,53,47,0.04)] hover:text-[#37352F]'
+                  }`}
+                  title={collapsed ? page.label : undefined}
+                >
+                  <span className="text-sm shrink-0 w-4 text-center">{page.icon}</span>
+
+                  {!collapsed && (
+                    <div className="flex-1 flex items-center justify-between min-w-0">
+                      <span className="truncate text-left">{page.label}</span>
+                      {page.badge && (
+                        <span
+                          className={`notion-tag text-[10px] px-1.5 py-0 rounded-[3px] font-medium ${
+                            page.badgeTag || 'bg-[#FAEBDD] text-[#D9730D]'
+                          }`}
+                        >
+                          {page.badge}
+                        </span>
+                      )}
+                    </div>
+                  )}
+                </button>
+              );
+            })}
           </div>
         </div>
-      )}
+
+        {/* Bottom Sidebar Status */}
+        {!collapsed && (
+          <div className="p-2 border-t border-[rgba(55,53,47,0.06)]">
+            <div className="px-2 py-1.5 rounded-[4px] bg-white border border-[rgba(55,53,47,0.09)] text-xs flex items-center justify-between">
+              <div className="truncate">
+                <div className="font-medium text-[#37352F] truncate">{selectedStore.name}</div>
+                <div className="text-[11px] text-[#37352F]/50">Telemetry synced</div>
+              </div>
+              <span className="w-2 h-2 rounded-full bg-[#0F7B6C] shrink-0" title="Connected" />
+            </div>
+          </div>
+        )}
+      </div>
     </aside>
   );
 };

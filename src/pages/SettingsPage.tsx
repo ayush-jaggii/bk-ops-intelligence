@@ -33,55 +33,41 @@ export const SettingsPage: React.FC = () => {
   };
 
   return (
-    <div className="space-y-6 pb-12 font-ui">
-      {/* Header */}
-      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
-        <div>
-          <div className="flex items-center gap-2">
-            <h1 className="text-3xl sm:text-4xl font-black font-display text-[#1A1A1A] tracking-tight">
-              Operational Settings & Model Thresholds.
-            </h1>
-            <span className="px-3 py-0.5 rounded-full text-xs font-black uppercase tracking-wider bg-[#5C3320] text-white">
-              Config
-            </span>
+    <div className="space-y-6 pb-12">
+      {/* Notion Page Header */}
+      <div className="space-y-2 border-b border-[rgba(55,53,47,0.09)] pb-4">
+        <div className="text-4xl mb-1 select-none">⚙️</div>
+        <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-2">
+          <div>
+            <h1 className="text-2xl font-bold tracking-tight text-[#37352F]">Settings & Parameters</h1>
+            <p className="text-xs text-[#37352F]/60 mt-0.5">
+              Configure store optimization constraints, staffing floors, and throughput thresholds
+            </p>
           </div>
-          <p className="text-sm text-[#6E6E6E] mt-1 font-medium">
-            Fine-tune the store optimization constraints and throughput capacity parameters.
-          </p>
-        </div>
-
-        <div className="flex items-center gap-2">
-          <button
-            onClick={handleReset}
-            type="button"
-            className="px-4 py-2 bg-white border border-stone-300 hover:bg-stone-50 text-[#6E6E6E] text-xs font-bold uppercase tracking-wider rounded-full transition-colors cursor-pointer flex items-center gap-1.5"
-          >
-            <RotateCcw className="w-3.5 h-3.5" /> Restore Defaults
-          </button>
+          <div className="flex items-center gap-2">
+            <button
+              onClick={handleReset}
+              type="button"
+              className="px-2.5 py-1 bg-white border border-[rgba(55,53,47,0.16)] hover:bg-[rgba(55,53,47,0.06)] text-[#37352F] text-xs font-medium rounded-[3px] transition-colors cursor-pointer flex items-center gap-1.5"
+            >
+              <RotateCcw className="w-3.5 h-3.5 text-[#37352F]/60" /> Restore Defaults
+            </button>
+          </div>
         </div>
       </div>
 
       <form onSubmit={handleSubmit} className="space-y-6">
-        {/* Section 1: Labor & Throughput Thresholds */}
-        <div className="p-6 bg-white rounded-2xl border border-stone-200 shadow-xs space-y-4">
-          <div className="flex items-center gap-2.5 pb-3 border-b border-stone-100">
-            <div className="w-9 h-9 rounded-full bg-[#E85C1A]/10 flex items-center justify-center text-[#E85C1A]">
-              <Users className="w-5 h-5" />
-            </div>
-            <div>
-              <h3 className="text-lg font-black font-display text-[#1A1A1A]">
-                Staffing & Station Throughput Assumptions.
-              </h3>
-              <p className="text-xs text-[#6E6E6E]">
-                Hourly order processing rate per station team member
-              </p>
-            </div>
+        {/* Section 1: Labor & Throughput */}
+        <div className="border border-[rgba(55,53,47,0.09)] rounded-[4px] bg-white p-4 space-y-4">
+          <div className="flex items-center gap-2 pb-2 border-b border-[rgba(55,53,47,0.06)]">
+            <Users className="w-4 h-4 text-[#37352F]/60" />
+            <h3 className="text-sm font-semibold text-[#37352F]">Staffing & Station Throughput</h3>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs">
             <div>
-              <label className="font-bold text-[#1A1A1A] block mb-1 uppercase tracking-wider text-[11px]">
-                Orders per Kitchen Employee / Hour
+              <label className="text-[11px] font-medium text-[#37352F]/70 block mb-1">
+                Orders per Kitchen Crew / Hour
               </label>
               <input
                 type="number"
@@ -94,15 +80,15 @@ export const SettingsPage: React.FC = () => {
                     ordersPerKitchenCrewPerHour: Number(e.target.value)
                   })
                 }
-                className="w-full px-3 py-2 bg-[#F5F4F1] border border-stone-200 rounded-xl font-bold text-[#1A1A1A]"
+                className="w-full px-2.5 py-1.5 bg-[#F7F6F3] border border-[rgba(55,53,47,0.09)] rounded-[3px] text-xs text-[#37352F] outline-none focus:border-[#2383E2]"
               />
-              <span className="text-[10px] text-[#6E6E6E] mt-1 block">
+              <span className="text-[11px] text-[#37352F]/40 mt-1 block">
                 Standard QSR throughput benchmark is 25–32 orders/hr.
               </span>
             </div>
 
             <div>
-              <label className="font-bold text-[#1A1A1A] block mb-1 uppercase tracking-wider text-[11px]">
+              <label className="text-[11px] font-medium text-[#37352F]/70 block mb-1">
                 Orders per Front Counter / Cashier / Hour
               </label>
               <input
@@ -116,15 +102,15 @@ export const SettingsPage: React.FC = () => {
                     ordersPerFrontCounterCrewPerHour: Number(e.target.value)
                   })
                 }
-                className="w-full px-3 py-2 bg-[#F5F4F1] border border-stone-200 rounded-xl font-bold text-[#1A1A1A]"
+                className="w-full px-2.5 py-1.5 bg-[#F7F6F3] border border-[rgba(55,53,47,0.09)] rounded-[3px] text-xs text-[#37352F] outline-none focus:border-[#2383E2]"
               />
-              <span className="text-[10px] text-[#6E6E6E] mt-1 block">
+              <span className="text-[11px] text-[#37352F]/40 mt-1 block">
                 Includes Self-Ordering Kiosks and front point-of-sale registers.
               </span>
             </div>
 
             <div>
-              <label className="font-bold text-[#1A1A1A] block mb-1 uppercase tracking-wider text-[11px]">
+              <label className="text-[11px] font-medium text-[#37352F]/70 block mb-1">
                 Minimum Kitchen Staffing Floor
               </label>
               <input
@@ -135,15 +121,15 @@ export const SettingsPage: React.FC = () => {
                 onChange={(e) =>
                   setFormData({ ...formData, minKitchenStaffing: Number(e.target.value) })
                 }
-                className="w-full px-3 py-2 bg-[#F5F4F1] border border-stone-200 rounded-xl font-bold text-[#1A1A1A]"
+                className="w-full px-2.5 py-1.5 bg-[#F7F6F3] border border-[rgba(55,53,47,0.09)] rounded-[3px] text-xs text-[#37352F] outline-none focus:border-[#2383E2]"
               />
-              <span className="text-[10px] text-[#6E6E6E] mt-1 block">
-                Mandatory safety minimum regardless of how low demand falls.
+              <span className="text-[11px] text-[#37352F]/40 mt-1 block">
+                Mandatory safety minimum regardless of demand dips.
               </span>
             </div>
 
             <div>
-              <label className="font-bold text-[#1A1A1A] block mb-1 uppercase tracking-wider text-[11px]">
+              <label className="text-[11px] font-medium text-[#37352F]/70 block mb-1">
                 Minimum Front-of-House Staffing Floor
               </label>
               <input
@@ -154,9 +140,9 @@ export const SettingsPage: React.FC = () => {
                 onChange={(e) =>
                   setFormData({ ...formData, minFrontOfHouseStaffing: Number(e.target.value) })
                 }
-                className="w-full px-3 py-2 bg-[#F5F4F1] border border-stone-200 rounded-xl font-bold text-[#1A1A1A]"
+                className="w-full px-2.5 py-1.5 bg-[#F7F6F3] border border-[rgba(55,53,47,0.09)] rounded-[3px] text-xs text-[#37352F] outline-none focus:border-[#2383E2]"
               />
-              <span className="text-[10px] text-[#6E6E6E] mt-1 block">
+              <span className="text-[11px] text-[#37352F]/40 mt-1 block">
                 Host / kiosk assistant minimum floor.
               </span>
             </div>
@@ -164,24 +150,15 @@ export const SettingsPage: React.FC = () => {
         </div>
 
         {/* Section 2: Kitchen Holding & Batch Prep */}
-        <div className="p-6 bg-white rounded-2xl border border-stone-200 shadow-xs space-y-4">
-          <div className="flex items-center gap-2.5 pb-3 border-b border-stone-100">
-            <div className="w-9 h-9 rounded-full bg-amber-500/10 flex items-center justify-center text-amber-700">
-              <ChefHat className="w-5 h-5" />
-            </div>
-            <div>
-              <h3 className="text-lg font-black font-display text-[#1A1A1A]">
-                Kitchen Batch Prep & Holding Buffer.
-              </h3>
-              <p className="text-xs text-[#6E6E6E]">
-                Safety multipliers applied to short-term SKU demand predictions
-              </p>
-            </div>
+        <div className="border border-[rgba(55,53,47,0.09)] rounded-[4px] bg-white p-4 space-y-4">
+          <div className="flex items-center gap-2 pb-2 border-b border-[rgba(55,53,47,0.06)]">
+            <ChefHat className="w-4 h-4 text-[#37352F]/60" />
+            <h3 className="text-sm font-semibold text-[#37352F]">Kitchen Batch Prep & Holding Buffer</h3>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs">
             <div>
-              <label className="font-bold text-[#1A1A1A] block mb-1 uppercase tracking-wider text-[11px]">
+              <label className="text-[11px] font-medium text-[#37352F]/70 block mb-1">
                 Preparation Safety Buffer (%)
               </label>
               <input
@@ -192,15 +169,15 @@ export const SettingsPage: React.FC = () => {
                 onChange={(e) =>
                   setFormData({ ...formData, prepSafetyBufferPct: Number(e.target.value) })
                 }
-                className="w-full px-3 py-2 bg-[#F5F4F1] border border-stone-200 rounded-xl font-bold text-[#1A1A1A]"
+                className="w-full px-2.5 py-1.5 bg-[#F7F6F3] border border-[rgba(55,53,47,0.09)] rounded-[3px] text-xs text-[#37352F] outline-none focus:border-[#2383E2]"
               />
-              <span className="text-[10px] text-[#6E6E6E] mt-1 block">
+              <span className="text-[11px] text-[#37352F]/40 mt-1 block">
                 Buffer added on top of 30-min forecast to prevent stockouts.
               </span>
             </div>
 
             <div>
-              <label className="font-bold text-[#1A1A1A] block mb-1 uppercase tracking-wider text-[11px]">
+              <label className="text-[11px] font-medium text-[#37352F]/70 block mb-1">
                 Maximum Cooked Holding Time (Minutes)
               </label>
               <input
@@ -211,9 +188,9 @@ export const SettingsPage: React.FC = () => {
                 onChange={(e) =>
                   setFormData({ ...formData, maxHoldingTimeMinutes: Number(e.target.value) })
                 }
-                className="w-full px-3 py-2 bg-[#F5F4F1] border border-stone-200 rounded-xl font-bold text-[#1A1A1A]"
+                className="w-full px-2.5 py-1.5 bg-[#F7F6F3] border border-[rgba(55,53,47,0.09)] rounded-[3px] text-xs text-[#37352F] outline-none focus:border-[#2383E2]"
               />
-              <span className="text-[10px] text-[#6E6E6E] mt-1 block">
+              <span className="text-[11px] text-[#37352F]/40 mt-1 block">
                 Cooked protein shelf-life limit before mandatory discarding.
               </span>
             </div>
@@ -221,24 +198,15 @@ export const SettingsPage: React.FC = () => {
         </div>
 
         {/* Section 3: Energy & Forecasting */}
-        <div className="p-6 bg-white rounded-2xl border border-stone-200 shadow-xs space-y-4">
-          <div className="flex items-center gap-2.5 pb-3 border-b border-stone-100">
-            <div className="w-9 h-9 rounded-full bg-green-500/10 flex items-center justify-center text-[#0E8A3E]">
-              <Zap className="w-5 h-5" />
-            </div>
-            <div>
-              <h3 className="text-lg font-black font-display text-[#1A1A1A]">
-                Energy Setback & Forecast Horizon.
-              </h3>
-              <p className="text-xs text-[#6E6E6E]">
-                Occupancy threshold to trigger smart BMS chiller eco-modulation
-              </p>
-            </div>
+        <div className="border border-[rgba(55,53,47,0.09)] rounded-[4px] bg-white p-4 space-y-4">
+          <div className="flex items-center gap-2 pb-2 border-b border-[rgba(55,53,47,0.06)]">
+            <Zap className="w-4 h-4 text-[#37352F]/60" />
+            <h3 className="text-sm font-semibold text-[#37352F]">Energy Setback & Forecast Horizon</h3>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs">
             <div>
-              <label className="font-bold text-[#1A1A1A] block mb-1 uppercase tracking-wider text-[11px]">
+              <label className="text-[11px] font-medium text-[#37352F]/70 block mb-1">
                 Energy Optimization Occupancy Threshold (%)
               </label>
               <input
@@ -252,15 +220,15 @@ export const SettingsPage: React.FC = () => {
                     energyOptimizationThresholdPct: Number(e.target.value)
                   })
                 }
-                className="w-full px-3 py-2 bg-[#F5F4F1] border border-stone-200 rounded-xl font-bold text-[#1A1A1A]"
+                className="w-full px-2.5 py-1.5 bg-[#F7F6F3] border border-[rgba(55,53,47,0.09)] rounded-[3px] text-xs text-[#37352F] outline-none focus:border-[#2383E2]"
               />
-              <span className="text-[10px] text-[#6E6E6E] mt-1 block">
+              <span className="text-[11px] text-[#37352F]/40 mt-1 block">
                 HVAC eco-setback triggers when dining occupancy falls below this percentage.
               </span>
             </div>
 
             <div>
-              <label className="font-bold text-[#1A1A1A] block mb-1 uppercase tracking-wider text-[11px]">
+              <label className="text-[11px] font-medium text-[#37352F]/70 block mb-1">
                 Forecast Horizon (Hours)
               </label>
               <input
@@ -271,22 +239,22 @@ export const SettingsPage: React.FC = () => {
                 onChange={(e) =>
                   setFormData({ ...formData, forecastHorizonHours: Number(e.target.value) })
                 }
-                className="w-full px-3 py-2 bg-[#F5F4F1] border border-stone-200 rounded-xl font-bold text-[#1A1A1A]"
+                className="w-full px-2.5 py-1.5 bg-[#F7F6F3] border border-[rgba(55,53,47,0.09)] rounded-[3px] text-xs text-[#37352F] outline-none focus:border-[#2383E2]"
               />
-              <span className="text-[10px] text-[#6E6E6E] mt-1 block">
+              <span className="text-[11px] text-[#37352F]/40 mt-1 block">
                 Forward predictive planning window.
               </span>
             </div>
           </div>
         </div>
 
-        {/* Save Button in Pill format */}
+        {/* Save Button */}
         <div className="flex justify-end">
           <button
             type="submit"
-            className="px-8 py-3 bg-[#E85C1A] hover:bg-[#D44D0F] text-white text-xs font-black uppercase tracking-wider rounded-full shadow-xs transition-all flex items-center gap-2 cursor-pointer"
+            className="px-4 py-2 bg-[#2383E2] hover:bg-[#1B6FC2] text-white text-xs font-medium rounded-[3px] transition-colors flex items-center gap-1.5 cursor-pointer"
           >
-            <Save className="w-4 h-4" /> Save Operational Parameters
+            <Save className="w-3.5 h-3.5" /> Save Changes
           </button>
         </div>
       </form>

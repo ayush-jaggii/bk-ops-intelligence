@@ -1,21 +1,27 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { useApp } from '../context/AppContext';
-import { BurgerKingLogo } from './BurgerKingLogo';
-import { VegIndicator, NonVegIndicator } from './FoodIndicators';
 import {
   ChevronDown,
-  Calendar,
   Bell,
-  Zap,
-  TrendingUp,
-  RotateCcw,
   Workflow,
   FileText,
-  Store as StoreIcon,
-  MapPin
+  MapPin,
+  Menu,
+  ChevronRight,
+  Share2,
+  Clock,
+  Star,
+  MoreHorizontal,
+  Check,
+  TrendingUp
 } from 'lucide-react';
 
-export const Navbar: React.FC = () => {
+interface NavbarProps {
+  sidebarCollapsed?: boolean;
+  setSidebarCollapsed?: (c: boolean | ((prev: boolean) => boolean)) => void;
+}
+
+export const Navbar: React.FC<NavbarProps> = ({ sidebarCollapsed, setSidebarCollapsed }) => {
   const {
     stores,
     selectedStore,
@@ -29,12 +35,12 @@ export const Navbar: React.FC = () => {
 
   const [storeMenuOpen, setStoreMenuOpen] = useState<boolean>(false);
   const [notificationsOpen, setNotificationsOpen] = useState<boolean>(false);
+  const [favorited, setFavorited] = useState<boolean>(false);
 
   const pendingAlerts = alerts.filter((a) => a.status === 'pending');
   const storeDropdownRef = useRef<HTMLDivElement>(null);
   const notifDropdownRef = useRef<HTMLDivElement>(null);
 
-  // Close dropdown on outside click
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (storeDropdownRef.current && !storeDropdownRef.current.contains(event.target as Node)) {
@@ -49,39 +55,41 @@ export const Navbar: React.FC = () => {
   }, []);
 
   return (
-    <header className="sticky top-0 z-40 bg-white border-b border-stone-200/80 shadow-xs font-ui">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between gap-4">
-        {/* Left: Brand Mark + Name */}
-        <div className="flex items-center gap-3 shrink-0">
-          <BurgerKingLogo size={40} />
-          <div className="flex items-center gap-2">
-            <span className="text-xl font-black font-display text-[#1A1A1A] tracking-tight leading-none">
-              BK Ops Intelligence.
-            </span>
-            <span className="hidden sm:inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-50 text-[#0E8A3E] border border-emerald-200/70">
-              <span className="w-1.5 h-1.5 rounded-full bg-[#0E8A3E] animate-pulse"></span>
-              Live
-            </span>
-          </div>
-        </div>
+    <header className="sticky top-0 z-40 bg-white border-b border-[rgba(55,53,47,0.09)] text-[#37352F] font-sans h-11 select-none">
+      <div className="w-full px-3 h-full flex items-center justify-between gap-2">
+        {/* Left: Sidebar Toggle + Breadcrumb */}
+        <div className="flex items-center gap-1.5 shrink-0 overflow-hidden">
+          {setSidebarCollapsed && (
+            <button
+              onClick={() => setSidebarCollapsed((prev) => !prev)}
+              className="p-1 rounded-[4px] hover:bg-[rgba(55,53,47,0.08)] text-[#37352F]/70 hover:text-[#37352F] transition-colors cursor-pointer"
+              title="Toggle sidebar (Cmd+\)"
+            >
+              <Menu className="w-4 h-4" />
+            </button>
+          )}
 
-        {/* Center: Store Selector + Simulator Segmented Control */}
-        <div className="hidden md:flex items-center gap-3">
-          {/* Store Selector Button */}
+          {/* Breadcrumb Workspace */}
+          <div className="flex items-center gap-1 text-[13px] text-[#37352F]/60">
+            <span className="text-sm">🍔</span>
+            <span className="font-medium text-[#37352F] hidden sm:inline">BK Operations</span>
+            <ChevronRight className="w-3 h-3 text-[#37352F]/40" />
+          </div>
+
+          {/* Store Switcher Dropdown */}
           <div className="relative" ref={storeDropdownRef}>
             <button
               onClick={() => setStoreMenuOpen(!storeMenuOpen)}
-              className="flex items-center gap-2 px-3.5 py-1.5 bg-[#F5F4F1] hover:bg-stone-200/60 border border-stone-200/80 rounded-full text-xs font-bold text-[#5C3320] transition-colors cursor-pointer"
+              className="flex items-center gap-1 px-1.5 py-0.5 rounded-[4px] hover:bg-[rgba(55,53,47,0.08)] text-[13px] font-medium text-[#37352F] transition-colors cursor-pointer"
             >
-              <MapPin className="w-3.5 h-3.5 text-[#E85C1A]" />
-              <span className="max-w-[170px] truncate">{selectedStore.name}</span>
-              <ChevronDown className="w-3 h-3 text-stone-400" />
+              <span className="truncate max-w-[180px] sm:max-w-[260px]">{selectedStore.name}</span>
+              <ChevronDown className="w-3 h-3 text-[#37352F]/50" />
             </button>
 
             {storeMenuOpen && (
-              <div className="absolute left-0 mt-2 w-80 bg-white rounded-2xl shadow-xl border border-stone-200 py-2 text-stone-800 z-50 animate-fade-in">
-                <div className="px-4 py-2 text-[10px] font-black uppercase tracking-wider text-[#6E6E6E] border-b border-stone-100">
-                  Select Store
+              <div className="absolute left-0 mt-1 w-76 bg-white rounded-[6px] shadow-[rgba(15,15,15,0.05)_0px_0px_0px_1px,rgba(15,15,15,0.1)_0px_3px_6px,rgba(15,15,15,0.2)_0px_9px_24px] border border-[rgba(55,53,47,0.09)] py-1.5 text-[#37352F] z-50 animate-fade-in text-xs">
+                <div className="px-3 py-1 text-[11px] font-medium text-[#37352F]/50 uppercase tracking-wider">
+                  Switch Store
                 </div>
                 {stores.map((s) => (
                   <button
@@ -90,25 +98,21 @@ export const Navbar: React.FC = () => {
                       setSelectedStoreId(s.id);
                       setStoreMenuOpen(false);
                     }}
-                    className={`w-full text-left px-4 py-2.5 hover:bg-[#F5F4F1] flex items-center justify-between text-xs transition-colors cursor-pointer ${
-                      s.id === selectedStore.id
-                        ? 'bg-amber-50/80 font-bold text-[#E85C1A]'
-                        : 'text-stone-700'
+                    className={`w-full text-left px-3 py-1.5 hover:bg-[rgba(55,53,47,0.06)] flex items-center justify-between transition-colors cursor-pointer ${
+                      s.id === selectedStore.id ? 'bg-[rgba(55,53,47,0.04)] font-medium' : ''
                     }`}
                   >
-                    <div>
-                      <div className="font-bold text-[#1A1A1A]">{s.name}</div>
-                      <div className="text-[11px] text-[#6E6E6E]">
-                        {s.city} · SSSG {s.sssg > 0 ? `+${s.sssg}%` : `${s.sssg}%`}
-                      </div>
+                    <div className="truncate">
+                      <div className="font-medium text-[#37352F]">{s.name}</div>
+                      <div className="text-[11px] text-[#37352F]/50">{s.city}</div>
                     </div>
                     <span
-                      className={`text-[10px] font-bold px-2 py-0.5 rounded-full ${
+                      className={`notion-tag shrink-0 ml-2 ${
                         s.status === 'Optimized'
-                          ? 'bg-emerald-100 text-[#0E8A3E]'
+                          ? 'bg-[#DDEDEA] text-[#0F7B6C]'
                           : s.status === 'Watch'
-                          ? 'bg-amber-100 text-amber-800'
-                          : 'bg-red-100 text-[#7A1F1F]'
+                          ? 'bg-[#FBF3DB] text-[#DFAB01]'
+                          : 'bg-[#FBE4E4] text-[#E03E3E]'
                       }`}
                     >
                       {s.status}
@@ -118,99 +122,107 @@ export const Navbar: React.FC = () => {
               </div>
             )}
           </div>
-
-          {/* Clean Segmented Scenario Switcher */}
-          <div className="flex items-center bg-[#F5F4F1] p-0.5 rounded-full border border-stone-200/80 text-xs font-bold">
-            <button
-              onClick={() => setScenario('normal')}
-              className={`px-3 py-1 rounded-full transition-all cursor-pointer ${
-                scenario === 'normal'
-                  ? 'bg-white text-[#5C3320] shadow-xs'
-                  : 'text-[#6E6E6E] hover:text-[#1A1A1A]'
-              }`}
-            >
-              Baseline
-            </button>
-            <button
-              onClick={() => setScenario('spike')}
-              className={`px-3 py-1 rounded-full transition-all cursor-pointer flex items-center gap-1 ${
-                scenario === 'spike'
-                  ? 'bg-[#E85C1A] text-white shadow-xs'
-                  : 'text-[#6E6E6E] hover:text-[#E85C1A]'
-              }`}
-            >
-              <TrendingUp className="w-3 h-3" />
-              <span>Rush +25%</span>
-            </button>
-            <button
-              onClick={() => setScenario('low')}
-              className={`px-3 py-1 rounded-full transition-all cursor-pointer ${
-                scenario === 'low'
-                  ? 'bg-amber-600 text-white shadow-xs'
-                  : 'text-[#6E6E6E] hover:text-amber-800'
-              }`}
-            >
-              Dip -25%
-            </button>
-          </div>
         </div>
 
-        {/* Right: Quick actions, notifications, profile */}
-        <div className="flex items-center gap-2 shrink-0">
+        {/* Center: Notion Style Scenario Segment */}
+        <div className="hidden md:flex items-center gap-0.5 bg-[rgba(55,53,47,0.06)] p-0.5 rounded-[4px] text-xs">
+          <button
+            onClick={() => setScenario('normal')}
+            className={`px-2 py-0.5 rounded-[3px] font-medium transition-all cursor-pointer ${
+              scenario === 'normal'
+                ? 'bg-white text-[#37352F] shadow-[0_1px_2px_rgba(0,0,0,0.06)]'
+                : 'text-[#37352F]/70 hover:text-[#37352F]'
+            }`}
+          >
+            Baseline
+          </button>
+          <button
+            onClick={() => setScenario('spike')}
+            className={`px-2 py-0.5 rounded-[3px] font-medium transition-all cursor-pointer flex items-center gap-1 ${
+              scenario === 'spike'
+                ? 'bg-[#FAEBDD] text-[#D9730D] shadow-[0_1px_2px_rgba(0,0,0,0.06)]'
+                : 'text-[#37352F]/70 hover:text-[#D9730D]'
+            }`}
+          >
+            <TrendingUp className="w-3 h-3" />
+            <span>Rush +25%</span>
+          </button>
+          <button
+            onClick={() => setScenario('low')}
+            className={`px-2 py-0.5 rounded-[3px] font-medium transition-all cursor-pointer ${
+              scenario === 'low'
+                ? 'bg-[#EBECED] text-[#64473A] shadow-[0_1px_2px_rgba(0,0,0,0.06)]'
+                : 'text-[#37352F]/70 hover:text-[#37352F]'
+            }`}
+          >
+            Dip -25%
+          </button>
+        </div>
+
+        {/* Right: Actions, Share, Notifications */}
+        <div className="flex items-center gap-1 shrink-0 text-xs">
           <button
             onClick={() => setDecisionFlowOpen(true)}
-            className="hidden lg:flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-bold text-[#5C3320] hover:bg-[#F5F4F1] transition-colors cursor-pointer"
+            className="hidden lg:flex items-center gap-1 px-2 py-1 rounded-[4px] text-[#37352F]/80 hover:bg-[rgba(55,53,47,0.08)] hover:text-[#37352F] transition-colors cursor-pointer"
           >
-            <Workflow className="w-3.5 h-3.5 text-[#E85C1A]" />
+            <Workflow className="w-3.5 h-3.5 text-[#2383E2]" />
             <span>Decision Loop</span>
           </button>
 
           <button
             onClick={() => setDataAssumptionsOpen(true)}
-            className="hidden lg:flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-bold text-[#5C3320] hover:bg-[#F5F4F1] transition-colors cursor-pointer"
+            className="hidden lg:flex items-center gap-1 px-2 py-1 rounded-[4px] text-[#37352F]/80 hover:bg-[rgba(55,53,47,0.08)] hover:text-[#37352F] transition-colors cursor-pointer"
           >
-            <FileText className="w-3.5 h-3.5 text-[#E85C1A]" />
+            <FileText className="w-3.5 h-3.5" />
             <span>Telemetry</span>
+          </button>
+
+          {/* Favorite Star */}
+          <button
+            onClick={() => setFavorited(!favorited)}
+            className="p-1 rounded-[4px] hover:bg-[rgba(55,53,47,0.08)] text-[#37352F]/60 hover:text-[#37352F] transition-colors cursor-pointer"
+            title="Favorite page"
+          >
+            <Star className={`w-3.5 h-3.5 ${favorited ? 'text-amber-500 fill-amber-500' : ''}`} />
           </button>
 
           {/* Notification Bell */}
           <div className="relative" ref={notifDropdownRef}>
             <button
               onClick={() => setNotificationsOpen(!notificationsOpen)}
-              className="relative p-2 rounded-full hover:bg-[#F5F4F1] text-[#5C3320] transition-colors cursor-pointer"
-              aria-label="Notifications"
+              className="relative p-1 rounded-[4px] hover:bg-[rgba(55,53,47,0.08)] text-[#37352F]/70 hover:text-[#37352F] transition-colors cursor-pointer"
+              title="Updates & Alerts"
             >
-              <Bell className="w-4 h-4" />
+              <Bell className="w-3.5 h-3.5" />
               {pendingAlerts.length > 0 && (
-                <span className="absolute top-0.5 right-0.5 w-4 h-4 bg-[#E85C1A] text-white text-[9px] font-black rounded-full flex items-center justify-center ring-2 ring-white">
-                  {pendingAlerts.length}
-                </span>
+                <span className="absolute top-0 right-0 w-2 h-2 bg-[#E03E3E] rounded-full ring-1 ring-white" />
               )}
             </button>
 
             {notificationsOpen && (
-              <div className="absolute right-0 mt-2 w-80 sm:w-96 bg-white rounded-2xl shadow-xl border border-stone-200 p-4 text-stone-800 z-50 animate-fade-in">
-                <div className="flex items-center justify-between pb-2 border-b border-stone-100">
-                  <span className="text-xs font-black uppercase tracking-wider text-[#1A1A1A]">
-                    Operational Alerts
-                  </span>
-                  <span className="text-[10px] font-bold text-[#E85C1A]">
-                    {pendingAlerts.length} Action Needed
+              <div className="absolute right-0 mt-1 w-80 bg-white rounded-[6px] shadow-[rgba(15,15,15,0.05)_0px_0px_0px_1px,rgba(15,15,15,0.1)_0px_3px_6px,rgba(15,15,15,0.2)_0px_9px_24px] border border-[rgba(55,53,47,0.09)] p-3 text-[#37352F] z-50 animate-fade-in text-xs">
+                <div className="flex items-center justify-between pb-2 border-b border-[rgba(55,53,47,0.09)] font-medium">
+                  <span>Updates</span>
+                  <span className="text-[11px] text-[#E03E3E]">
+                    {pendingAlerts.length} new
                   </span>
                 </div>
-                <div className="mt-2 space-y-2 max-h-80 overflow-y-auto">
+                <div className="mt-2 space-y-1.5 max-h-72 overflow-y-auto">
                   {pendingAlerts.length === 0 ? (
-                    <p className="text-xs text-stone-400 py-3 text-center">No pending alerts</p>
+                    <p className="text-[#37352F]/50 py-3 text-center">All caught up</p>
                   ) : (
                     pendingAlerts.map((alt) => (
-                      <div key={alt.id} className="p-2.5 rounded-xl bg-[#F5F4F1] border border-stone-200/80 text-xs">
-                        <div className="flex items-center justify-between">
-                          <span className="font-bold text-[#1A1A1A]">{alt.title}</span>
-                          <span className="text-[9px] font-bold px-1.5 py-0.5 rounded-full bg-red-100 text-[#7A1F1F]">
+                      <div
+                        key={alt.id}
+                        className="p-2 rounded-[4px] bg-[#F7F6F3] border border-[rgba(55,53,47,0.06)]"
+                      >
+                        <div className="flex items-center justify-between font-medium">
+                          <span>{alt.title}</span>
+                          <span className="notion-tag bg-[#FBE4E4] text-[#E03E3E] text-[10px]">
                             {alt.priority}
                           </span>
                         </div>
-                        <p className="text-[11px] text-[#6E6E6E] mt-1 line-clamp-2">{alt.description}</p>
+                        <p className="text-[11px] text-[#37352F]/70 mt-1">{alt.description}</p>
                       </div>
                     ))
                   )}
@@ -219,14 +231,10 @@ export const Navbar: React.FC = () => {
             )}
           </div>
 
-          {/* Duty Manager Avatar */}
-          <div className="flex items-center gap-2 pl-2 border-l border-stone-200/80">
-            <div className="w-8 h-8 rounded-full bg-[#5C3320] text-white font-black text-xs flex items-center justify-center font-display shadow-xs">
-              SM
-            </div>
-            <div className="hidden xl:block text-left leading-tight">
-              <div className="text-xs font-bold text-[#1A1A1A]">Manager #402</div>
-              <div className="text-[10px] text-[#6E6E6E]">Duty Lead</div>
+          {/* User Avatar */}
+          <div className="flex items-center gap-1.5 pl-1.5">
+            <div className="w-5 h-5 rounded-full bg-[#EBECED] text-[#37352F] font-bold text-[10px] flex items-center justify-center">
+              M
             </div>
           </div>
         </div>

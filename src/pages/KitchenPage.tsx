@@ -65,153 +65,137 @@ export const KitchenPage: React.FC = () => {
   ];
 
   return (
-    <div className="space-y-6 pb-12 font-ui">
-      {/* Header */}
-      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
+    <div className="space-y-6 pb-12 font-sans select-none text-[#37352F]">
+      {/* Page Header */}
+      <div className="pt-2 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <div className="flex items-center gap-2">
-            <h1 className="text-3xl font-black font-display text-[#1A1A1A] tracking-tight">
-              AI Kitchen Prep.
-            </h1>
-            <span className="px-3 py-0.5 rounded-full text-xs font-black uppercase tracking-wider bg-[#E85C1A] text-white">
-              KDS Engine
-            </span>
-          </div>
-          <p className="text-sm text-[#6E6E6E] mt-1 font-medium">
-            Predict short-term SKU demand and optimize batch preparation to minimize food waste.
+          <div className="text-4xl mb-3">🍳</div>
+          <h1 className="text-3xl sm:text-4xl font-bold text-[#37352F] tracking-tight">
+            Kitchen & Holding
+          </h1>
+          <p className="text-xs text-[#37352F]/60 mt-1">
+            Short-term SKU order velocity forecasts and batch preparation triggers.
           </p>
         </div>
 
         <button
           onClick={() => applyKitchenRecommendation()}
           disabled={kitchenPrepApplied}
-          className={`px-5 py-2.5 rounded-full text-xs font-black uppercase tracking-wider flex items-center gap-2 shadow-xs transition-all cursor-pointer ${
+          className={`self-start sm:self-auto px-3.5 py-1.5 rounded-[4px] text-xs font-medium flex items-center gap-1.5 transition-colors cursor-pointer shadow-xs ${
             kitchenPrepApplied
-              ? 'bg-emerald-100 text-[#0E8A3E] border border-emerald-300 cursor-default'
-              : 'bg-[#E85C1A] hover:bg-[#D44D0F] text-white ring-2 ring-orange-200'
+              ? 'bg-[#DDEDEA] text-[#0F7B6C] cursor-default'
+              : 'bg-[#2383E2] hover:bg-[#1B6FBF] text-white'
           }`}
         >
           {kitchenPrepApplied ? (
             <>
-              <CheckCircle2 className="w-4 h-4" /> Prep Recommendations Applied
+              <CheckCircle2 className="w-3.5 h-3.5" /> Prep Plan Applied
             </>
           ) : (
             <>
-              <ChefHat className="w-4 h-4" /> Apply All Prep Recommendations
+              <ChefHat className="w-3.5 h-3.5" /> Apply Batch Prep Plan
             </>
           )}
         </button>
       </div>
 
       {/* Top 4 Operational Metrics */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-        <div className="p-5 bg-white rounded-2xl border border-stone-200 shadow-xs">
-          <span className="text-[11px] font-black uppercase tracking-wider text-[#6E6E6E] block font-ui">
-            Current Queue
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+        <div className="p-4 bg-white rounded-[4px] border border-[rgba(55,53,47,0.09)]">
+          <span className="text-[11px] text-[#37352F]/50 font-medium block">
+            Current KDS Queue
           </span>
-          <div className="text-3xl font-black font-display text-[#1A1A1A] mt-1">14 orders</div>
-          <span className="text-xs text-[#6E6E6E] mt-1 block">8 Dine-in · 6 Delivery</span>
+          <div className="text-2xl font-semibold text-[#37352F] mt-1">14 orders</div>
+          <span className="text-[11px] text-[#37352F]/50 mt-1 block">8 Dine-in · 6 Delivery</span>
         </div>
 
-        <div className="p-5 bg-white rounded-2xl border border-stone-200 shadow-xs">
-          <span className="text-[11px] font-black uppercase tracking-wider text-[#6E6E6E] block font-ui">
+        <div className="p-4 bg-white rounded-[4px] border border-[rgba(55,53,47,0.09)]">
+          <span className="text-[11px] text-[#37352F]/50 font-medium block">
             Average Prep Time
           </span>
-          <div className="text-3xl font-black font-display text-[#0E8A3E] mt-1">7m 24s</div>
-          <span className="text-xs text-[#6E6E6E] mt-1 block">-42s vs lunch baseline</span>
+          <div className="text-2xl font-semibold text-[#0F7B6C] mt-1">7m 24s</div>
+          <span className="text-[11px] text-[#37352F]/50 mt-1 block">-42s vs lunch baseline</span>
         </div>
 
-        <div className="p-5 bg-white rounded-2xl border border-stone-200 shadow-xs">
-          <span className="text-[11px] font-black uppercase tracking-wider text-[#6E6E6E] block font-ui">
+        <div className="p-4 bg-white rounded-[4px] border border-[rgba(55,53,47,0.09)]">
+          <span className="text-[11px] text-[#37352F]/50 font-medium block">
             Kitchen Utilization
           </span>
-          <div className="text-3xl font-black font-display text-[#1A1A1A] mt-1">78%</div>
-          <span className="text-xs text-[#6E6E6E] mt-1 block">Comfortable operating capacity</span>
+          <div className="text-2xl font-semibold text-[#37352F] mt-1">78%</div>
+          <span className="text-[11px] text-[#37352F]/50 mt-1 block">Calibrated station capacity</span>
         </div>
 
-        <div className="p-5 bg-white rounded-2xl border border-stone-200 shadow-xs">
-          <span className="text-[11px] font-black uppercase tracking-wider text-[#6E6E6E] block font-ui">
+        <div className="p-4 bg-white rounded-[4px] border border-[rgba(55,53,47,0.09)]">
+          <span className="text-[11px] text-[#37352F]/50 font-medium block">
             Holding Value at Risk
           </span>
-          <div className="text-3xl font-black font-display text-[#7A1F1F] mt-1">
+          <div className="text-2xl font-semibold text-[#E03E3E] mt-1">
             {kitchenPrepApplied ? '₹ 240/-' : '₹ 1,240/-'}
           </div>
-          <span className="text-xs text-[#6E6E6E] mt-1 block">
-            {kitchenPrepApplied ? 'Protected by batch reduction' : 'Approaching max holding limit'}
+          <span className="text-[11px] text-[#37352F]/50 mt-1 block">
+            {kitchenPrepApplied ? 'Protected by batch reduction' : 'Approaching quality limit'}
           </span>
         </div>
       </div>
 
-      {/* Items at Risk (Section 9) */}
-      <div className="p-6 bg-amber-50/80 rounded-2xl border border-amber-300">
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4">
-          <div className="flex items-center gap-2.5">
-            <div className="w-9 h-9 rounded-full bg-amber-200 text-amber-900 flex items-center justify-center">
-              <AlertTriangle className="w-5 h-5 text-[#E85C1A]" />
-            </div>
+      {/* Items at Risk Notion Callout */}
+      <div className="notion-callout border border-[rgba(55,53,47,0.09)]">
+        <div className="text-xl shrink-0">⚠️</div>
+        <div className="flex-1 min-w-0">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
             <div>
-              <h3 className="text-lg font-black font-display text-[#1A1A1A]">
-                Items at Risk (Holding Shelf Life).
-              </h3>
-              <p className="text-xs text-[#6E6E6E]">
-                Holding timers approaching Burger King Gold Standard quality thresholds
+              <div className="font-semibold text-sm text-[#37352F]">
+                Items at Risk (Holding Shelf Life)
+              </div>
+              <p className="text-xs text-[#37352F]/60 mt-0.5">
+                Holding timers approaching Burger King Gold Standard quality thresholds.
               </p>
             </div>
+
+            <button
+              onClick={() => applyKitchenRecommendation()}
+              className="self-start sm:self-auto px-2.5 py-1 bg-white border border-[rgba(55,53,47,0.12)] hover:bg-[rgba(55,53,47,0.06)] text-[#37352F] text-xs font-medium rounded-[3px] transition-colors cursor-pointer"
+            >
+              Apply Prep Recommendation
+            </button>
           </div>
 
-          <button
-            onClick={() => applyKitchenRecommendation()}
-            className="px-4 py-2 bg-[#E85C1A] hover:bg-[#D44D0F] text-white text-xs font-black uppercase tracking-wider rounded-full shadow-xs transition-all cursor-pointer"
-          >
-            Apply Prep Recommendation
-          </button>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          {/* Fries Risk Card */}
-          <div className="p-4 bg-white rounded-xl border border-amber-200 flex items-start justify-between">
-            <div>
-              <div className="flex items-center gap-1.5">
-                <span className="text-xs font-black font-display text-[#1A1A1A]">
-                  King French Fries.
-                </span>
-                <VegIndicator size={13} />
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mt-3">
+            {/* Fries Risk Card */}
+            <div className="p-3 bg-white rounded-[3px] border border-[rgba(55,53,47,0.09)] flex items-start justify-between">
+              <div>
+                <div className="flex items-center gap-1.5 font-medium text-xs text-[#37352F]">
+                  <span>King French Fries</span>
+                  <VegIndicator size={12} />
+                </div>
+                <div className="text-[11px] text-[#37352F]/60 mt-1">
+                  Bin: 8 portions · Value: ₹ 280/-
+                </div>
+                <div className="mt-1.5 text-xs text-[#D9730D] font-medium">
+                  Recommendation: Reduce next batch size by 20%.
+                </div>
               </div>
-              <div className="text-xs text-[#6E6E6E] mt-1 font-ui">
-                Quantity in Bin: <strong>8 portions</strong> · Estimated Value: <strong>₹ 280/-</strong>
-              </div>
-              <div className="mt-2 text-xs text-[#1A1A1A]">
-                <strong>AI Recommendation: </strong>
-                <span className="text-[#E85C1A] font-bold">Reduce next batch size by 20%.</span>
-              </div>
-            </div>
-            <div className="text-right shrink-0">
-              <span className="inline-flex items-center gap-1 text-xs font-black text-[#7A1F1F] px-2.5 py-1 bg-red-50 rounded-full border border-red-200 font-ui">
-                <Timer className="w-3.5 h-3.5" /> 6 min left
+              <span className="notion-tag bg-[#FBE4E4] text-[#E03E3E] text-[10px] shrink-0">
+                <Timer className="w-3 h-3 mr-1" /> 6m left
               </span>
             </div>
-          </div>
 
-          {/* Chicken Patties Risk Card */}
-          <div className="p-4 bg-white rounded-xl border border-amber-200 flex items-start justify-between">
-            <div>
-              <div className="flex items-center gap-1.5">
-                <span className="text-xs font-black font-display text-[#1A1A1A]">
-                  Chicken Patties (Fried).
-                </span>
-                <NonVegIndicator size={13} />
+            {/* Chicken Patties Risk Card */}
+            <div className="p-3 bg-white rounded-[3px] border border-[rgba(55,53,47,0.09)] flex items-start justify-between">
+              <div>
+                <div className="flex items-center gap-1.5 font-medium text-xs text-[#37352F]">
+                  <span>Chicken Patties (Fried)</span>
+                  <NonVegIndicator size={12} />
+                </div>
+                <div className="text-[11px] text-[#37352F]/60 mt-1">
+                  Bin: 5 patties · Value: ₹ 460/-
+                </div>
+                <div className="mt-1.5 text-xs text-[#DFAB01] font-medium">
+                  Recommendation: Hold fryer drop; utilize buffer.
+                </div>
               </div>
-              <div className="text-xs text-[#6E6E6E] mt-1 font-ui">
-                Quantity in Bin: <strong>5 patties</strong> · Estimated Value: <strong>₹ 460/-</strong>
-              </div>
-              <div className="mt-2 text-xs text-[#1A1A1A]">
-                <strong>AI Recommendation: </strong>
-                <span className="text-amber-800 font-bold">Hold fryer drop; utilize buffer.</span>
-              </div>
-            </div>
-            <div className="text-right shrink-0">
-              <span className="inline-flex items-center gap-1 text-xs font-black text-amber-800 px-2.5 py-1 bg-amber-100 rounded-full border border-amber-300 font-ui">
-                <Timer className="w-3.5 h-3.5" /> 11 min left
+              <span className="notion-tag bg-[#FBF3DB] text-[#DFAB01] text-[10px] shrink-0">
+                <Timer className="w-3 h-3 mr-1" /> 11m left
               </span>
             </div>
           </div>
@@ -219,42 +203,37 @@ export const KitchenPage: React.FC = () => {
       </div>
 
       {/* SKU Table & Kitchen Timeline Toggle */}
-      <div className="p-6 bg-white rounded-2xl border border-stone-200 shadow-xs">
-        <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4 pb-4 mb-4 border-b border-stone-100">
-          <div>
-            <h3 className="text-xl font-black font-display text-[#1A1A1A]">
-              SKU Batch Preparation Plan.
-            </h3>
-            <p className="text-xs text-[#6E6E6E] mt-0.5">
-              Live batch trigger model calibrated to 30-minute order velocity and holding limits.
-            </p>
+      <div className="bg-white rounded-[4px] border border-[rgba(55,53,47,0.09)] overflow-hidden">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 p-3.5 border-b border-[rgba(55,53,47,0.06)]">
+          <div className="flex items-center gap-2">
+            <span className="text-xs font-semibold text-[#37352F]">SKU Batch Preparation Plan</span>
+            <span className="text-xs text-[#37352F]/40">/</span>
+            <span className="text-xs text-[#37352F]/50">Calibrated to 30-min demand velocity</span>
           </div>
 
-          <div className="flex flex-wrap items-center gap-3">
-            {/* India FSSAI Veg / Non-Veg segmented toggle filters */}
+          <div className="flex flex-wrap items-center gap-2">
             <DietFilterToggles dietFilter={dietFilter} setDietFilter={setDietFilter} />
 
-            {/* Table / Timeline switcher */}
-            <div className="inline-flex p-1 bg-[#F5F4F1] rounded-full border border-stone-200">
+            <div className="inline-flex p-0.5 bg-[rgba(55,53,47,0.06)] rounded-[3px] text-xs">
               <button
                 onClick={() => setActiveTab('table')}
-                className={`px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider transition-all cursor-pointer ${
+                className={`px-2 py-0.5 rounded-[2px] font-medium transition-colors cursor-pointer ${
                   activeTab === 'table'
-                    ? 'bg-[#5C3320] text-white shadow-xs'
-                    : 'text-[#6E6E6E] hover:text-[#1A1A1A]'
+                    ? 'bg-white text-[#37352F] shadow-xs'
+                    : 'text-[#37352F]/60 hover:text-[#37352F]'
                 }`}
               >
-                SKU Table
+                Table
               </button>
               <button
                 onClick={() => setActiveTab('timeline')}
-                className={`px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider transition-all cursor-pointer ${
+                className={`px-2 py-0.5 rounded-[2px] font-medium transition-colors cursor-pointer ${
                   activeTab === 'timeline'
-                    ? 'bg-[#5C3320] text-white shadow-xs'
-                    : 'text-[#6E6E6E] hover:text-[#1A1A1A]'
+                    ? 'bg-white text-[#37352F] shadow-xs'
+                    : 'text-[#37352F]/60 hover:text-[#37352F]'
                 }`}
               >
-                Event Timeline
+                Timeline
               </button>
             </div>
           </div>
@@ -262,19 +241,19 @@ export const KitchenPage: React.FC = () => {
 
         {activeTab === 'table' ? (
           <div className="overflow-x-auto">
-            <table className="w-full text-left border-collapse min-w-[700px]">
+            <table className="w-full text-left border-collapse min-w-[650px] text-xs">
               <thead>
-                <tr className="border-b border-stone-200 text-[11px] font-black uppercase tracking-wider text-[#6E6E6E] font-ui">
-                  <th className="py-3 px-3">Product Name</th>
-                  <th className="py-3 px-3 text-center">Current Ready</th>
-                  <th className="py-3 px-3 text-center">Next 30m Forecast</th>
-                  <th className="py-3 px-3 text-center">Recommended Prep</th>
-                  <th className="py-3 px-3 text-center">Holding Time</th>
-                  <th className="py-3 px-3 text-center">Status</th>
-                  <th className="py-3 px-3 text-right">Why?</th>
+                <tr className="border-b border-[rgba(55,53,47,0.09)] bg-[#F7F6F3]/60 text-[11px] font-medium text-[#37352F]/60">
+                  <th className="py-2.5 px-3">Product Name</th>
+                  <th className="py-2.5 px-3 text-center">Current Ready</th>
+                  <th className="py-2.5 px-3 text-center">Next 30m Forecast</th>
+                  <th className="py-2.5 px-3 text-center">Recommended Prep</th>
+                  <th className="py-2.5 px-3 text-center">Holding Time</th>
+                  <th className="py-2.5 px-3 text-center">Status</th>
+                  <th className="py-2.5 px-3 text-right">Reasoning</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-stone-100 text-xs">
+              <tbody className="divide-y divide-[rgba(55,53,47,0.06)]">
                 {filteredSKUs.map((sku) => {
                   const isPrepare = sku.status === 'Prepare';
                   const isRisk = sku.status === 'At Risk';
@@ -282,63 +261,61 @@ export const KitchenPage: React.FC = () => {
                     sku.id.includes('veg') || sku.id.includes('fries') || sku.id.includes('shake');
 
                   return (
-                    <tr key={sku.id} className="hover:bg-[#F5F4F1]/60 transition-colors">
-                      <td className="py-3.5 px-3">
-                        <div className="flex items-center gap-2">
-                          <span className="font-black font-display text-sm text-[#1A1A1A]">
-                            {sku.name}.
-                          </span>
-                          {isVeg ? <VegIndicator size={14} /> : <NonVegIndicator size={14} />}
+                    <tr key={sku.id} className="hover:bg-[rgba(55,53,47,0.02)] transition-colors">
+                      <td className="py-3 px-3">
+                        <div className="flex items-center gap-1.5 font-medium text-[#37352F]">
+                          <span>{sku.name}</span>
+                          {isVeg ? <VegIndicator size={12} /> : <NonVegIndicator size={12} />}
                         </div>
-                        <span className="text-[11px] text-[#6E6E6E] font-ui mt-0.5 block">
-                          {sku.category} · ₹ {sku.unitPrice}/-
+                        <span className="text-[11px] text-[#37352F]/40 mt-0.5 block">
+                          {sku.category} · ₹{sku.unitPrice}/-
                         </span>
                       </td>
 
-                      <td className="py-3.5 px-3 text-center font-black font-display text-stone-800 text-base">
+                      <td className="py-3 px-3 text-center font-medium text-[#37352F]">
                         {sku.currentReady}
                       </td>
 
-                      <td className="py-3.5 px-3 text-center font-black font-display text-[#E85C1A] text-base">
+                      <td className="py-3 px-3 text-center font-medium text-[#D9730D]">
                         {sku.next30mForecast}
                       </td>
 
-                      <td className="py-3.5 px-3 text-center">
+                      <td className="py-3 px-3 text-center">
                         <span
-                          className={`font-black font-display text-base px-3 py-1 rounded-full ${
+                          className={`notion-tag text-xs font-semibold ${
                             sku.recommendedPrep > 0
-                              ? 'bg-[#E85C1A] text-white shadow-xs'
-                              : 'bg-stone-100 text-[#6E6E6E]'
+                              ? 'bg-[#FAEBDD] text-[#D9730D]'
+                              : 'bg-[#EBECED] text-[#9B9A97]'
                           }`}
                         >
                           {sku.recommendedPrep}
                         </span>
                       </td>
 
-                      <td className="py-3.5 px-3 text-center font-bold text-[#6E6E6E]">
+                      <td className="py-3 px-3 text-center text-[#37352F]/70">
                         {sku.holdingTimeRemMin}m / {sku.maxHoldingTimeMin}m
                       </td>
 
-                      <td className="py-3.5 px-3 text-center">
+                      <td className="py-3 px-3 text-center">
                         <span
-                          className={`text-[10px] font-black font-ui px-3 py-1 rounded-full uppercase tracking-wider ${
+                          className={`notion-tag text-[10px] ${
                             isPrepare
-                              ? 'bg-red-50 text-[#7A1F1F] border border-red-200'
+                              ? 'bg-[#FBE4E4] text-[#E03E3E]'
                               : isRisk
-                              ? 'bg-amber-100 text-amber-900 border border-amber-300'
-                              : 'bg-stone-100 text-[#6E6E6E]'
+                              ? 'bg-[#FBF3DB] text-[#DFAB01]'
+                              : 'bg-[#EBECED] text-[#9B9A97]'
                           }`}
                         >
                           {sku.status}
                         </span>
                       </td>
 
-                      <td className="py-3.5 px-3 text-right">
+                      <td className="py-3 px-3 text-right">
                         <button
                           onClick={() => setSelectedExplanationSKU(sku)}
-                          className="px-3.5 py-1.5 rounded-full border border-[#5C3320] bg-white hover:bg-[#5C3320] text-[#5C3320] hover:text-white text-xs font-black uppercase tracking-wider transition-all inline-flex items-center gap-1 cursor-pointer"
+                          className="px-2 py-1 rounded-[3px] border border-[rgba(55,53,47,0.12)] hover:bg-[rgba(55,53,47,0.06)] text-[#37352F] text-xs font-medium transition-colors inline-flex items-center gap-1 cursor-pointer"
                         >
-                          <HelpCircle className="w-3.5 h-3.5 text-[#E85C1A]" /> Why?
+                          <HelpCircle className="w-3 h-3 text-[#2383E2]" /> Why?
                         </button>
                       </td>
                     </tr>
@@ -349,26 +326,26 @@ export const KitchenPage: React.FC = () => {
           </div>
         ) : (
           /* Kitchen Timeline */
-          <div className="py-6 space-y-4">
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          <div className="p-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
               {kitchenTimelineEvents.map((evt, idx) => (
                 <div
                   key={evt.time}
-                  className="p-4 rounded-xl bg-[#F5F4F1] border border-stone-200 hover:border-[#E85C1A]/40 transition-all flex flex-col justify-between"
+                  className="p-3 rounded-[3px] bg-[#F7F6F3] border border-[rgba(55,53,47,0.06)] flex flex-col justify-between"
                 >
                   <div>
-                    <div className="flex items-center justify-between mb-2">
-                      <span className="text-sm font-black font-display text-[#E85C1A]">{evt.time}</span>
-                      <span className="text-[9px] font-bold font-ui px-2 py-0.5 rounded-full bg-white text-[#6E6E6E] border border-stone-200 uppercase tracking-wider">
+                    <div className="flex items-center justify-between mb-1.5">
+                      <span className="text-xs font-semibold text-[#37352F]">{evt.time}</span>
+                      <span className="notion-tag text-[10px] bg-white text-[#37352F]/60 border border-[rgba(55,53,47,0.09)]">
                         {evt.badge}
                       </span>
                     </div>
-                    <h4 className="font-black font-display text-[#1A1A1A] text-sm">{evt.title}</h4>
-                    <p className="text-xs text-[#6E6E6E] mt-1 leading-relaxed">{evt.desc}</p>
+                    <h4 className="font-medium text-[#37352F] text-xs">{evt.title}</h4>
+                    <p className="text-[11px] text-[#37352F]/60 mt-1 leading-relaxed">{evt.desc}</p>
                   </div>
 
-                  <div className="mt-4 pt-2 border-t border-stone-200 text-[10px] text-stone-400 uppercase tracking-wider">
-                    Sequence Step 0{idx + 1}
+                  <div className="mt-3 pt-2 border-t border-[rgba(55,53,47,0.06)] text-[10px] text-[#37352F]/40">
+                    Step {idx + 1}
                   </div>
                 </div>
               ))}

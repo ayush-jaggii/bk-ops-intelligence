@@ -42,120 +42,118 @@ export const ImpactPage: React.FC = () => {
   ];
 
   return (
-    <div className="space-y-8 pb-12 font-ui">
+    <div className="space-y-6 pb-12 font-sans select-none text-[#37352F]">
       {/* Header */}
-      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
+      <div className="pt-2 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <div className="flex items-center gap-2">
-            <h1 className="text-3xl sm:text-4xl font-black font-display text-[#1A1A1A] tracking-tight">
-              Operational Impact.
-            </h1>
-            <span className="px-3 py-0.5 rounded-full text-xs font-black uppercase tracking-wider bg-emerald-100 text-[#0E8A3E] border border-emerald-300">
-              EBITDA Bridge
-            </span>
-          </div>
-          <p className="text-sm text-[#6E6E6E] mt-1 font-medium">
-            Estimated financial impact from AI-driven store optimization for {selectedStore.name}.
+          <div className="text-4xl mb-3">💰</div>
+          <h1 className="text-3xl sm:text-4xl font-bold text-[#37352F] tracking-tight">
+            Impact & Financials
+          </h1>
+          <p className="text-xs text-[#37352F]/60 mt-1">
+            Store EBITDA bridge and projected financial opportunity from AI synchronization.
           </p>
         </div>
 
-        <div className="text-xs text-[#6E6E6E] font-medium italic">
-          *Illustrative QSR benchmark model
+        <div className="text-xs text-[#37352F]/50 italic">
+          *Illustrative QSR benchmark model for {selectedStore.name}
         </div>
       </div>
 
-      {/* Big Summary Card */}
-      <div className="p-8 rounded-2xl bg-gradient-to-br from-[#5C3320] to-[#422012] text-white shadow-md relative overflow-hidden">
-        <div className="relative z-10">
-          <span className="text-xs font-black font-ui uppercase tracking-wider text-[#F5A827] block">
-            ESTIMATED MONTHLY STORE OPPORTUNITY
+      {/* Notion Summary Callout Box */}
+      <div className="notion-callout border border-[rgba(55,53,47,0.09)]">
+        <span className="text-2xl shrink-0">📈</span>
+        <div className="flex-1 min-w-0">
+          <span className="text-[11px] text-[#37352F]/50 font-medium uppercase tracking-wider block">
+            Estimated Monthly Store Opportunity
           </span>
-          <div className="text-4xl sm:text-6xl font-black font-display text-white mt-2 tracking-tight">
-            ₹ {metrics.monthlyOpportunityLakhs} Lakhs/-
+          <div className="text-3xl sm:text-4xl font-bold text-[#37352F] mt-1 tracking-tight">
+            ₹ {metrics.monthlyOpportunityLakhs} Lakhs / month
           </div>
-          <p className="text-xs sm:text-sm text-stone-300 mt-2 max-w-xl">
-            Modeled financial opportunity across workforce scheduling, food waste reduction, energy setback, and dinner rush throughput capture.
+          <p className="text-xs text-[#37352F]/70 mt-1.5 leading-relaxed max-w-xl">
+            Financial opportunity captured across workforce rebalancing, holding waste reduction, equipment energy setback, and dinner rush throughput.
           </p>
 
           {/* 4 Category Breakdowns */}
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 mt-6">
-            <div className="p-4 rounded-xl bg-white/10 backdrop-blur-xs border border-white/15">
-              <div className="flex items-center gap-1.5 text-xs text-stone-300 font-medium">
-                <Users className="w-3.5 h-3.5 text-[#F5A827]" /> Labor Optimization
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-2.5 mt-4">
+            <div className="p-3 rounded-[3px] bg-white border border-[rgba(55,53,47,0.09)]">
+              <div className="flex items-center gap-1.5 text-xs text-[#37352F]/60">
+                <Users className="w-3 h-3 text-[#2383E2]" /> Labor Optimization
               </div>
-              <div className="text-xl font-black font-display text-white mt-1">
+              <div className="text-base font-semibold text-[#37352F] mt-1">
                 ₹ {metrics.laborSavingsMonthly.toLocaleString('en-IN')}/-
               </div>
-              <span className="text-[10px] text-stone-300">Rebalanced idle hours</span>
+              <span className="text-[10px] text-[#37352F]/40">Rebalanced idle hours</span>
             </div>
 
-            <div className="p-4 rounded-xl bg-white/10 backdrop-blur-xs border border-white/15">
-              <div className="flex items-center gap-1.5 text-xs text-stone-300 font-medium">
-                <Trash2 className="w-3.5 h-3.5 text-red-400" /> Kitchen Waste Reduction
+            <div className="p-3 rounded-[3px] bg-white border border-[rgba(55,53,47,0.09)]">
+              <div className="flex items-center gap-1.5 text-xs text-[#37352F]/60">
+                <Trash2 className="w-3 h-3 text-[#E03E3E]" /> Waste Reduction
               </div>
-              <div className="text-xl font-black font-display text-white mt-1">
+              <div className="text-base font-semibold text-[#37352F] mt-1">
                 ₹ {metrics.wasteSavingsMonthly.toLocaleString('en-IN')}/-
               </div>
-              <span className="text-[10px] text-stone-300">Prevented shelf expiry</span>
+              <span className="text-[10px] text-[#37352F]/40">Prevented shelf discard</span>
             </div>
 
-            <div className="p-4 rounded-xl bg-white/10 backdrop-blur-xs border border-white/15">
-              <div className="flex items-center gap-1.5 text-xs text-stone-300 font-medium">
-                <Zap className="w-3.5 h-3.5 text-emerald-400" /> Energy Optimization
+            <div className="p-3 rounded-[3px] bg-white border border-[rgba(55,53,47,0.09)]">
+              <div className="flex items-center gap-1.5 text-xs text-[#37352F]/60">
+                <Zap className="w-3 h-3 text-[#0F7B6C]" /> Energy Setback
               </div>
-              <div className="text-xl font-black font-display text-white mt-1">
+              <div className="text-base font-semibold text-[#37352F] mt-1">
                 ₹ {metrics.energySavingsMonthly.toLocaleString('en-IN')}/-
               </div>
-              <span className="text-[10px] text-stone-300">HVAC & fryer setback</span>
+              <span className="text-[10px] text-[#37352F]/40">HVAC modulation</span>
             </div>
 
-            <div className="p-4 rounded-xl bg-white/10 backdrop-blur-xs border border-white/15">
-              <div className="flex items-center gap-1.5 text-xs text-stone-300 font-medium">
-                <TrendingUp className="w-3.5 h-3.5 text-[#F5A827]" /> Peak Throughput
+            <div className="p-3 rounded-[3px] bg-white border border-[rgba(55,53,47,0.09)]">
+              <div className="flex items-center gap-1.5 text-xs text-[#37352F]/60">
+                <TrendingUp className="w-3 h-3 text-[#D9730D]" /> Peak Throughput
               </div>
-              <div className="text-xl font-black font-display text-white mt-1">
+              <div className="text-base font-semibold text-[#37352F] mt-1">
                 ₹ {metrics.throughputBoostMonthly.toLocaleString('en-IN')}/-
               </div>
-              <span className="text-[10px] text-stone-300">Faster ticket assembly</span>
+              <span className="text-[10px] text-[#37352F]/40">Faster order assembly</span>
             </div>
           </div>
         </div>
       </div>
 
       {/* Waterfall Chart */}
-      <div className="p-6 bg-white rounded-2xl border border-stone-200 shadow-xs">
-        <div className="pb-4 mb-4 border-b border-stone-100 flex items-center justify-between">
+      <div className="p-5 bg-white rounded-[4px] border border-[rgba(55,53,47,0.09)]">
+        <div className="pb-3 mb-3 border-b border-[rgba(55,53,47,0.06)] flex items-center justify-between">
           <div>
-            <h3 className="text-xl font-black font-display text-[#1A1A1A]">
-              Store Contribution Waterfall Model.
+            <h3 className="text-xs font-semibold text-[#37352F]">
+              Store Contribution Waterfall Model
             </h3>
-            <p className="text-xs text-[#6E6E6E]">
-              Visualizing store EBITDA bridge from baseline operating leaks to AI-optimized run-rate
+            <p className="text-[11px] text-[#37352F]/50">
+              Visualizing store EBITDA bridge from baseline leaks to AI-optimized run-rate
             </p>
           </div>
-          <span className="text-[11px] font-bold text-[#6E6E6E] italic">Values in ₹ Thousands</span>
+          <span className="text-[11px] text-[#37352F]/50">Values in ₹ Thousands</span>
         </div>
 
-        <div className="h-[280px] w-full">
+        <div className="h-[260px] w-full">
           <ResponsiveContainer width="100%" height="100%">
             <BarChart data={waterfallData} margin={{ top: 20, right: 20, left: 0, bottom: 5 }}>
-              <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#f2eadf" />
-              <XAxis dataKey="name" tick={{ fill: '#5C3320', fontSize: 11, fontWeight: 700 }} />
-              <YAxis tick={{ fill: '#5C3320', fontSize: 11 }} />
+              <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="rgba(55,53,47,0.06)" />
+              <XAxis dataKey="name" tick={{ fill: '#37352F', fontSize: 11 }} />
+              <YAxis tick={{ fill: '#37352F', fontSize: 11 }} />
               <Tooltip
                 formatter={(val: any) => [`₹ ${val}k/-`, 'Impact']}
                 contentStyle={{
                   backgroundColor: '#FFFFFF',
-                  borderRadius: '12px',
-                  border: '1px solid #e5dfd5'
+                  borderRadius: '4px',
+                  border: '1px solid rgba(55,53,47,0.09)',
+                  boxShadow: 'rgba(15,15,15,0.05) 0px 0px 0px 1px, rgba(15,15,15,0.1) 0px 3px 6px'
                 }}
               />
-              <Bar dataKey="value" radius={[6, 6, 0, 0]}>
+              <Bar dataKey="value" radius={[3, 3, 0, 0]}>
                 {waterfallData.map((entry, index) => {
-                  let color = '#5C3320';
-                  if (entry.type === 'loss') color = '#7A1F1F';
-                  if (entry.type === 'gain') color = '#E85C1A';
-                  if (entry.type === 'final') color = '#0E8A3E';
+                  let color = '#37352F';
+                  if (entry.type === 'loss') color = '#E03E3E';
+                  if (entry.type === 'gain') color = '#2383E2';
+                  if (entry.type === 'final') color = '#0F7B6C';
                   return <Cell key={`cell-${index}`} fill={color} />;
                 })}
               </Bar>
@@ -163,34 +161,33 @@ export const ImpactPage: React.FC = () => {
           </ResponsiveContainer>
         </div>
 
-        <div className="mt-4 pt-3 border-t border-stone-100 flex flex-wrap items-center justify-between text-xs text-[#6E6E6E]">
+        <div className="mt-3 pt-2.5 border-t border-[rgba(55,53,47,0.06)] flex flex-wrap items-center justify-between text-xs text-[#37352F]/60">
           <div className="flex items-center gap-4">
             <span className="flex items-center gap-1.5">
-              <span className="w-3 h-3 rounded-md bg-[#5C3320]"></span> Base Contribution
+              <span className="w-2.5 h-2.5 rounded-[2px] bg-[#37352F]"></span> Base Contribution
             </span>
             <span className="flex items-center gap-1.5">
-              <span className="w-3 h-3 rounded-md bg-[#7A1F1F]"></span> Controllable Leakage
+              <span className="w-2.5 h-2.5 rounded-[2px] bg-[#E03E3E]"></span> Controllable Leakage
             </span>
             <span className="flex items-center gap-1.5">
-              <span className="w-3 h-3 rounded-md bg-[#E85C1A]"></span> AI Recovery
+              <span className="w-2.5 h-2.5 rounded-[2px] bg-[#2383E2]"></span> AI Recovery
             </span>
             <span className="flex items-center gap-1.5">
-              <span className="w-3 h-3 rounded-md bg-[#0E8A3E]"></span> Optimized Potential
+              <span className="w-2.5 h-2.5 rounded-[2px] bg-[#0F7B6C]"></span> Optimized Potential
             </span>
           </div>
-          <span className="text-[10px] text-stone-400">Illustrative QSR store benchmark</span>
         </div>
       </div>
 
       {/* Sensitivity Analysis Section */}
-      <div className="p-6 bg-white rounded-2xl border border-stone-200 shadow-xs space-y-6">
-        <div className="flex items-center justify-between pb-3 border-b border-stone-100">
+      <div className="p-5 bg-white rounded-[4px] border border-[rgba(55,53,47,0.09)] space-y-4">
+        <div className="flex items-center justify-between pb-3 border-b border-[rgba(55,53,47,0.06)]">
           <div>
-            <h3 className="text-xl font-black font-display text-[#1A1A1A]">
-              Dynamic Sensitivity Analysis.
+            <h3 className="text-xs font-semibold text-[#37352F]">
+              Dynamic Sensitivity Analysis
             </h3>
-            <p className="text-xs text-[#6E6E6E]">
-              Drag the parameter sliders to test conservative vs aggressive operational efficiency assumptions.
+            <p className="text-[11px] text-[#37352F]/50">
+              Drag parameters to model conservative vs aggressive operational recovery assumptions.
             </p>
           </div>
           <button
@@ -202,18 +199,18 @@ export const ImpactPage: React.FC = () => {
                 throughputBoostPct: 2.2
               })
             }
-            className="text-xs text-[#E85C1A] font-black uppercase tracking-wider hover:underline cursor-pointer"
+            className="text-xs text-[#2383E2] hover:underline cursor-pointer"
           >
             Reset to Defaults
           </button>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {/* Labor Slider */}
-          <div className="p-4 bg-[#F5F4F1] rounded-xl border border-stone-200">
-            <div className="flex justify-between items-center text-xs font-bold text-[#1A1A1A] mb-2 font-ui">
+          <div className="p-3 bg-[#F7F6F3] rounded-[3px] border border-[rgba(55,53,47,0.06)]">
+            <div className="flex justify-between items-center text-xs font-medium text-[#37352F] mb-1.5">
               <span>Labor Savings Rate:</span>
-              <span className="text-sm font-black text-[#E85C1A] font-display">
+              <span className="font-semibold text-[#2383E2]">
                 {sensitivity.laborSavingsPct}%
               </span>
             </div>
@@ -226,9 +223,9 @@ export const ImpactPage: React.FC = () => {
               onChange={(e) =>
                 setSensitivity({ ...sensitivity, laborSavingsPct: Number(e.target.value) })
               }
-              className="w-full accent-[#E85C1A] cursor-pointer"
+              className="w-full accent-[#2383E2] cursor-pointer"
             />
-            <div className="flex justify-between text-[10px] text-[#6E6E6E] mt-1">
+            <div className="flex justify-between text-[10px] text-[#37352F]/40 mt-1">
               <span>1% (Minimal)</span>
               <span>Default: 4.8%</span>
               <span>10% (Maximum)</span>
@@ -236,10 +233,10 @@ export const ImpactPage: React.FC = () => {
           </div>
 
           {/* Waste Slider */}
-          <div className="p-4 bg-[#F5F4F1] rounded-xl border border-stone-200">
-            <div className="flex justify-between items-center text-xs font-bold text-[#1A1A1A] mb-2 font-ui">
+          <div className="p-3 bg-[#F7F6F3] rounded-[3px] border border-[rgba(55,53,47,0.06)]">
+            <div className="flex justify-between items-center text-xs font-medium text-[#37352F] mb-1.5">
               <span>Kitchen Waste Reduction:</span>
-              <span className="text-sm font-black text-[#E85C1A] font-display">
+              <span className="font-semibold text-[#2383E2]">
                 {sensitivity.wasteReductionPct}%
               </span>
             </div>
@@ -252,9 +249,9 @@ export const ImpactPage: React.FC = () => {
               onChange={(e) =>
                 setSensitivity({ ...sensitivity, wasteReductionPct: Number(e.target.value) })
               }
-              className="w-full accent-[#E85C1A] cursor-pointer"
+              className="w-full accent-[#2383E2] cursor-pointer"
             />
-            <div className="flex justify-between text-[10px] text-[#6E6E6E] mt-1">
+            <div className="flex justify-between text-[10px] text-[#37352F]/40 mt-1">
               <span>5%</span>
               <span>Default: 18.0%</span>
               <span>30%</span>
@@ -262,10 +259,10 @@ export const ImpactPage: React.FC = () => {
           </div>
 
           {/* Energy Slider */}
-          <div className="p-4 bg-[#F5F4F1] rounded-xl border border-stone-200">
-            <div className="flex justify-between items-center text-xs font-bold text-[#1A1A1A] mb-2 font-ui">
+          <div className="p-3 bg-[#F7F6F3] rounded-[3px] border border-[rgba(55,53,47,0.06)]">
+            <div className="flex justify-between items-center text-xs font-medium text-[#37352F] mb-1.5">
               <span>Energy Setback Savings:</span>
-              <span className="text-sm font-black text-[#E85C1A] font-display">
+              <span className="font-semibold text-[#2383E2]">
                 {sensitivity.energySavingsPct}%
               </span>
             </div>
@@ -278,9 +275,9 @@ export const ImpactPage: React.FC = () => {
               onChange={(e) =>
                 setSensitivity({ ...sensitivity, energySavingsPct: Number(e.target.value) })
               }
-              className="w-full accent-[#E85C1A] cursor-pointer"
+              className="w-full accent-[#2383E2] cursor-pointer"
             />
-            <div className="flex justify-between text-[10px] text-[#6E6E6E] mt-1">
+            <div className="flex justify-between text-[10px] text-[#37352F]/40 mt-1">
               <span>3%</span>
               <span>Default: 11.5%</span>
               <span>20%</span>
@@ -288,10 +285,10 @@ export const ImpactPage: React.FC = () => {
           </div>
 
           {/* Throughput Slider */}
-          <div className="p-4 bg-[#F5F4F1] rounded-xl border border-stone-200">
-            <div className="flex justify-between items-center text-xs font-bold text-[#1A1A1A] mb-2 font-ui">
+          <div className="p-3 bg-[#F7F6F3] rounded-[3px] border border-[rgba(55,53,47,0.06)]">
+            <div className="flex justify-between items-center text-xs font-medium text-[#37352F] mb-1.5">
               <span>Peak Throughput Capture:</span>
-              <span className="text-sm font-black text-[#E85C1A] font-display">
+              <span className="font-semibold text-[#2383E2]">
                 {sensitivity.throughputBoostPct}%
               </span>
             </div>
@@ -304,9 +301,9 @@ export const ImpactPage: React.FC = () => {
               onChange={(e) =>
                 setSensitivity({ ...sensitivity, throughputBoostPct: Number(e.target.value) })
               }
-              className="w-full accent-[#E85C1A] cursor-pointer"
+              className="w-full accent-[#2383E2] cursor-pointer"
             />
-            <div className="flex justify-between text-[10px] text-[#6E6E6E] mt-1">
+            <div className="flex justify-between text-[10px] text-[#37352F]/40 mt-1">
               <span>0%</span>
               <span>Default: 2.2%</span>
               <span>5%</span>

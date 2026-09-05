@@ -70,91 +70,89 @@ export const ShiftBuilderModal: React.FC<ShiftBuilderModalProps> = ({ isOpen, on
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-xs animate-fade-in font-ui">
-      <div className="bg-white rounded-2xl shadow-2xl max-w-4xl w-full max-h-[92vh] overflow-y-auto border border-stone-200">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/40 backdrop-blur-[2px] animate-fade-in">
+      <div className="bg-white rounded-[6px] shadow-[rgba(15,15,15,0.05)_0px_0px_0px_1px,rgba(15,15,15,0.1)_0px_3px_6px,rgba(15,15,15,0.2)_0px_9px_24px] max-w-3xl w-full max-h-[90vh] overflow-y-auto border border-[rgba(55,53,47,0.09)]">
         {/* Header */}
-        <div className="p-6 border-b border-stone-200 bg-[#F5F4F1] flex items-center justify-between sticky top-0 z-10">
+        <div className="p-4 border-b border-[rgba(55,53,47,0.09)] bg-[#F7F6F3] flex items-center justify-between sticky top-0 z-10">
           <div>
-            <div className="flex items-center gap-2 mb-1">
-              <span className="px-3 py-0.5 rounded-full text-[10px] font-black font-ui uppercase tracking-wider bg-[#5C3320] text-white">
-                Interactive Shift Planner
+            <div className="flex items-center gap-2">
+              <span className="text-xl">📅</span>
+              <h3 className="text-sm font-semibold text-[#37352F]">Master Shift Roster Builder</h3>
+              <span className="text-[10px] px-1.5 py-0.2 rounded-[3px] bg-[#DDEBF1] text-[#0B6E99] font-medium">
+                Interactive
               </span>
-              <span className="text-xs font-semibold text-[#6E6E6E]">Anonymous Crew Roster</span>
             </div>
-            <h3 className="text-2xl font-black font-display text-[#1A1A1A]">Master Shift Roster Builder.</h3>
-            <p className="text-xs text-[#6E6E6E] mt-0.5">
-              Adjust shift windows per crew member. The constraint engine checks coverage against predicted demand in real-time.
+            <p className="text-[11px] text-[#37352F]/60 mt-0.5">
+              Adjust shift hours per crew member. The constraint engine checks coverage against predicted demand.
             </p>
           </div>
           <button
             onClick={onClose}
-            className="text-[#6E6E6E] hover:text-[#1A1A1A] p-2 rounded-full hover:bg-stone-200 transition-colors cursor-pointer"
+            className="text-[#37352F]/50 hover:text-[#37352F] p-1 rounded-[3px] hover:bg-[rgba(55,53,47,0.06)] transition-colors cursor-pointer"
           >
-            <X className="w-5 h-5" />
+            <X className="w-4 h-4" />
           </button>
         </div>
 
         {/* Real-time Constraint Warning Banner */}
         {isKitchenUnderstaffedAt7PM && (
-          <div className="m-6 p-4 rounded-xl bg-amber-50 border border-amber-300 flex items-start gap-3 animate-pulse">
-            <AlertTriangle className="w-5 h-5 text-[#E85C1A] shrink-0 mt-0.5" />
+          <div className="m-4 p-3 rounded-[4px] bg-[#FFE2DD]/60 border border-[#D44040]/30 flex items-start gap-2.5">
+            <AlertTriangle className="w-4 h-4 text-[#D44040] shrink-0 mt-0.5" />
             <div>
-              <h4 className="font-bold text-amber-900 text-sm">
-                ⚠ Staffing Constraint Warning (7:00 PM Dinner Rush)
-              </h4>
-              <p className="text-xs text-amber-800 mt-0.5">
-                Kitchen staffing will fall <strong>1 employee below forecast requirement</strong> at 7 PM. Ensure at least 4 kitchen-qualified crew members are active during the evening cricket match window.
+              <div className="font-medium text-[#D44040] text-xs">
+                Staffing Constraint Warning (7:00 PM Dinner Rush)
+              </div>
+              <p className="text-[11px] text-[#37352F]/80 mt-0.5">
+                Kitchen staffing will fall <strong>1 employee below forecast requirement</strong> at 7 PM. Ensure at least 4 kitchen-qualified crew members are active during the evening rush window.
               </p>
             </div>
           </div>
         )}
 
         {/* Quick Align to AI button */}
-        <div className="px-6 pb-2 flex items-center justify-between">
-          <span className="text-xs font-bold text-[#6E6E6E] uppercase tracking-wider">7 Active Team Members</span>
+        <div className="px-4 py-2 flex items-center justify-between border-b border-[rgba(55,53,47,0.06)] text-xs">
+          <span className="text-[11px] text-[#37352F]/50">7 Active Team Members</span>
           <button
             onClick={handleApplyAIRecommendation}
-            className="text-xs font-black uppercase tracking-wider text-[#E85C1A] hover:text-[#D44D0F] flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-orange-50 hover:bg-orange-100 transition-colors cursor-pointer border border-[#E85C1A]/30"
+            className="text-xs text-[#2383E2] hover:text-[#1B6FC2] flex items-center gap-1.5 px-2 py-1 rounded-[3px] hover:bg-[rgba(55,53,47,0.06)] transition-colors cursor-pointer"
           >
-            <RotateCcw className="w-3.5 h-3.5" /> Load AI Recommended Shift Windows
+            <RotateCcw className="w-3 h-3" /> Load AI Recommended Windows
           </button>
         </div>
 
         {/* Employee Roster List */}
-        <div className="px-6 pb-6 space-y-3">
+        <div className="p-4 space-y-2">
           {localEmployees.map((emp) => {
             const hasShiftChange = emp.currentShift.label !== emp.recommendedShift.label;
 
             return (
               <div
                 key={emp.id}
-                className="p-4 rounded-xl bg-[#F5F4F1] border border-stone-200 hover:border-[#5C3320]/30 transition-all flex flex-col md:flex-row md:items-center justify-between gap-4"
+                className="p-3 rounded-[4px] bg-[#F7F6F3]/50 border border-[rgba(55,53,47,0.09)] flex flex-col md:flex-row md:items-center justify-between gap-3 text-xs"
               >
                 {/* Employee Info */}
-                <div className="min-w-[220px]">
-                  <div className="flex items-center gap-2.5">
-                    <span className="w-8 h-8 rounded-full bg-[#5C3320] text-white text-xs font-black font-display flex items-center justify-center">
-                      {emp.nameId.replace('Crew ', '')}
-                    </span>
+                <div className="min-w-[200px]">
+                  <div className="flex items-center gap-2">
+                    <span className="text-base">👤</span>
                     <div>
-                      <div className="font-black font-display text-[#1A1A1A] text-sm flex items-center gap-2">
-                        <span>{emp.nameId}.</span>
+                      <div className="font-medium text-[#37352F] flex items-center gap-1.5">
+                        <span>{emp.nameId}</span>
                         {emp.isCrossTrained && (
-                          <span className="text-[9px] font-black uppercase tracking-wider px-2 py-0.5 rounded-full bg-amber-100 text-amber-900">
+                          <span className="text-[10px] px-1.5 py-0.2 rounded-[3px] bg-[#FDECC8] text-[#D9730D]">
                             Cross-Trained
                           </span>
                         )}
                       </div>
-                      <div className="text-xs text-[#6E6E6E] font-medium">{emp.primaryRole}</div>
+                      <div className="text-[11px] text-[#37352F]/50">{emp.primaryRole}</div>
                     </div>
                   </div>
 
                   {/* Skill tags */}
-                  <div className="flex flex-wrap gap-1 mt-2.5">
+                  <div className="flex flex-wrap gap-1 mt-1.5">
                     {emp.skills.map((skill) => (
                       <span
                         key={skill}
-                        className="text-[9px] font-bold px-2 py-0.5 rounded-full bg-white border border-stone-300 text-[#5C3320]"
+                        className="text-[10px] px-1.5 py-0.2 rounded-[3px] bg-white border border-[rgba(55,53,47,0.09)] text-[#37352F]/70"
                       >
                         {skill}
                       </span>
@@ -163,20 +161,20 @@ export const ShiftBuilderModal: React.FC<ShiftBuilderModalProps> = ({ isOpen, on
                 </div>
 
                 {/* Shift Hours Adjuster */}
-                <div className="flex-1 flex flex-col sm:flex-row sm:items-center gap-4">
+                <div className="flex-1 flex flex-col sm:flex-row sm:items-center gap-3">
                   {/* Current Active Hours */}
-                  <div className="p-3 rounded-xl bg-white border border-stone-200 flex-1">
-                    <span className="text-[10px] font-black uppercase tracking-wider text-[#6E6E6E] block mb-1">
+                  <div className="p-2 rounded-[4px] bg-white border border-[rgba(55,53,47,0.09)] flex-1">
+                    <span className="text-[10px] text-[#37352F]/50 block mb-1">
                       Assigned Shift Window
                     </span>
-                    <div className="flex items-center gap-2">
+                    <div className="flex items-center gap-1.5">
                       <select
                         value={emp.currentShift.start}
                         onChange={(e) =>
                           handleShiftChange(emp.id, Number(e.target.value), emp.currentShift.end)
                         }
                         aria-label={`${emp.nameId} start time`}
-                        className="bg-[#F5F4F1] border border-stone-300 rounded-lg px-2 py-1 text-xs font-bold text-[#1A1A1A]"
+                        className="bg-[#F7F6F3] border border-[rgba(55,53,47,0.09)] rounded-[3px] px-2 py-1 text-xs text-[#37352F] outline-none"
                       >
                         <option value={10}>10:00 AM</option>
                         <option value={11}>11:00 AM</option>
@@ -188,14 +186,14 @@ export const ShiftBuilderModal: React.FC<ShiftBuilderModalProps> = ({ isOpen, on
                         <option value={17}>05:00 PM</option>
                         <option value={18}>06:00 PM</option>
                       </select>
-                      <span className="text-stone-400 text-xs font-bold">to</span>
+                      <span className="text-[#37352F]/40 text-xs">to</span>
                       <select
                         value={emp.currentShift.end}
                         onChange={(e) =>
                           handleShiftChange(emp.id, emp.currentShift.start, Number(e.target.value))
                         }
                         aria-label={`${emp.nameId} end time`}
-                        className="bg-[#F5F4F1] border border-stone-300 rounded-lg px-2 py-1 text-xs font-bold text-[#1A1A1A]"
+                        className="bg-[#F7F6F3] border border-[rgba(55,53,47,0.09)] rounded-[3px] px-2 py-1 text-xs text-[#37352F] outline-none"
                       >
                         <option value={17}>05:00 PM</option>
                         <option value={18}>06:00 PM</option>
@@ -210,11 +208,11 @@ export const ShiftBuilderModal: React.FC<ShiftBuilderModalProps> = ({ isOpen, on
                   </div>
 
                   {/* AI Recommended Window */}
-                  <div className="p-3 rounded-xl bg-orange-50/70 border border-orange-200 min-w-[150px]">
-                    <span className="text-[10px] font-black uppercase tracking-wider text-[#E85C1A] block mb-1">
-                      AI Target Shift
+                  <div className="p-2 rounded-[4px] bg-[#F7F6F3] border border-[rgba(55,53,47,0.09)] min-w-[130px]">
+                    <span className="text-[10px] text-[#D9730D] block mb-0.5">
+                      Target Shift
                     </span>
-                    <span className="text-xs font-black font-display text-[#1A1A1A]">
+                    <span className="text-xs font-medium text-[#37352F]">
                       {emp.recommendedShift.label}
                     </span>
                     {hasShiftChange && (
@@ -226,7 +224,7 @@ export const ShiftBuilderModal: React.FC<ShiftBuilderModalProps> = ({ isOpen, on
                             emp.recommendedShift.end
                           )
                         }
-                        className="text-[10px] text-[#E85C1A] font-bold block mt-1 hover:underline"
+                        className="text-[10px] text-[#2383E2] hover:underline block mt-0.5 cursor-pointer"
                       >
                         Match AI
                       </button>
@@ -239,24 +237,24 @@ export const ShiftBuilderModal: React.FC<ShiftBuilderModalProps> = ({ isOpen, on
         </div>
 
         {/* Footer */}
-        <div className="p-6 bg-stone-100 border-t border-stone-200 flex flex-col sm:flex-row items-center justify-between gap-3">
-          <div className="flex items-center gap-2 text-xs text-[#6E6E6E]">
-            <ShieldCheck className="w-4 h-4 text-[#0E8A3E]" />
-            <span>Complies with maximum 8-hour statutory shift rules and mandatory meal intervals.</span>
+        <div className="p-3 bg-[#F7F6F3] border-t border-[rgba(55,53,47,0.09)] flex flex-col sm:flex-row items-center justify-between gap-2 text-xs">
+          <div className="flex items-center gap-1.5 text-[11px] text-[#37352F]/60">
+            <ShieldCheck className="w-3.5 h-3.5 text-[#0F7B6C]" />
+            <span>Complies with maximum 8-hour statutory shift rules and meal intervals.</span>
           </div>
 
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-2">
             <button
               onClick={onClose}
-              className="px-4 py-2 text-xs font-bold uppercase tracking-wider text-[#6E6E6E] hover:text-[#1A1A1A] rounded-full hover:bg-stone-200 transition-colors"
+              className="px-2.5 py-1 text-xs text-[#37352F]/70 hover:text-[#37352F] rounded-[3px] hover:bg-[rgba(55,53,47,0.06)] transition-colors"
             >
               Cancel
             </button>
             <button
               onClick={handleSave}
-              className="px-6 py-2.5 bg-[#E85C1A] hover:bg-[#D44D0F] text-white text-xs font-black uppercase tracking-wider rounded-full shadow-xs transition-all flex items-center gap-2 cursor-pointer"
+              className="px-3 py-1.5 bg-[#2383E2] hover:bg-[#1B6FC2] text-white text-xs font-medium rounded-[3px] transition-colors flex items-center gap-1.5 cursor-pointer"
             >
-              <Save className="w-4 h-4" /> Save Schedule
+              <Save className="w-3.5 h-3.5" /> Save Schedule
             </button>
           </div>
         </div>

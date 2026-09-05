@@ -1,62 +1,53 @@
 @import "tailwindcss";
 
 @theme {
-  --color-bk-orange: #E85C1A;
-  --color-bk-orange-hover: #D44D0F;
-  --color-bk-maroon: #5C3320;
-  --color-bk-maroon-hover: #4A2616;
-  --color-bk-ink: #1A1A1A;
-  --color-bk-bg: #F5F4F1;
-  --color-bk-grey: #6E6E6E;
-  --color-bk-grey-light: #E5E4E0;
-  --color-bk-veg: #0E8A3E;
-  --color-bk-nonveg: #7A1F1F;
-  --color-bk-card: #FFFFFF;
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-display: 'Inter', sans-serif;
+  --font-ui: 'Inter', sans-serif;
 
-  /* Compatibility aliases */
-  --color-bk-red: #E85C1A;
-  --color-bk-brown: #5C3320;
-  --color-bk-yellow: #F4B800;
-  --color-bk-cream: #F5F4F1;
+  --color-notion-default: #37352F;
+  --color-notion-canvas: #FFFFFF;
+  --color-notion-sidebar: #F7F6F3;
+  --color-notion-blue: #2383E2;
+  --color-notion-border: rgba(55, 53, 47, 0.09);
+  --color-notion-border-strong: rgba(55, 53, 47, 0.16);
+  --color-notion-hover: rgba(55, 53, 47, 0.06);
+  --color-notion-active: rgba(55, 53, 47, 0.12);
 
-  --font-display: 'Fraunces', serif;
-  --font-ui: 'Plus Jakarta Sans', sans-serif;
+  /* Notion Tag Pastels */
+  --color-tag-gray-bg: #EBECED;
+  --color-tag-gray-text: #9B9A97;
+  --color-tag-brown-bg: #E9E5E3;
+  --color-tag-brown-text: #64473A;
+  --color-tag-orange-bg: #FAEBDD;
+  --color-tag-orange-text: #D9730D;
+  --color-tag-yellow-bg: #FBF3DB;
+  --color-tag-yellow-text: #DFAB01;
+  --color-tag-green-bg: #DDEDEA;
+  --color-tag-green-text: #0F7B6C;
+  --color-tag-blue-bg: #DDEBF1;
+  --color-tag-blue-text: #0B6E99;
+  --color-tag-purple-bg: #EAE4F2;
+  --color-tag-purple-text: #6940A5;
+  --color-tag-pink-bg: #F4DFEB;
+  --color-tag-pink-text: #AD1A72;
+  --color-tag-red-bg: #FBE4E4;
+  --color-tag-red-text: #E03E3E;
 }
 
 :root {
-  --bk-orange: #E85C1A;
-  --bk-maroon: #5C3320;
-  --bk-ink: #1A1A1A;
-  --bk-bg: #F5F4F1;
-  --bk-grey: #6E6E6E;
-  --bk-veg: #0E8A3E;
-  --bk-nonveg: #7A1F1F;
-  --bk-radius-card: 8px;
-  --bk-radius-pill: 999px;
-
-  font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-  color: #1A1A1A;
-  background-color: #F5F4F1;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  color: #37352F;
+  background-color: #FFFFFF;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-}
-
-/* Custom fonts styling */
-.font-display {
-  font-family: 'Fraunces', Georgia, serif;
-  font-feature-settings: "cv01", "ss01";
-  letter-spacing: -0.02em;
-}
-
-.font-ui {
-  font-family: 'Plus Jakarta Sans', sans-serif;
 }
 
 body {
   margin: 0;
   padding: 0;
-  background-color: #F5F4F1;
-  color: #1A1A1A;
+  background-color: #FFFFFF;
+  color: #37352F;
   min-height: 100vh;
 }
 
@@ -69,25 +60,57 @@ body {
   border: none;
 }
 
-/* Custom subtle scrollbars */
+/* Notion Callout Box */
+.notion-callout {
+  background-color: #F1F1EF;
+  border-radius: 4px;
+  padding: 14px 16px;
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+/* Notion Tag Pill */
+.notion-tag {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 7px;
+  border-radius: 3px;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 16px;
+}
+
+/* Notion Card */
+.notion-card {
+  background-color: #FFFFFF;
+  border: 1px solid rgba(55, 53, 47, 0.09);
+  border-radius: 4px;
+  transition: background 0.1s ease;
+}
+.notion-card:hover {
+  background-color: rgba(55, 53, 47, 0.02);
+}
+
+/* Notion Minimal Scrollbar */
 ::-webkit-scrollbar {
   width: 6px;
   height: 6px;
 }
 ::-webkit-scrollbar-track {
-  background: #F2EADF;
+  background: transparent;
 }
 ::-webkit-scrollbar-thumb {
-  background: #C4B5A5;
-  border-radius: 9999px;
+  background: rgba(55, 53, 47, 0.2);
+  border-radius: 3px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #A08E7D;
+  background: rgba(55, 53, 47, 0.35);
 }
 
-/* Accessibility Focus Rings (Eliminates WCAG focus failure) */
+/* Minimal Focus Ring */
 :focus-visible {
-  outline: 2px solid #E85C1A;
-  outline-offset: 2px;
+  outline: 2px solid #2383E2;
+  outline-offset: 1px;
 }
 

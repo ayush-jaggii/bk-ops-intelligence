@@ -57,104 +57,92 @@ export const ForecastPage: React.FC = () => {
   };
 
   return (
-    <div className="space-y-6 pb-12 font-ui">
+    <div className="space-y-6 pb-12 font-sans select-none text-[#37352F]">
       {/* Header */}
-      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
+      <div className="pt-2 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <div className="flex items-center gap-2">
-            <h1 className="text-3xl sm:text-4xl font-black font-display text-[#1A1A1A] tracking-tight">
-              AI Demand Forecast.
-            </h1>
-            <span className="px-3 py-0.5 rounded-full text-xs font-black uppercase tracking-wider bg-emerald-100 text-[#0E8A3E] border border-emerald-300">
-              Live Model
-            </span>
-          </div>
-          <p className="text-sm text-[#6E6E6E] mt-1 font-medium">
-            Predicting the next 6 hours of restaurant demand for {selectedStore.name}.
+          <div className="text-4xl mb-3">📈</div>
+          <h1 className="text-3xl sm:text-4xl font-bold text-[#37352F] tracking-tight">
+            Demand Forecast
+          </h1>
+          <p className="text-xs text-[#37352F]/60 mt-1">
+            Predicting the next 6 hours of store order velocity for {selectedStore.name}.
           </p>
         </div>
 
-        {/* Confidence Pill */}
-        <div className="flex items-center gap-3">
-          <div className="px-4 py-2 bg-white border border-stone-200 rounded-full shadow-xs flex items-center gap-3">
-            <div className="text-right">
-              <span className="text-[10px] font-black uppercase tracking-wider text-[#6E6E6E] block font-ui">
-                Model Confidence
-              </span>
-              <span className="text-base font-black font-display text-[#1A1A1A]">87% · High Confidence</span>
-            </div>
-            <div className="w-8 h-8 rounded-full bg-emerald-50 text-[#0E8A3E] font-black text-xs flex items-center justify-center border border-emerald-300 font-display">
-              A+
-            </div>
-          </div>
+        {/* Confidence Property */}
+        <div className="flex items-center gap-2 text-xs">
+          <span className="notion-tag bg-[#DDEDEA] text-[#0F7B6C] font-semibold">
+            Model Confidence: 87% (High)
+          </span>
         </div>
       </div>
 
       {/* Main Interactive Forecast Chart Card */}
-      <div className="p-6 bg-white rounded-2xl border border-stone-200 shadow-xs">
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 mb-4 border-b border-stone-100">
+      <div className="p-5 bg-white rounded-[4px] border border-[rgba(55,53,47,0.09)]">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 mb-3 border-b border-[rgba(55,53,47,0.06)]">
           <div>
-            <h3 className="text-xl font-black font-display text-[#1A1A1A]">
-              Hourly Order Demand Curve.
+            <h3 className="text-xs font-semibold text-[#37352F]">
+              Hourly Order Demand Trajectory
             </h3>
-            <p className="text-xs text-[#6E6E6E]">
-              Orders per hour (Historical actuals, predictive trajectory & previous-week baseline)
+            <p className="text-[11px] text-[#37352F]/50">
+              Orders per hour (Historical actuals, AI forecast & prior-week baseline)
             </p>
           </div>
 
           {/* Chart Controls */}
-          <div className="flex items-center gap-2 text-xs font-bold font-ui">
+          <div className="flex items-center gap-2 text-xs">
             <button
               onClick={() => setShowConfidence(!showConfidence)}
-              className={`px-3.5 py-1.5 rounded-full border transition-all cursor-pointer uppercase tracking-wider text-[11px] ${
+              className={`px-2.5 py-1 rounded-[3px] border transition-colors cursor-pointer text-xs ${
                 showConfidence
-                  ? 'bg-amber-50 border-amber-300 text-amber-900 font-black'
-                  : 'border-stone-200 text-[#6E6E6E] hover:bg-stone-50'
+                  ? 'bg-[#FBF3DB] border-[#FBF3DB] text-[#DFAB01] font-medium'
+                  : 'border-[rgba(55,53,47,0.12)] text-[#37352F]/60 hover:bg-[rgba(55,53,47,0.04)]'
               }`}
             >
-              {showConfidence ? '✓ Confidence Band (±8%)' : '+ Show Confidence'}
+              {showConfidence ? '✓ Confidence Band (±8%)' : '+ Confidence Band'}
             </button>
             <button
               onClick={() => setShowBaseline(!showBaseline)}
-              className={`px-3.5 py-1.5 rounded-full border transition-all cursor-pointer uppercase tracking-wider text-[11px] ${
+              className={`px-2.5 py-1 rounded-[3px] border transition-colors cursor-pointer text-xs ${
                 showBaseline
-                  ? 'bg-stone-100 border-stone-300 text-[#1A1A1A] font-black'
-                  : 'border-stone-200 text-[#6E6E6E] hover:bg-stone-50'
+                  ? 'bg-[#EBECED] border-[#EBECED] text-[#37352F] font-medium'
+                  : 'border-[rgba(55,53,47,0.12)] text-[#37352F]/60 hover:bg-[rgba(55,53,47,0.04)]'
               }`}
             >
-              {showBaseline ? '✓ Previous Week Baseline' : '+ Show Baseline'}
+              {showBaseline ? '✓ Prior-Week Baseline' : '+ Prior Baseline'}
             </button>
           </div>
         </div>
 
         {/* Recharts Container */}
-        <div className="h-[360px] w-full pt-2">
+        <div className="h-[340px] w-full pt-1">
           <ResponsiveContainer width="100%" height="100%">
-            <ComposedChart data={chartData} margin={{ top: 10, right: 20, left: -10, bottom: 0 }}>
+            <ComposedChart data={chartData} margin={{ top: 10, right: 20, left: -15, bottom: 0 }}>
               <defs>
                 <linearGradient id="forecastGradient" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="5%" stopColor="#E85C1A" stopOpacity={0.25} />
-                  <stop offset="95%" stopColor="#E85C1A" stopOpacity={0.0} />
+                  <stop offset="5%" stopColor="#2383E2" stopOpacity={0.2} />
+                  <stop offset="95%" stopColor="#2383E2" stopOpacity={0.0} />
                 </linearGradient>
                 <linearGradient id="confidenceGradient" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="5%" stopColor="#F5A827" stopOpacity={0.2} />
-                  <stop offset="95%" stopColor="#F5A827" stopOpacity={0.05} />
+                  <stop offset="5%" stopColor="#DFAB01" stopOpacity={0.15} />
+                  <stop offset="95%" stopColor="#DFAB01" stopOpacity={0.02} />
                 </linearGradient>
               </defs>
-              <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#f0ebe1" />
-              <XAxis dataKey="time" tick={{ fill: '#5C3320', fontSize: 12, fontWeight: 700 }} />
-              <YAxis tick={{ fill: '#5C3320', fontSize: 11 }} />
+              <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="rgba(55,53,47,0.06)" />
+              <XAxis dataKey="time" tick={{ fill: '#37352F', fontSize: 11 }} />
+              <YAxis tick={{ fill: '#37352F', fontSize: 11 }} />
               <Tooltip
                 contentStyle={{
                   backgroundColor: '#FFFFFF',
-                  borderRadius: '12px',
-                  border: '1px solid #e5dfd5',
-                  boxShadow: '0 8px 20px -4px rgba(0, 0, 0, 0.08)',
-                  padding: '12px 16px'
+                  borderRadius: '4px',
+                  border: '1px solid rgba(55,53,47,0.09)',
+                  boxShadow: 'rgba(15,15,15,0.05) 0px 0px 0px 1px, rgba(15,15,15,0.1) 0px 3px 6px',
+                  padding: '8px 12px'
                 }}
-                labelStyle={{ fontWeight: 800, color: '#1A1A1A', marginBottom: '4px' }}
+                labelStyle={{ fontWeight: 600, color: '#37352F', marginBottom: '2px' }}
               />
-              <Legend verticalAlign="top" height={36} iconType="circle" />
+              <Legend verticalAlign="top" height={32} iconType="circle" />
 
               {/* Shaded Confidence Area */}
               {showConfidence && (
@@ -172,31 +160,31 @@ export const ForecastPage: React.FC = () => {
                 <Line
                   type="monotone"
                   dataKey="Previous-Week Baseline"
-                  stroke="#A89B8C"
-                  strokeDasharray="4 4"
-                  strokeWidth={2}
-                  dot={{ r: 3, fill: '#A89B8C' }}
+                  stroke="#9B9A97"
+                  strokeDasharray="3 3"
+                  strokeWidth={1.5}
+                  dot={{ r: 2.5, fill: '#9B9A97' }}
                 />
               )}
 
-              {/* AI Forecast in Flame Orange */}
+              {/* AI Forecast */}
               <Area
                 type="monotone"
                 dataKey="AI Forecast"
-                stroke="#E85C1A"
-                strokeWidth={3}
+                stroke="#2383E2"
+                strokeWidth={2.5}
                 fill="url(#forecastGradient)"
-                dot={{ r: 4, fill: '#E85C1A', stroke: '#FFFFFF', strokeWidth: 2 }}
-                activeDot={{ r: 6 }}
+                dot={{ r: 3.5, fill: '#2383E2', stroke: '#FFFFFF', strokeWidth: 1.5 }}
+                activeDot={{ r: 5 }}
               />
 
-              {/* Actual Orders in Dark Maroon */}
+              {/* Actual Orders */}
               <Line
                 type="monotone"
                 dataKey="Actual Orders"
-                stroke="#5C3320"
-                strokeWidth={3}
-                dot={{ r: 5, fill: '#5C3320', stroke: '#FFFFFF', strokeWidth: 2 }}
+                stroke="#37352F"
+                strokeWidth={2.5}
+                dot={{ r: 4, fill: '#37352F', stroke: '#FFFFFF', strokeWidth: 1.5 }}
                 connectNulls={false}
               />
             </ComposedChart>
@@ -204,75 +192,75 @@ export const ForecastPage: React.FC = () => {
         </div>
 
         {/* Legend notes */}
-        <div className="mt-4 pt-3 border-t border-stone-100 flex flex-wrap items-center justify-between gap-3 text-xs text-[#6E6E6E]">
+        <div className="mt-3 pt-2.5 border-t border-[rgba(55,53,47,0.06)] flex flex-wrap items-center justify-between gap-3 text-xs text-[#37352F]/60">
           <div className="flex items-center gap-4">
             <span className="flex items-center gap-1.5">
-              <span className="w-3 h-3 rounded-full bg-[#5C3320]"></span> Actual Orders (to 4 PM)
+              <span className="w-2.5 h-2.5 rounded-full bg-[#37352F]"></span> Actual Orders (to 4 PM)
             </span>
             <span className="flex items-center gap-1.5">
-              <span className="w-3 h-3 rounded-full bg-[#E85C1A]"></span> AI Forecast (5–8 PM)
+              <span className="w-2.5 h-2.5 rounded-full bg-[#2383E2]"></span> AI Forecast (5–8 PM)
             </span>
             <span className="flex items-center gap-1.5">
-              <span className="w-3 h-1 bg-[#A89B8C]"></span> Previous-Week Baseline
+              <span className="w-3 h-0.5 bg-[#9B9A97]"></span> Prior-Week Baseline
             </span>
           </div>
-          <span className="text-[11px] text-stone-400 italic">
-            Calibrated against Burger King India flagship mall store telemetry
+          <span className="text-[11px] text-[#37352F]/40">
+            Telemetry synchronized with POS & aggregator channels
           </span>
         </div>
       </div>
 
       {/* Forecast Signals Section */}
       <div>
-        <div className="flex items-center justify-between mb-4">
+        <div className="flex items-center justify-between mb-3">
           <div>
-            <h3 className="text-2xl font-black font-display text-[#1A1A1A]">Forecast Signals Ingested.</h3>
-            <p className="text-xs text-[#6E6E6E]">
-              Multi-variable input factors driving the neural forecast weightings
+            <h3 className="text-sm font-semibold text-[#37352F]">Active Forecast Signals</h3>
+            <p className="text-[11px] text-[#37352F]/50">
+              Multi-variable input parameters weighting the neural forecast
             </p>
           </div>
-          <span className="text-xs font-bold text-[#6E6E6E] px-3.5 py-1.5 bg-white rounded-full border border-stone-200 uppercase tracking-wider">
+          <span className="notion-tag bg-[#EBECED] text-[#37352F]/70 text-[10px]">
             5 Signals Active
           </span>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
           {signals.map((sig) => {
             const Icon = getSignalIcon(sig.category);
 
             return (
               <div
                 key={sig.id}
-                className="p-5 bg-white rounded-2xl border border-stone-200 shadow-xs hover:shadow-md transition-all flex flex-col justify-between"
+                className="p-4 bg-white rounded-[4px] border border-[rgba(55,53,47,0.09)] hover:bg-[rgba(55,53,47,0.02)] transition-colors flex flex-col justify-between"
               >
                 <div>
                   <div className="flex items-center justify-between">
-                    <div className="w-10 h-10 rounded-full bg-[#F5F4F1] border border-stone-200 flex items-center justify-center text-[#E85C1A]">
-                      <Icon className="w-5 h-5" />
+                    <div className="w-7 h-7 rounded-[3px] bg-[#F7F6F3] border border-[rgba(55,53,47,0.06)] flex items-center justify-center text-[#37352F]">
+                      <Icon className="w-3.5 h-3.5" />
                     </div>
                     <span
-                      className={`text-[10px] font-black uppercase tracking-wider px-3 py-1 rounded-full ${
+                      className={`notion-tag text-[10px] ${
                         sig.impactType === 'positive'
-                          ? 'bg-emerald-50 text-[#0E8A3E] border border-emerald-200'
+                          ? 'bg-[#DDEDEA] text-[#0F7B6C]'
                           : sig.impactType === 'negative'
-                          ? 'bg-amber-50 text-amber-900 border border-amber-200'
-                          : 'bg-stone-100 text-[#6E6E6E]'
+                          ? 'bg-[#FBF3DB] text-[#DFAB01]'
+                          : 'bg-[#EBECED] text-[#9B9A97]'
                       }`}
                     >
                       {sig.impactBadge}
                     </span>
                   </div>
 
-                  <h4 className="text-base font-black font-display text-[#1A1A1A] mt-3">{sig.title}</h4>
-                  <span className="text-[11px] text-[#6E6E6E] font-semibold block mt-0.5">
+                  <h4 className="text-xs font-semibold text-[#37352F] mt-2.5">{sig.title}</h4>
+                  <span className="text-[11px] text-[#37352F]/50 font-normal block mt-0.5">
                     {sig.subtitle}
                   </span>
-                  <p className="text-xs text-[#6E6E6E] mt-2 leading-relaxed">{sig.explanation}</p>
+                  <p className="text-xs text-[#37352F]/70 mt-1.5 leading-relaxed">{sig.explanation}</p>
                 </div>
 
-                <div className="mt-4 pt-3 border-t border-stone-100 flex items-center justify-between text-[11px] text-stone-400">
-                  <span className="uppercase tracking-wider text-[10px]">Source: Live Stream</span>
-                  <span className="text-[#0E8A3E] font-bold flex items-center gap-1">
+                <div className="mt-3 pt-2 border-t border-[rgba(55,53,47,0.06)] flex items-center justify-between text-[11px] text-[#37352F]/40">
+                  <span>Stream Source</span>
+                  <span className="text-[#0F7B6C] font-medium flex items-center gap-1">
                     <CheckCircle2 className="w-3 h-3" /> Synced
                   </span>
                 </div>
@@ -283,19 +271,11 @@ export const ForecastPage: React.FC = () => {
       </div>
 
       {/* Model Transparency Box */}
-      <div className="p-6 bg-[#F5F4F1] rounded-2xl border border-stone-200">
-        <div className="flex items-start gap-3.5">
-          <div className="w-10 h-10 rounded-full bg-[#5C3320] text-[#F5A827] flex items-center justify-center shrink-0 mt-0.5 shadow-xs">
-            <Cpu className="w-5 h-5" />
-          </div>
-          <div>
-            <h4 className="text-base font-black font-display text-[#1A1A1A]">
-              Model Formulation: Ensemble Demand Decomposition.
-            </h4>
-            <p className="text-xs text-[#6E6E6E] mt-1 leading-relaxed">
-              The model combines historical transaction patterns, current order velocity, day-of-week effects, local events and promotional activity. During dynamic simulation events (e.g. demand spike), the velocity coefficient automatically shifts weighting to high-frequency 15-minute moving averages to prevent kitchen lag and long customer wait times.
-            </p>
-          </div>
+      <div className="notion-callout border border-[rgba(55,53,47,0.09)]">
+        <span className="text-xl shrink-0">🤖</span>
+        <div className="text-xs text-[#37352F]/80 leading-relaxed">
+          <strong className="text-[#37352F]">Ensemble Demand Decomposition: </strong>
+          The predictive model combines historical day-of-week velocity, realtime aggregator cart adds, weather indices, and local event schedules. When scenario perturbations (e.g. +25% Rush) occur, the weighting engine prioritizes 15-minute moving rate-of-change metrics to ensure the kitchen and roster have sufficient lead time.
         </div>
       </div>
     </div>

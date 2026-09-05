@@ -35,73 +35,70 @@ export const EnergyPage: React.FC = () => {
   ];
 
   return (
-    <div className="space-y-6 pb-12 font-ui">
+    <div className="space-y-6 pb-12 font-sans select-none text-[#37352F]">
       {/* Header */}
-      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
+      <div className="pt-2 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <div className="flex items-center gap-2">
-            <h1 className="text-3xl sm:text-4xl font-black font-display text-[#1A1A1A] tracking-tight">
-              Smart Energy Control.
-            </h1>
-            <span className="px-3 py-0.5 rounded-full text-xs font-black uppercase tracking-wider bg-emerald-100 text-[#0E8A3E] border border-emerald-300">
-              BMS Telemetry
-            </span>
-          </div>
-          <p className="text-sm text-[#6E6E6E] mt-1 font-medium">
-            Optimize equipment utilization based on occupancy and demand while strictly respecting food safety constraints.
+          <div className="text-4xl mb-3">⚡</div>
+          <h1 className="text-3xl sm:text-4xl font-bold text-[#37352F] tracking-tight">
+            Energy & HVAC
+          </h1>
+          <p className="text-xs text-[#37352F]/60 mt-1">
+            Telemetry-driven equipment load moderation with food safety constraints strictly locked.
           </p>
         </div>
 
         <button
           onClick={applyAllEnergyRecommendations}
-          className="flex items-center gap-2 px-5 py-2.5 rounded-full border-2 border-[#5C3320] bg-white hover:bg-[#5C3320] text-[#5C3320] hover:text-white text-xs font-black uppercase tracking-wider shadow-xs transition-all cursor-pointer"
+          className="self-start sm:self-auto flex items-center gap-1.5 px-3.5 py-1.5 rounded-[4px] bg-[#2383E2] hover:bg-[#1B6FBF] text-white text-xs font-medium transition-colors cursor-pointer shadow-xs"
         >
-          <Zap className="w-4 h-4 text-[#E85C1A]" /> Apply All Safe Optimizations
+          <Zap className="w-3.5 h-3.5" />
+          <span>Apply Safe Optimizations</span>
         </button>
       </div>
 
-      {/* Top 3 Summary Cards */}
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-        <div className="p-5 bg-white rounded-2xl border border-stone-200 shadow-xs">
-          <span className="text-[11px] font-black uppercase tracking-wider text-[#6E6E6E] block font-ui">
+      {/* Top 3 Metric Cards */}
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+        <div className="p-4 bg-white rounded-[4px] border border-[rgba(55,53,47,0.09)]">
+          <span className="text-[11px] text-[#37352F]/50 font-medium block">
             Hourly Electrical Load
           </span>
-          <div className="text-3xl font-black font-display text-[#1A1A1A] mt-1">38.4 kWh</div>
-          <span className="text-xs text-[#6E6E6E] mt-1 block font-medium">Active draw across 6 primary circuits</span>
+          <div className="text-2xl font-semibold text-[#37352F] mt-1">38.4 kWh</div>
+          <span className="text-[11px] text-[#37352F]/50 mt-1 block">Active draw across 6 primary circuits</span>
         </div>
 
-        <div className="p-5 bg-white rounded-2xl border border-stone-200 shadow-xs">
-          <span className="text-[11px] font-black uppercase tracking-wider text-[#6E6E6E] block font-ui">
-            Realized Hourly Saving
+        <div className="p-4 bg-white rounded-[4px] border border-[rgba(55,53,47,0.09)]">
+          <span className="text-[11px] text-[#37352F]/50 font-medium block">
+            Realized Hourly Savings
           </span>
-          <div className="text-3xl font-black font-display text-[#0E8A3E] mt-1">
-            ₹ {totalEstimatedSavings}/- per hr
+          <div className="text-2xl font-semibold text-[#0F7B6C] mt-1">
+            ₹ {totalEstimatedSavings}/- hr
           </div>
-          <span className="text-xs text-[#6E6E6E] mt-1 block font-medium">Active approved eco-modulations</span>
+          <span className="text-[11px] text-[#37352F]/50 mt-1 block">Active approved eco-modulations</span>
         </div>
 
-        <div className="p-5 bg-white rounded-2xl border border-stone-200 shadow-xs">
-          <span className="text-[11px] font-black uppercase tracking-wider text-[#6E6E6E] block font-ui">
+        <div className="p-4 bg-white rounded-[4px] border border-[rgba(55,53,47,0.09)]">
+          <span className="text-[11px] text-[#37352F]/50 font-medium block">
             Monthly Cost Opportunity
           </span>
-          <div className="text-3xl font-black font-display text-[#E85C1A] mt-1">₹ 24,000/- per mo</div>
-          <span className="text-[10px] text-[#6E6E6E] font-medium mt-1 block">
-            Sub-metered baseline · 11.5% average restaurant utility optimization
+          <div className="text-2xl font-semibold text-[#D9730D] mt-1">₹ 24,000/- mo</div>
+          <span className="text-[11px] text-[#37352F]/50 mt-1 block">
+            11.5% average restaurant utility optimization
           </span>
         </div>
       </div>
 
-      {/* Food Safety Policy Notice */}
-      <div className="p-4 rounded-xl bg-[#F5F4F1] border border-stone-300 flex items-start gap-3">
-        <ShieldCheck className="w-5 h-5 text-[#0E8A3E] shrink-0 mt-0.5" />
-        <div className="text-xs text-[#1A1A1A]">
-          <strong>Food Safety First Policy: </strong>
-          Equipment is never abruptly powered off. Non-critical chillers and fryers enter calibrated standby modes. Walk-in refrigeration units are strictly hard-locked against automated alteration.
+      {/* Food Safety Policy Notice Callout */}
+      <div className="notion-callout border border-[rgba(55,53,47,0.09)]">
+        <span className="text-xl shrink-0">🛡️</span>
+        <div className="text-xs text-[#37352F]/80 leading-relaxed">
+          <strong className="text-[#37352F]">Food Safety First Policy: </strong>
+          Equipment is never abruptly powered down. Chillers and fryers enter calibrated standby setbacks only during verified low-demand velocity. Walk-in freezers and cold storage circuits are permanently locked against automated alteration.
         </div>
       </div>
 
       {/* Equipment Cards Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
         {equipment.map((eq) => {
           const isLocked = eq.isSafetyLocked;
           const isOptimized = eq.approved;
@@ -109,83 +106,83 @@ export const EnergyPage: React.FC = () => {
           return (
             <div
               key={eq.id}
-              className={`p-5 rounded-2xl border transition-all flex flex-col justify-between ${
+              className={`p-4 rounded-[4px] border transition-colors flex flex-col justify-between ${
                 isLocked
-                  ? 'bg-[#F5F4F1] border-stone-300'
+                  ? 'bg-[#F7F6F3] border-[rgba(55,53,47,0.09)]'
                   : isOptimized
-                  ? 'bg-emerald-50/50 border-emerald-300 shadow-xs'
-                  : 'bg-white border-stone-200 hover:shadow-md'
+                  ? 'bg-[#DDEDEA]/40 border-[#DDEDEA]'
+                  : 'bg-white border-[rgba(55,53,47,0.09)] hover:bg-[rgba(55,53,47,0.02)]'
               }`}
             >
               <div>
                 <div className="flex items-center justify-between">
-                  <span className="text-[10px] font-black uppercase tracking-wider text-[#6E6E6E]">
+                  <span className="text-[11px] text-[#37352F]/50 font-medium uppercase tracking-wider">
                     {eq.category}
                   </span>
                   {isLocked ? (
-                    <span className="flex items-center gap-1 text-[10px] font-black uppercase tracking-wider px-2.5 py-0.5 rounded-full bg-stone-200 text-stone-700">
-                      <Lock className="w-3 h-3 text-stone-500" /> Safety Constrained
+                    <span className="notion-tag bg-[#EBECED] text-[#9B9A97] text-[10px]">
+                      <Lock className="w-2.5 h-2.5 mr-1" /> Safety Constrained
                     </span>
                   ) : (
-                    <span className="text-[10px] font-black uppercase tracking-wider px-2.5 py-0.5 rounded-full bg-amber-100 text-amber-900">
-                      Safe Optimization
+                    <span className="notion-tag bg-[#FAEBDD] text-[#D9730D] text-[10px]">
+                      Optimization
                     </span>
                   )}
                 </div>
 
-                <h4 className="text-base font-black font-display text-[#1A1A1A] mt-2">{eq.name}.</h4>
+                <h4 className="text-sm font-semibold text-[#37352F] mt-2">{eq.name}</h4>
 
                 {/* Utilization gauge */}
-                <div className="mt-3 p-3 rounded-xl bg-[#F5F4F1] border border-stone-200 space-y-1.5 text-xs font-ui">
-                  <div className="flex justify-between font-bold">
-                    <span className="text-[#6E6E6E]">Current Load:</span>
-                    <span className="text-[#1A1A1A]">{eq.currentUtilization}%</span>
+                <div className="mt-2.5 p-2.5 rounded-[3px] bg-white border border-[rgba(55,53,47,0.06)] space-y-1 text-xs">
+                  <div className="flex justify-between">
+                    <span className="text-[#37352F]/50">Current Load:</span>
+                    <span className="font-medium text-[#37352F]">{eq.currentUtilization}%</span>
                   </div>
-                  <div className="flex justify-between font-bold">
-                    <span className="text-[#6E6E6E]">AI Target Mode:</span>
-                    <span className="text-[#E85C1A]">{eq.recommendedMode}</span>
+                  <div className="flex justify-between">
+                    <span className="text-[#37352F]/50">AI Target Mode:</span>
+                    <span className="font-medium text-[#D9730D]">{eq.recommendedMode}</span>
                   </div>
-                  <div className="flex justify-between text-[11px] text-[#6E6E6E]">
-                    <span>Est. Cost: ₹ {eq.estimatedHourlyCost}/- hr</span>
+                  <div className="flex justify-between text-[11px] pt-1 border-t border-[rgba(55,53,47,0.06)]">
+                    <span className="text-[#37352F]/50">Est. Cost: ₹{eq.estimatedHourlyCost}/hr</span>
                     {eq.estimatedSavingsPerHour > 0 && (
-                      <span className="text-[#0E8A3E] font-bold">
-                        Save: ₹ {eq.estimatedSavingsPerHour}/- hr
+                      <span className="text-[#0F7B6C] font-medium">
+                        Save: ₹{eq.estimatedSavingsPerHour}/hr
                       </span>
                     )}
                   </div>
                 </div>
 
-                <p className="text-xs text-[#6E6E6E] mt-3 leading-relaxed font-ui">{eq.reason}</p>
+                <p className="text-xs text-[#37352F]/70 mt-2.5 leading-relaxed">{eq.reason}</p>
 
                 {eq.safetyNote && (
-                  <div className="mt-2 text-[10px] text-stone-400 italic font-ui">
+                  <div className="mt-1.5 text-[11px] text-[#37352F]/40 italic">
                     Safety Rule: {eq.safetyNote}
                   </div>
                 )}
               </div>
 
               {/* Action Button */}
-              <div className="mt-5 pt-3 border-t border-stone-100">
+              <div className="mt-4 pt-2.5 border-t border-[rgba(55,53,47,0.06)]">
                 {isLocked ? (
-                  <div className="text-[11px] font-black uppercase tracking-wider text-stone-500 flex items-center justify-center py-2 bg-stone-200/80 rounded-full font-ui">
-                    <Lock className="w-3.5 h-3.5 mr-1.5" /> Always-On / Safety Lock
+                  <div className="text-xs text-[#37352F]/40 flex items-center justify-center py-1 font-medium">
+                    <Lock className="w-3 h-3 mr-1" /> Safety Hard-Locked
                   </div>
                 ) : (
                   <button
                     onClick={() => toggleEquipmentApproval(eq.id)}
-                    className={`w-full py-2.5 rounded-full text-xs font-black uppercase tracking-wider transition-all flex items-center justify-center gap-1.5 cursor-pointer font-ui ${
+                    className={`w-full py-1.5 rounded-[3px] text-xs font-medium transition-colors flex items-center justify-center gap-1.5 cursor-pointer ${
                       isOptimized
-                        ? 'bg-emerald-600 hover:bg-emerald-700 text-white shadow-xs'
-                        : 'bg-white border-2 border-[#5C3320] hover:bg-[#5C3320] text-[#5C3320] hover:text-white'
+                        ? 'bg-[#DDEDEA] text-[#0F7B6C]'
+                        : 'border border-[rgba(55,53,47,0.12)] hover:bg-[rgba(55,53,47,0.06)] text-[#37352F]'
                     }`}
                   >
                     {isOptimized ? (
                       <>
-                        <CheckCircle2 className="w-3.5 h-3.5" /> Mode Active (Click to Revert)
+                        <CheckCircle2 className="w-3.5 h-3.5" /> Setback Active (Click to Revert)
                       </>
                     ) : (
                       <>
-                        <Power className="w-3.5 h-3.5" /> Approve Optimization
+                        <Power className="w-3.5 h-3.5" /> Approve Setback
                       </>
                     )}
                   </button>
@@ -197,18 +194,20 @@ export const EnergyPage: React.FC = () => {
       </div>
 
       {/* Energy Timeline (12 PM to 10 PM) */}
-      <div className="p-6 bg-white rounded-2xl border border-stone-200 shadow-xs">
-        <div className="pb-4 mb-4 border-b border-stone-100">
-          <h3 className="text-xl font-black font-display text-[#1A1A1A]">
-            Hourly Power Consumption Profile (12 PM – 10 PM).
-          </h3>
-          <p className="text-xs text-[#6E6E6E]">
-            Baseline continuous draw vs AI demand-moderated energy load
-          </p>
+      <div className="bg-white rounded-[4px] border border-[rgba(55,53,47,0.09)] p-4 sm:p-5">
+        <div className="pb-3 mb-3 border-b border-[rgba(55,53,47,0.06)] flex items-center justify-between">
+          <div>
+            <h3 className="text-xs font-semibold text-[#37352F]">
+              Hourly Power Consumption Profile
+            </h3>
+            <p className="text-[11px] text-[#37352F]/50">
+              Continuous baseline vs AI-moderated demand curve (12:00 PM – 10:00 PM)
+            </p>
+          </div>
         </div>
 
         <div className="overflow-x-auto">
-          <div className="min-w-[720px] flex items-stretch gap-2.5 py-2">
+          <div className="min-w-[650px] flex items-stretch gap-1.5 py-1">
             {energyTimelineHours.map((slot) => {
               const isDip = slot.hour === '3 PM' || slot.hour === '4 PM';
               const savingsKw = slot.baselineKw - slot.optimizedKw;
@@ -216,29 +215,29 @@ export const EnergyPage: React.FC = () => {
               return (
                 <div
                   key={slot.hour}
-                  className={`flex-1 p-3.5 rounded-xl border text-center flex flex-col justify-between ${
+                  className={`flex-1 p-2.5 rounded-[3px] border text-center flex flex-col justify-between ${
                     isDip
-                      ? 'bg-emerald-50 border-emerald-300 ring-1 ring-emerald-400'
-                      : 'bg-[#F5F4F1] border-stone-200'
+                      ? 'bg-[#DDEDEA]/40 border-[#DDEDEA]'
+                      : 'bg-white border-[rgba(55,53,47,0.09)]'
                   }`}
                 >
                   <div>
-                    <span className="text-xs font-black uppercase tracking-wider text-[#1A1A1A] font-ui">
+                    <span className="text-[11px] font-medium text-[#37352F]/70">
                       {slot.hour}
                     </span>
-                    <div className="text-base font-black font-display text-[#1A1A1A] mt-1">
+                    <div className="text-sm font-semibold text-[#37352F] mt-1">
                       {slot.optimizedKw} kW
                     </div>
-                    <span className="text-[9px] text-[#6E6E6E] block line-through">
-                      Base: {slot.baselineKw} kW
+                    <span className="text-[10px] text-[#37352F]/40 block line-through">
+                      {slot.baselineKw} kW
                     </span>
                   </div>
 
-                  <div className="mt-2 pt-2 border-t border-stone-200 text-[10px]">
+                  <div className="mt-2 pt-1.5 border-t border-[rgba(55,53,47,0.06)] text-[10px]">
                     {savingsKw > 0 ? (
-                      <span className="font-black text-[#0E8A3E]">-{savingsKw} kW</span>
+                      <span className="font-semibold text-[#0F7B6C]">-{savingsKw} kW</span>
                     ) : (
-                      <span className="text-stone-400 font-medium">Standard</span>
+                      <span className="text-[#37352F]/40 font-normal">Standard</span>
                     )}
                   </div>
                 </div>

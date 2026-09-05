@@ -23,9 +23,12 @@ const AppContent: React.FC = () => {
   const [sidebarCollapsed, setSidebarCollapsed] = useState<boolean>(false);
 
   return (
-    <div className="min-h-screen bg-[#F5F4F1] flex flex-col font-ui text-[#1A1A1A]">
+    <div className="min-h-screen bg-white flex flex-col font-sans text-[#37352F]">
       {/* Top Header */}
-      <Navbar />
+      <Navbar
+        sidebarCollapsed={sidebarCollapsed}
+        setSidebarCollapsed={setSidebarCollapsed}
+      />
 
       {/* Main Body */}
       <div className="flex-1 flex overflow-hidden">
@@ -38,7 +41,7 @@ const AppContent: React.FC = () => {
         />
 
         {/* Dynamic Page Content */}
-        <main className="flex-1 overflow-y-auto px-4 sm:px-8 py-6 max-w-7xl mx-auto w-full">
+        <main className="flex-1 overflow-y-auto px-4 sm:px-12 py-7 max-w-5xl mx-auto w-full">
           {currentTab === 'overview' && <OverviewPage setCurrentTab={setCurrentTab} />}
           {currentTab === 'forecast' && <ForecastPage />}
           {currentTab === 'workforce' && <WorkforcePage />}

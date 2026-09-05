@@ -24,209 +24,206 @@ export const OverviewPage: React.FC<OverviewPageProps> = ({ setCurrentTab }) => 
   } = useApp();
 
   return (
-    <div className="space-y-6 pb-12 font-ui">
-      {/* Page Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-        <div>
-          <h1 className="text-2xl sm:text-3xl font-black font-display text-[#1A1A1A] tracking-tight">
-            Store Overview
-          </h1>
-          <p className="text-xs sm:text-sm text-[#6E6E6E] mt-0.5 font-medium">
-            Live operations telemetry for {selectedStore.name} · Synchronized with POS, KDS & IoT
-          </p>
-        </div>
+    <div className="space-y-6 pb-12 font-sans select-none text-[#37352F]">
+      {/* Notion Page Header with Page Icon */}
+      <div className="pt-2">
+        <div className="text-4xl mb-3">📊</div>
+        <h1 className="text-3xl sm:text-4xl font-bold text-[#37352F] tracking-tight">
+          Store Overview
+        </h1>
 
-        <div className="flex items-center gap-2.5">
-          <button
-            onClick={() => setCurrentTab('impact')}
-            className="flex items-center gap-1.5 px-4 py-2 bg-stone-100 hover:bg-stone-200 text-[#5C3320] text-xs font-bold font-ui uppercase tracking-wider rounded-xl transition-all cursor-pointer"
-          >
-            <span>Monthly Impact: ₹{metrics.monthlyOpportunityLakhs}L</span>
-            <ArrowRight className="w-3.5 h-3.5 text-[#E85C1A]" />
-          </button>
-        </div>
-      </div>
-
-      {/* Clean Status Alert Strip */}
-      <div
-        className={`px-4 sm:px-5 py-3.5 rounded-2xl border transition-all flex flex-col sm:flex-row sm:items-center justify-between gap-3 ${
-          scheduleApproved
-            ? 'bg-emerald-50/70 border-emerald-200 text-emerald-950'
-            : 'bg-[#F5F4F1] border-stone-200 text-[#1A1A1A]'
-        }`}
-      >
-        <div className="flex items-center gap-3">
-          <div
-            className={`w-2.5 h-2.5 rounded-full shrink-0 ${
-              scheduleApproved ? 'bg-[#0E8A3E]' : 'bg-[#E85C1A] animate-pulse'
-            }`}
-          />
-          <div className="text-xs font-ui">
-            <span className="font-bold">
-              {scheduleApproved ? 'Store Fully Optimized' : 'Optimization Recommendation Available'}
-            </span>
-            <span className="text-[#6E6E6E] ml-2 hidden md:inline">
-              {scheduleApproved
-                ? 'Labor and kitchen batch schedules are synced to predicted order pacing.'
-                : 'Afternoon demand lull (3–5 PM) detected. Shift 2 crew to 5–7 PM dinner rush to protect throughput.'}
-            </span>
+        {/* Notion Page Properties Table */}
+        <div className="mt-4 pt-3 border-t border-b border-[rgba(55,53,47,0.06)] py-2.5 space-y-2 text-xs">
+          <div className="flex items-center">
+            <span className="w-28 text-[#37352F]/50 font-medium">Store</span>
+            <span className="notion-tag bg-[#EBECED] text-[#37352F]">{selectedStore.name}</span>
+          </div>
+          <div className="flex items-center">
+            <span className="w-28 text-[#37352F]/50 font-medium">Telemetry</span>
+            <span className="notion-tag bg-[#DDEDEA] text-[#0F7B6C]">POS, KDS & IoT Connected</span>
+          </div>
+          <div className="flex items-center">
+            <span className="w-28 text-[#37352F]/50 font-medium">Monthly Impact</span>
+            <button
+              onClick={() => setCurrentTab('impact')}
+              className="notion-tag bg-[#DDEBF1] text-[#0B6E99] hover:underline cursor-pointer flex items-center gap-1"
+            >
+              <span>₹{metrics.monthlyOpportunityLakhs}L / month opportunity</span>
+              <ArrowRight className="w-3 h-3" />
+            </button>
           </div>
         </div>
-
-        {!scheduleApproved && (
-          <button
-            onClick={() => setCurrentTab('workforce')}
-            className="self-start sm:self-auto shrink-0 px-3.5 py-1.5 bg-[#5C3320] hover:bg-[#4A2616] text-white text-[11px] font-bold uppercase tracking-wider rounded-lg transition-all cursor-pointer flex items-center gap-1.5"
-          >
-            <span>Review Roster</span>
-            <ArrowRight className="w-3 h-3 text-[#E85C1A]" />
-          </button>
-        )}
       </div>
 
-      {/* 4 KPI Cards */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-        <KPICard
-          title="TODAY'S SALES"
-          value={`${metrics.salesToday}/-`}
-          change={metrics.salesDiffPct}
-          isPositiveChange={!metrics.salesDiffPct.includes('-')}
-          icon={IndianRupee}
-          subtext="Target: ₹ 2.67L/-"
-        />
+      {/* Notion Callout Block for AI Optimization Notice */}
+      <div
+        className={`notion-callout ${
+          scheduleApproved
+            ? 'bg-[#DDEDEA]/50 border border-[#DDEDEA]'
+            : 'bg-[#F1F1EF] border border-[rgba(55,53,47,0.06)]'
+        }`}
+      >
+        <span className="text-xl shrink-0">{scheduleApproved ? '✓' : '⚡'}</span>
+        <div className="flex-1 flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs">
+          <div>
+            <div className="font-semibold text-[#37352F]">
+              {scheduleApproved
+                ? 'Store Roster & Kitchen Stations Optimized'
+                : 'Optimization Recommendation: Afternoon Demand Lull Detected'}
+            </div>
+            <p className="text-[#37352F]/70 mt-0.5 leading-relaxed">
+              {scheduleApproved
+                ? 'Labor and batch holding rates match predicted order velocity. Peak throughput capacity protected.'
+                : 'Demand drops 27% between 3:00–5:00 PM. Reallocating 2 cross-trained crew members to the 5:00–7:00 PM dinner rush will boost utilization.'}
+            </p>
+          </div>
 
-        <KPICard
-          title="ORDERS TODAY"
-          value={metrics.ordersCount.toLocaleString('en-IN')}
-          change={metrics.ordersDiffPct}
-          isPositiveChange={!metrics.ordersDiffPct.includes('-')}
-          icon={ShoppingBag}
-          subtext="Avg Ticket: ₹ 248/-"
-        />
-
-        <KPICard
-          title="LABOR UTILIZATION"
-          value={`${metrics.laborUtilPct}%`}
-          change={metrics.laborDiffPts}
-          isPositiveChange={true}
-          icon={Users}
-          subtext="Target: 85%+"
-        />
-
-        <KPICard
-          title="HOLDING WASTE LOSS"
-          value={`${metrics.wasteLoss}/-`}
-          change={metrics.wasteDiffPct}
-          isPositiveChange={true}
-          reverseColor={true}
-          icon={Trash2}
-          subtext="Target: < ₹ 3,500/-"
-        />
+          {!scheduleApproved && (
+            <button
+              onClick={() => setCurrentTab('workforce')}
+              className="self-start sm:self-auto shrink-0 px-3 py-1.5 bg-[#2383E2] hover:bg-[#1B6FBF] text-white text-xs font-medium rounded-[4px] transition-colors cursor-pointer flex items-center gap-1.5 shadow-xs"
+            >
+              <span>Review Roster</span>
+              <ArrowRight className="w-3 h-3" />
+            </button>
+          )}
+        </div>
       </div>
 
-      {/* AI Operations Timeline (12 PM - 8 PM) */}
+      {/* 4 Database Metric Cards */}
+      <div>
+        <div className="flex items-center gap-2 mb-2 text-xs font-medium text-[#37352F]/60">
+          <span>Key Operational Metrics</span>
+        </div>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+          <KPICard
+            title="TODAY'S SALES"
+            value={`${metrics.salesToday}/-`}
+            change={metrics.salesDiffPct}
+            isPositiveChange={!metrics.salesDiffPct.includes('-')}
+            icon={IndianRupee}
+            subtext="Target: ₹ 2.67L/-"
+          />
+
+          <KPICard
+            title="ORDERS TODAY"
+            value={metrics.ordersCount.toLocaleString('en-IN')}
+            change={metrics.ordersDiffPct}
+            isPositiveChange={!metrics.ordersDiffPct.includes('-')}
+            icon={ShoppingBag}
+            subtext="Avg Ticket: ₹ 248/-"
+          />
+
+          <KPICard
+            title="LABOR UTILIZATION"
+            value={`${metrics.laborUtilPct}%`}
+            change={metrics.laborDiffPts}
+            isPositiveChange={true}
+            icon={Users}
+            subtext="Target: 85%+"
+          />
+
+          <KPICard
+            title="HOLDING WASTE LOSS"
+            value={`${metrics.wasteLoss}/-`}
+            change={metrics.wasteDiffPct}
+            isPositiveChange={true}
+            reverseColor={true}
+            icon={Trash2}
+            subtext="Target: < ₹ 3,500/-"
+          />
+        </div>
+      </div>
+
+      {/* Operations Timeline Database View */}
       <DemandTimeline onReviewSchedule={() => setCurrentTab('workforce')} />
 
-      {/* Two Column Cards: AI Workforce Alert & Kitchen Holding Warning */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        {/* Workforce Card */}
-        <div className="p-6 bg-white rounded-2xl border border-stone-200 shadow-xs flex flex-col justify-between">
+      {/* Two Notion Sub-Block Cards: Workforce & Kitchen */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+        {/* Workforce Block */}
+        <div className="p-4 bg-white rounded-[4px] border border-[rgba(55,53,47,0.09)] flex flex-col justify-between hover:bg-[rgba(55,53,47,0.02)] transition-colors">
           <div>
             <div className="flex items-center justify-between">
-              <div className="flex items-center gap-2">
-                <div className="w-8 h-8 rounded-full bg-[#E85C1A]/10 flex items-center justify-center text-[#E85C1A]">
-                  <Users className="w-4 h-4" />
-                </div>
-                <span className="text-xs font-black font-ui uppercase tracking-wider text-[#6E6E6E]">
-                  Workforce Recommendation
-                </span>
+              <div className="flex items-center gap-2 text-xs font-medium text-[#37352F]/80">
+                <span>👥</span>
+                <span>Workforce Reallocation</span>
               </div>
-              <span className="text-[10px] font-black font-ui uppercase tracking-wider px-2.5 py-0.5 rounded-full bg-amber-100 text-amber-900">
+              <span className="notion-tag bg-[#FAEBDD] text-[#D9730D] text-[10px]">
                 High Impact
               </span>
             </div>
 
-            <h3 className="text-lg font-black font-display text-[#1A1A1A] mt-3">
-              3:00 PM – 5:00 PM Crew Balancing.
+            <h3 className="text-sm font-semibold text-[#37352F] mt-2.5">
+              3:00 PM – 5:00 PM Crew Balancing
             </h3>
-            <p className="text-xs text-[#6E6E6E] mt-1 leading-relaxed font-ui">
-              Forecasted demand falls 27% below current scheduled staffing. Reassigning 2 cross-trained crew members to the evening cricket rush prevents idle labor and protects peak customer wait times.
+            <p className="text-xs text-[#37352F]/70 mt-1 leading-relaxed">
+              Demand falls 27% below scheduled floor roster. Reassigning 2 cross-trained crew members to the dinner rush prevents idle labor.
             </p>
 
-            <div className="mt-4 p-3.5 rounded-xl bg-[#F5F4F1] border border-stone-200 grid grid-cols-2 gap-2 text-xs font-ui">
+            <div className="mt-3 p-2.5 rounded-[3px] bg-[#F7F6F3] border border-[rgba(55,53,47,0.06)] grid grid-cols-2 gap-2 text-xs">
               <div>
-                <span className="text-[#6E6E6E] block text-[10px] font-bold uppercase tracking-wider">
-                  Current Roster
-                </span>
-                <span className="font-bold text-[#1A1A1A]">6 Active Front & Kitchen</span>
+                <span className="text-[#37352F]/50 block text-[11px]">Scheduled</span>
+                <span className="font-medium text-[#37352F]">6 Active Crew</span>
               </div>
               <div>
-                <span className="text-[#6E6E6E] block text-[10px] font-bold uppercase tracking-wider">
-                  Recommended Roster
-                </span>
-                <span className="font-bold text-[#E85C1A]">4 Active + 2 to 5–7 PM Peak</span>
+                <span className="text-[#37352F]/50 block text-[11px]">Recommended</span>
+                <span className="font-medium text-[#0F7B6C]">4 Active + 2 to Rush</span>
               </div>
             </div>
           </div>
 
-          <div className="mt-5 pt-4 border-t border-stone-100 flex items-center justify-between font-ui">
-            <span className="text-xs font-black text-[#0E8A3E]">Estimated Saving: ₹ 3,840/- per day</span>
+          <div className="mt-4 pt-3 border-t border-[rgba(55,53,47,0.06)] flex items-center justify-between text-xs">
+            <span className="font-medium text-[#0F7B6C]">Saving: ₹ 3,840/- per day</span>
             <button
               onClick={() => setCurrentTab('workforce')}
-              className="px-4 py-2 rounded-full border border-[#5C3320] bg-white hover:bg-[#5C3320] text-[#5C3320] hover:text-white text-xs font-black uppercase tracking-wider transition-all shadow-xs flex items-center gap-1.5 cursor-pointer"
+              className="px-2.5 py-1 rounded-[3px] border border-[rgba(55,53,47,0.12)] hover:bg-[rgba(55,53,47,0.06)] text-[#37352F] transition-colors flex items-center gap-1 cursor-pointer"
             >
-              Review Schedule <ArrowRight className="w-3.5 h-3.5" />
+              <span>View Roster</span>
+              <ArrowRight className="w-3 h-3" />
             </button>
           </div>
         </div>
 
-        {/* Kitchen Card */}
-        <div className="p-6 bg-white rounded-2xl border border-stone-200 shadow-xs flex flex-col justify-between">
+        {/* Kitchen Prep Block */}
+        <div className="p-4 bg-white rounded-[4px] border border-[rgba(55,53,47,0.09)] flex flex-col justify-between hover:bg-[rgba(55,53,47,0.02)] transition-colors">
           <div>
             <div className="flex items-center justify-between">
-              <div className="flex items-center gap-2">
-                <div className="w-8 h-8 rounded-full bg-[#E85C1A]/10 flex items-center justify-center text-[#E85C1A]">
-                  <ChefHat className="w-4 h-4" />
-                </div>
-                <span className="text-xs font-black font-ui uppercase tracking-wider text-[#6E6E6E]">
-                  Kitchen Batch Prep & Holding
-                </span>
+              <div className="flex items-center gap-2 text-xs font-medium text-[#37352F]/80">
+                <span>🍳</span>
+                <span>Kitchen Batch Prep & Holding</span>
               </div>
-              <span className="text-[10px] font-black font-ui uppercase tracking-wider px-2.5 py-0.5 rounded-full bg-red-100 text-[#7A1F1F]">
+              <span className="notion-tag bg-[#FBE4E4] text-[#E03E3E] text-[10px]">
                 Holding Risk
               </span>
             </div>
 
-            <h3 className="text-lg font-black font-display text-[#1A1A1A] mt-3">
-              King Fries & Chicken Patties at Risk.
+            <h3 className="text-sm font-semibold text-[#37352F] mt-2.5">
+              King Fries & Chicken Patties at Risk
             </h3>
-            <p className="text-xs text-[#6E6E6E] mt-1 leading-relaxed font-ui">
-              8 portions of King Fries have 6 minutes holding time remaining. The AI recommends holding new fry drops and reducing next basket size by 20% to prevent product discard.
+            <p className="text-xs text-[#37352F]/70 mt-1 leading-relaxed">
+              8 portions of King Fries have 6 minutes holding time remaining. Recommend holding new drops and reducing next basket size by 20%.
             </p>
 
-            <div className="mt-4 p-3.5 rounded-xl bg-[#F5F4F1] border border-stone-200 grid grid-cols-2 gap-2 text-xs font-ui">
+            <div className="mt-3 p-2.5 rounded-[3px] bg-[#F7F6F3] border border-[rgba(55,53,47,0.06)] grid grid-cols-2 gap-2 text-xs">
               <div>
-                <span className="text-[#6E6E6E] block text-[10px] font-bold uppercase tracking-wider">
-                  Current Queue
-                </span>
-                <span className="font-bold text-[#1A1A1A]">14 Orders · 7m 24s Avg</span>
+                <span className="text-[#37352F]/50 block text-[11px]">Current Queue</span>
+                <span className="font-medium text-[#37352F]">14 Orders · 7m Avg</span>
               </div>
               <div>
-                <span className="text-[#6E6E6E] block text-[10px] font-bold uppercase tracking-wider">
-                  Holding Value at Risk
-                </span>
-                <span className="font-bold text-[#7A1F1F]">₹ 1,240/- (Expiring Soon)</span>
+                <span className="text-[#37352F]/50 block text-[11px]">Value at Risk</span>
+                <span className="font-medium text-[#E03E3E]">₹ 1,240/- expiring</span>
               </div>
             </div>
           </div>
 
-          <div className="mt-5 pt-4 border-t border-stone-100 flex items-center justify-between font-ui">
-            <span className="text-xs font-bold text-amber-800">Action: Reduce drop size 20%</span>
+          <div className="mt-4 pt-3 border-t border-[rgba(55,53,47,0.06)] flex items-center justify-between text-xs">
+            <span className="text-[#37352F]/60">Action: Reduce drop 20%</span>
             <button
               onClick={() => setCurrentTab('kitchen')}
-              className="px-4 py-2 rounded-full border border-[#E85C1A] bg-[#E85C1A] hover:bg-[#D44D0F] text-white text-xs font-black uppercase tracking-wider transition-all shadow-xs flex items-center gap-1.5 cursor-pointer"
+              className="px-2.5 py-1 rounded-[3px] border border-[rgba(55,53,47,0.12)] hover:bg-[rgba(55,53,47,0.06)] text-[#37352F] transition-colors flex items-center gap-1 cursor-pointer"
             >
-              Open Kitchen Prep <ArrowRight className="w-3.5 h-3.5" />
+              <span>Kitchen KDS</span>
+              <ArrowRight className="w-3 h-3" />
             </button>
           </div>
         </div>

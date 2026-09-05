@@ -93,15 +93,15 @@ export const Sidebar: React.FC<SidebarProps> = ({
               <button
                 key={item.id}
                 onClick={() => setCurrentTab(item.id as NavTab)}
-                className={`w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-xs font-bold transition-all group cursor-pointer relative ${
+                className={`w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-xs transition-colors group cursor-pointer ${
                   isActive
-                    ? 'bg-[#F5F4F1] text-[#1A1A1A] font-extrabold border-l-4 border-[#E85C1A] '
-                    : 'text-[#6E6E6E] hover:bg-[#F5F4F1]/60 hover:text-[#1A1A1A]'
+                    ? 'bg-[#5C3320] text-white font-black'
+                    : 'text-[#6E6E6E] hover:bg-stone-100 hover:text-[#1A1A1A] font-semibold'
                 }`}
               >
                 <Icon
-                  className={`w-4 h-4 shrink-0 transition-transform group-hover:scale-110 ${
-                    isActive ? 'text-[#E85C1A]' : 'text-[#6E6E6E]'
+                  className={`w-4 h-4 shrink-0 transition-colors ${
+                    isActive ? 'text-[#F5A827]' : 'text-stone-400 group-hover:text-[#5C3320]'
                   }`}
                 />
                 {!collapsed && (
@@ -110,10 +110,9 @@ export const Sidebar: React.FC<SidebarProps> = ({
                     {item.badge && (
                       <span
                         className={`text-[9px] font-black px-2 py-0.5 rounded-full ${
-                          item.badgeColor ||
-                          (isActive
-                            ? 'bg-[#E85C1A] text-white'
-                            : 'bg-stone-200/80 text-[#6E6E6E] group-hover:bg-amber-100 group-hover:text-amber-900')
+                          isActive
+                            ? 'bg-white/20 text-white'
+                            : item.badgeColor || 'bg-stone-200 text-[#5C3320]'
                         }`}
                       >
                         {item.badge}

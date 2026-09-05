@@ -223,12 +223,12 @@ export const Navbar: React.FC = () => {
 
           {/* Duty Manager Avatar */}
           <div className="flex items-center gap-2 pl-2 border-l border-stone-200/80">
-            <div className="w-8 h-8 rounded-full bg-[#5C3320] text-white font-black text-xs flex items-center justify-center font-display ">
-              SM
+            <div className="w-8 h-8 rounded-full bg-[#5C3320] text-[#F5A827] font-black text-xs flex items-center justify-center font-display border border-amber-900/20">
+              A
             </div>
             <div className="hidden xl:block text-left leading-tight">
-              <div className="text-xs font-bold text-[#1A1A1A]">Manager #402</div>
-              <div className="text-[10px] text-[#6E6E6E]">Duty Lead</div>
+              <div className="text-xs font-black text-[#1A1A1A]">Manager Aladeen</div>
+              <div className="text-[10px] text-[#6E6E6E] font-medium">Duty Lead</div>
             </div>
           </div>
         </div>
